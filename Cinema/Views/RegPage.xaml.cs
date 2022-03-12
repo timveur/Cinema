@@ -1,5 +1,4 @@
-﻿using Cinema.Views;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,17 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Cinema
+namespace Cinema.Views
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для RegPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class RegPage : Page
     {
-        public MainWindow()
+        public RegPage()
         {
             InitializeComponent();
-            MainFrame.Navigate(new RegPage());
+        }
+
+        private void RegButtonClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
