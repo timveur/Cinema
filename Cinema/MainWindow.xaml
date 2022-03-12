@@ -5,12 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cinema"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="450" Width="800" Icon="Resources/cinema.ico">
+    <Grid Background="#6a4c8a">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Image Source="Resources/cinema.png"/>
+        </StackPanel>
         <Frame Grid.Row="1" x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

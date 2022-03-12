@@ -8,7 +8,59 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainPage">
 
-    <Grid>
-        
+    <Grid Background="#543964">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Width="160">
+                <TextBlock x:Name="DayTextBlock" TextAlignment="Center" FontSize="24"></TextBlock>
+                <TextBlock x:Name="DateTextBlock" TextAlignment="Center" FontSize="20"/>
+            </StackPanel>
+        </Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
+            <ListView x:Name="FilmsListView" HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="#543964">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Aqua" CornerRadius="5" BorderThickness="2" Padding="5">
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="7*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="8*"/>
+                                </Grid.RowDefinitions>
+                                <Image Grid.RowSpan="3"/>
+                                <StackPanel Grid.Column="1" Orientation="Vertical">
+                                    <TextBlock x:Name="NameFilmTextBlock" Background="Yellow" FontSize="26" FontWeight="Bold"/>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="7*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock x:Name="AgeTextBlock"/>
+                                        <StackPanel Grid.Column="1" Orientation="Vertical">
+                                            <TextBlock x:Name="GenresTextBlock"/>
+                                            <TextBlock x:Name="DurationTextBlock"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <StackPanel x:Name="SessionsStackPanel" Width="200" Orientation="Vertical">
+                                        <TextBlock x:Name="HallTextBlock"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock x:Name="TimeTextBlock"/>
+                                            <TextBlock x:Name="CostTextBlock"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollViewer>
     </Grid>
 </Page>

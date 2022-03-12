@@ -24,7 +24,7 @@ namespace Cinema
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new RegPage());
+            MainFrame.Navigate(new MainPage());
         }
     }
 }
