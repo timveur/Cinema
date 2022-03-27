@@ -5,17 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cinema"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Icon="Resources/cinema.ico">
+        Title="MainWindow" Height="650" Width="900" Icon="Resources/cinema.ico"
+        Closed="WindowClosed">
     <Grid Background="#6a4c8a">
         <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
             <RowDefinition/>
-            <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
         <Grid>
             <Image Source="Resources/cinema.png" HorizontalAlignment="Left"/>
-            <Label Style="{StaticResource HeaderLabel}" HorizontalAlignment="Center" VerticalAlignment="Top">Кинотеатр «Friends»</Label>
+            <Label Style="{StaticResource HeaderLabel}" HorizontalAlignment="Center" VerticalAlignment="Center">Кинотеатр «Friends»</Label>
             <Button x:Name="AuthButton" HorizontalAlignment="Right" Width="100" Click="AuthButtonClick">Войти</Button>
+            <StackPanel x:Name="ButtonsStackPanel" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="ExitButton" HorizontalAlignment="Right" Width="80" Click="ExitButtonClick" Margin="0 0 10 0">Выйти</Button>
+                <Button x:Name="BackButton" HorizontalAlignment="Right" Width="80" Click="BackButtonClick">Назад</Button>
+            </StackPanel> 
+            
         </Grid>
-        <Frame Grid.Row="1" x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+        <Frame Grid.Row="1" x:Name="MainFrame" NavigationUIVisibility="Hidden" ContentRendered="MainFrameContentRendered" Navigated="MainFrameNavigated"/>
     </Grid>
 </Window>

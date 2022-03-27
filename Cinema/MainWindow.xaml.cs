@@ -25,15 +25,81 @@ namespace Cinema
         {
             InitializeComponent();
             MainFrame.Navigate(new HallPage());
-            //if (Properties.Settings.Default.loginClient)
-            //{
-            //    AuthButton.Visibility(Hidden);
-            //}
+            Console.WriteLine(Properties.Settings.Default.loginClient);
+            
+
         }
 
         private void AuthButtonClick(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new AuthPage());
+            if (String.IsNullOrEmpty(Properties.Settings.Default.loginClient))
+            {
+                MainFrame.Navigate(new AuthPage());
+            }
+
+        }
+
+        
+
+
+
+        /// <summary>
+        /// выход из приложения
+        /// </summary>
+        private void WindowClosed(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.loginClient = String.Empty;
+            Properties.Settings.Default.Save();
+        }
+
+        private void MainFrameNavigated(object sender, NavigationEventArgs e)
+        {
+            var page = e.Content;
+        }
+
+
+        private void MainFrameContentRendered(object sender, EventArgs e)
+        {
+            
+            if (String.IsNullOrEmpty(Properties.Settings.Default.loginClient))
+            {
+                ExitButton.Visibility = Visibility.Collapsed;
+                BackButton.Visibility = Visibility.Collapsed;
+                AuthButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                AuthButton.Visibility = Visibility.Collapsed;
+                BackButton.Visibility = Visibility.Visible;
+                ExitButton.Visibility = Visibility.Visible;
+            }
+        }
+
+  
+        private void BackButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (MainFrame.CanGoBack)
+            {
+                MainFrame.GoBack();
+            }
+        }
+
+        private void ExitButtonClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MessageBoxResult messageExit = MessageBox.Show("Вы уверены, что хотите выйти?", "Выход...", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (messageExit == MessageBoxResult.Yes)
+                {
+                    Properties.Settings.Default.loginClient = String.Empty;
+                    Properties.Settings.Default.Save();
+                    MainFrame.Refresh();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Возникла ошибка", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
     }
