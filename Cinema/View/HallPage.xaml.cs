@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Cinema.Views
+namespace Cinema.View
 {
     /// <summary>
-    /// Логика взаимодействия для RegPage.xaml
+    /// Логика взаимодействия для HallPage.xaml
     /// </summary>
-    public partial class RegPage : Page
+    public partial class HallPage : Page
     {
-        public RegPage()
+        public HallPage()
         {
             InitializeComponent();
-        }
-
-        private void RegButtonClick(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

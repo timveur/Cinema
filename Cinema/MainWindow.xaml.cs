@@ -1,4 +1,4 @@
-﻿using Cinema.Views;
+﻿using Cinema.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +24,17 @@ namespace Cinema
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new MainPage());
+            MainFrame.Navigate(new HallPage());
+            //if (Properties.Settings.Default.loginClient)
+            //{
+            //    AuthButton.Visibility(Hidden);
+            //}
+        }
+
+        private void AuthButtonClick(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new AuthPage());
+
         }
     }
 }

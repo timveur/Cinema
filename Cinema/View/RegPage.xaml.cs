@@ -13,20 +13,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Cinema.Views
+namespace Cinema.View
 {
     /// <summary>
-    /// Логика взаимодействия для AuthPage.xaml
+    /// Логика взаимодействия для RegPage.xaml
     /// </summary>
-    public partial class AuthPage : Page
+    public partial class RegPage : Page
     {
-        public AuthPage()
+        public RegPage()
         {
             InitializeComponent();
         }
 
-
-        private void RegTextBlockMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void RegButtonClick(object sender, RoutedEventArgs e)
         {
 
         }

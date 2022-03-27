@@ -4,6 +4,17 @@
              xmlns:local="clr-namespace:Cinema"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <Style x:Key="HeaderLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="30"/>
+                <Setter Property="Foreground" Value="Yellow"/>
+                
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="#ffe45c"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Height" Value="35"/>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

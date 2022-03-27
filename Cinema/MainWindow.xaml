@@ -11,9 +11,11 @@
             <RowDefinition/>
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal">
-            <Image Source="Resources/cinema.png"/>
-        </StackPanel>
+        <Grid>
+            <Image Source="Resources/cinema.png" HorizontalAlignment="Left"/>
+            <Label Style="{StaticResource HeaderLabel}" HorizontalAlignment="Center" VerticalAlignment="Top">Кинотеатр «Friends»</Label>
+            <Button x:Name="AuthButton" HorizontalAlignment="Right" Width="100" Click="AuthButtonClick">Войти</Button>
+        </Grid>
         <Frame Grid.Row="1" x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>
