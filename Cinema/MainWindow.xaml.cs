@@ -24,7 +24,7 @@ namespace Cinema
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new HallPage());
+            MainFrame.Navigate(new MainPage());
             Console.WriteLine(Properties.Settings.Default.loginClient);
             
 

@@ -7,13 +7,22 @@
         <ResourceDictionary>
             <Style x:Key="HeaderLabel" TargetType="Label">
                 <Setter Property="FontSize" Value="30"/>
-                <Setter Property="Foreground" Value="Yellow"/>
-                
+                <Setter Property="Foreground" Value="#ffe45c"/>
             </Style>
             <Style TargetType="Button">
                 <Setter Property="Background" Value="#ffe45c"/>
                 <Setter Property="FontSize" Value="20"/>
                 <Setter Property="Height" Value="35"/>
+            </Style>
+            <Style TargetType="Button" x:Key="DateButtons">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0.5"/>
+            </Style>
+            <Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="White"/>
+            </Style>
+            <Style TargetType="TextBlock" x:Key="YellowText">
+                <Setter Property="Foreground" Value="#ffe45c"/>
             </Style>
         </ResourceDictionary>
     </Application.Resources>
