@@ -10,7 +10,7 @@
             <PropertyRef Name="IdAgeLimit" />
           </Key>
           <Property Name="IdAgeLimit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Limit" Type="nvarchar" MaxLength="3" />
+          <Property Name="Limit" Type="nvarchar" MaxLength="3" Nullable="false" />
         </EntityType>
         <EntityType Name="Countries">
           <Key>
@@ -24,11 +24,11 @@
             <PropertyRef Name="IdFilm" />
           </Key>
           <Property Name="IdFilm" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NameFIlm" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="IdAgeLimits" Type="int" Nullable="false" />
+          <Property Name="NameFilm" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DescriptionFilm" Type="nvarchar(max)" />
+          <Property Name="IdAgeLimit" Type="int" Nullable="false" />
           <Property Name="Duration" Type="time" Precision="7" Nullable="false" />
-          <Property Name="Actors" Type="nvarchar(max)" />
+          <Property Name="Actors" Type="nvarchar(max)" Nullable="false" />
           <Property Name="FilmsCompany" Type="nvarchar(max)" />
           <Property Name="FilmsDirectors" Type="nvarchar(max)" />
         </EntityType>
@@ -60,13 +60,20 @@
           <Property Name="IdFilm" Type="int" Nullable="false" />
           <Property Name="Photo" Type="image" />
         </EntityType>
+        <EntityType Name="Formats">
+          <Key>
+            <PropertyRef Name="IdFormat" />
+          </Key>
+          <Property Name="IdFormat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Format" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
         <EntityType Name="Genres">
           <Key>
             <PropertyRef Name="IdGenre" />
           </Key>
           <Property Name="IdGenre" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="NameGenre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DescriptionGenre" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Halls">
           <Key>
@@ -75,7 +82,7 @@
           <Property Name="IdHall" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NameHall" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="CountSeats" Type="int" Nullable="false" />
-          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="DescriptionHall" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="HallsSeats">
           <Key>
@@ -99,11 +106,12 @@
           </Key>
           <Property Name="IdSession" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdFilm" Type="int" Nullable="false" />
-          <Property Name="IdSeat" Type="int" Nullable="false" />
-          <Property Name="Date" Type="date" />
-          <Property Name="StartTime" Type="time" Precision="7" />
-          <Property Name="EndTime" Type="time" Precision="7" />
-          <Property Name="CostTicket" Type="money" />
+          <Property Name="IdHall" Type="int" Nullable="false" />
+          <Property Name="IdFormat" Type="int" Nullable="false" />
+          <Property Name="DateSession" Type="date" Nullable="false" />
+          <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="CostTicket" Type="money" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -121,8 +129,7 @@
           </Key>
           <Property Name="IdTicket" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdSession" Type="int" Nullable="false" />
-          <Property Name="NumberRow" Type="int" />
-          <Property Name="NumberSeat" Type="int" />
+          <Property Name="IdSeat" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -146,7 +153,7 @@
               <PropertyRef Name="IdAgeLimit" />
             </Principal>
             <Dependent Role="Films">
-              <PropertyRef Name="IdAgeLimits" />
+              <PropertyRef Name="IdAgeLimit" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -234,6 +241,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Sessions_Formats">
+          <End Role="Formats" Type="Self.Formats" Multiplicity="1" />
+          <End Role="Sessions" Type="Self.Sessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Formats">
+              <PropertyRef Name="IdFormat" />
+            </Principal>
+            <Dependent Role="Sessions">
+              <PropertyRef Name="IdFormat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Sessions_Halls">
           <End Role="Halls" Type="Self.Halls" Multiplicity="1" />
           <End Role="Sessions" Type="Self.Sessions" Multiplicity="*" />
@@ -242,6 +261,18 @@
               <PropertyRef Name="IdHall" />
             </Principal>
             <Dependent Role="Sessions">
+              <PropertyRef Name="IdHall" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_HallsSeats">
+          <End Role="HallsSeats" Type="Self.HallsSeats" Multiplicity="1" />
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HallsSeats">
+              <PropertyRef Name="IdSeat" />
+            </Principal>
+            <Dependent Role="Tickets">
               <PropertyRef Name="IdSeat" />
             </Dependent>
           </ReferentialConstraint>
@@ -270,11 +301,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="Хранилище CinemaModelContainer">
           <EntitySet Name="AgeLimits" EntityType="Self.AgeLimits" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Films" EntityType="Self.Films" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FilmsPhotos" EntityType="Self.FilmsPhotos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Formats" EntityType="Self.Formats" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genres" EntityType="Self.Genres" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Halls" EntityType="Self.Halls" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HallsSeats" EntityType="Self.HallsSeats" Schema="dbo" store:Type="Tables" />
@@ -327,9 +390,17 @@
             <End Role="Films" EntitySet="Films" />
             <End Role="Sessions" EntitySet="Sessions" />
           </AssociationSet>
+          <AssociationSet Name="FK_Sessions_Formats" Association="Self.FK_Sessions_Formats">
+            <End Role="Formats" EntitySet="Formats" />
+            <End Role="Sessions" EntitySet="Sessions" />
+          </AssociationSet>
           <AssociationSet Name="FK_Sessions_Halls" Association="Self.FK_Sessions_Halls">
             <End Role="Halls" EntitySet="Halls" />
             <End Role="Sessions" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_HallsSeats" Association="Self.FK_Tickets_HallsSeats">
+            <End Role="HallsSeats" EntitySet="HallsSeats" />
+            <End Role="Tickets" EntitySet="Tickets" />
           </AssociationSet>
           <AssociationSet Name="FK_Tickets_Sessions" Association="Self.FK_Tickets_Sessions">
             <End Role="Sessions" EntitySet="Sessions" />
@@ -349,7 +420,7 @@
             <PropertyRef Name="IdAgeLimit" />
           </Key>
           <Property Name="IdAgeLimit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Limit" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="Limit" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Films" Relationship="Self.FK_Films_AgeLimits" FromRole="AgeLimits" ToRole="Films" />
         </EntityType>
         <EntityType Name="Countries">
@@ -365,11 +436,11 @@
             <PropertyRef Name="IdFilm" />
           </Key>
           <Property Name="IdFilm" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NameFIlm" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IdAgeLimits" Type="Int32" Nullable="false" />
+          <Property Name="NameFilm" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DescriptionFilm" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdAgeLimit" Type="Int32" Nullable="false" />
           <Property Name="Duration" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="Actors" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actors" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FilmsCompany" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="FilmsDirectors" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AgeLimits" Relationship="Self.FK_Films_AgeLimits" FromRole="Films" ToRole="AgeLimits" />
@@ -387,13 +458,21 @@
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Films" Relationship="Self.FK_FilmsPhotos_Films" FromRole="FilmsPhotos" ToRole="Films" />
         </EntityType>
+        <EntityType Name="Formats">
+          <Key>
+            <PropertyRef Name="IdFormat" />
+          </Key>
+          <Property Name="IdFormat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Format" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Sessions" Relationship="Self.FK_Sessions_Formats" FromRole="Formats" ToRole="Sessions" />
+        </EntityType>
         <EntityType Name="Genres">
           <Key>
             <PropertyRef Name="IdGenre" />
           </Key>
           <Property Name="IdGenre" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NameGenre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DescriptionGenre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Films" Relationship="Self.FilmsGenres" FromRole="Genres" ToRole="Films" />
         </EntityType>
         <EntityType Name="Halls">
@@ -403,9 +482,9 @@
           <Property Name="IdHall" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NameHall" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CountSeats" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionHall" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HallsSeats" Relationship="Self.FK_HallsSeats_Halls" FromRole="Halls" ToRole="HallsSeats" />
           <NavigationProperty Name="Sessions" Relationship="Self.FK_Sessions_Halls" FromRole="Halls" ToRole="Sessions" />
-          <NavigationProperty Name="HallsSeats" Relationship="CinemaModel.FK_HallsSeats_Halls" FromRole="Halls" ToRole="HallsSeats" />
         </EntityType>
         <EntityType Name="HallsSeats">
           <Key>
@@ -415,7 +494,8 @@
           <Property Name="IdHall" Type="Int32" Nullable="false" />
           <Property Name="Row" Type="Int32" Nullable="false" />
           <Property Name="NumberSeat" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Halls" Relationship="CinemaModel.FK_HallsSeats_Halls" FromRole="HallsSeats" ToRole="Halls" />
+          <NavigationProperty Name="Halls" Relationship="Self.FK_HallsSeats_Halls" FromRole="HallsSeats" ToRole="Halls" />
+          <NavigationProperty Name="Tickets" Relationship="Self.FK_Tickets_HallsSeats" FromRole="HallsSeats" ToRole="Tickets" />
         </EntityType>
         <EntityType Name="RoleUsers">
           <Key>
@@ -431,12 +511,14 @@
           </Key>
           <Property Name="IdSession" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdFilm" Type="Int32" Nullable="false" />
-          <Property Name="IdSeat" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Precision="0" />
-          <Property Name="StartTime" Type="Time" Precision="7" />
-          <Property Name="EndTime" Type="Time" Precision="7" />
-          <Property Name="CostTicket" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="IdHall" Type="Int32" Nullable="false" />
+          <Property Name="IdFormat" Type="Int32" Nullable="false" />
+          <Property Name="DateSession" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="CostTicket" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <NavigationProperty Name="Films" Relationship="Self.FK_Sessions_Films" FromRole="Sessions" ToRole="Films" />
+          <NavigationProperty Name="Formats" Relationship="Self.FK_Sessions_Formats" FromRole="Sessions" ToRole="Formats" />
           <NavigationProperty Name="Halls" Relationship="Self.FK_Sessions_Halls" FromRole="Sessions" ToRole="Halls" />
           <NavigationProperty Name="Tickets" Relationship="Self.FK_Tickets_Sessions" FromRole="Sessions" ToRole="Tickets" />
         </EntityType>
@@ -456,8 +538,8 @@
           </Key>
           <Property Name="IdTicket" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdSession" Type="Int32" Nullable="false" />
-          <Property Name="NumberRow" Type="Int32" />
-          <Property Name="NumberSeat" Type="Int32" />
+          <Property Name="IdSeat" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="HallsSeats" Relationship="Self.FK_Tickets_HallsSeats" FromRole="Tickets" ToRole="HallsSeats" />
           <NavigationProperty Name="Sessions" Relationship="Self.FK_Tickets_Sessions" FromRole="Tickets" ToRole="Sessions" />
         </EntityType>
         <EntityType Name="Users">
@@ -483,7 +565,7 @@
               <PropertyRef Name="IdAgeLimit" />
             </Principal>
             <Dependent Role="Films">
-              <PropertyRef Name="IdAgeLimits" />
+              <PropertyRef Name="IdAgeLimit" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -511,6 +593,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Sessions_Formats">
+          <End Role="Formats" Type="Self.Formats" Multiplicity="1" />
+          <End Role="Sessions" Type="Self.Sessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Formats">
+              <PropertyRef Name="IdFormat" />
+            </Principal>
+            <Dependent Role="Sessions">
+              <PropertyRef Name="IdFormat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HallsSeats_Halls">
+          <End Role="Halls" Type="Self.Halls" Multiplicity="1" />
+          <End Role="HallsSeats" Type="Self.HallsSeats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Halls">
+              <PropertyRef Name="IdHall" />
+            </Principal>
+            <Dependent Role="HallsSeats">
+              <PropertyRef Name="IdHall" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Sessions_Halls">
           <End Role="Halls" Type="Self.Halls" Multiplicity="1" />
           <End Role="Sessions" Type="Self.Sessions" Multiplicity="*" />
@@ -519,6 +625,18 @@
               <PropertyRef Name="IdHall" />
             </Principal>
             <Dependent Role="Sessions">
+              <PropertyRef Name="IdHall" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_HallsSeats">
+          <End Role="HallsSeats" Type="Self.HallsSeats" Multiplicity="1" />
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HallsSeats">
+              <PropertyRef Name="IdSeat" />
+            </Principal>
+            <Dependent Role="Tickets">
               <PropertyRef Name="IdSeat" />
             </Dependent>
           </ReferentialConstraint>
@@ -560,6 +678,7 @@
           <EntitySet Name="Countries" EntityType="Self.Countries" />
           <EntitySet Name="Films" EntityType="Self.Films" />
           <EntitySet Name="FilmsPhotos" EntityType="Self.FilmsPhotos" />
+          <EntitySet Name="Formats" EntityType="Self.Formats" />
           <EntitySet Name="Genres" EntityType="Self.Genres" />
           <EntitySet Name="Halls" EntityType="Self.Halls" />
           <EntitySet Name="HallsSeats" EntityType="Self.HallsSeats" />
@@ -580,9 +699,21 @@
             <End Role="Films" EntitySet="Films" />
             <End Role="Sessions" EntitySet="Sessions" />
           </AssociationSet>
+          <AssociationSet Name="FK_Sessions_Formats" Association="Self.FK_Sessions_Formats">
+            <End Role="Formats" EntitySet="Formats" />
+            <End Role="Sessions" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HallsSeats_Halls" Association="Self.FK_HallsSeats_Halls">
+            <End Role="Halls" EntitySet="Halls" />
+            <End Role="HallsSeats" EntitySet="HallsSeats" />
+          </AssociationSet>
           <AssociationSet Name="FK_Sessions_Halls" Association="Self.FK_Sessions_Halls">
             <End Role="Halls" EntitySet="Halls" />
             <End Role="Sessions" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_HallsSeats" Association="Self.FK_Tickets_HallsSeats">
+            <End Role="HallsSeats" EntitySet="HallsSeats" />
+            <End Role="Tickets" EntitySet="Tickets" />
           </AssociationSet>
           <AssociationSet Name="FK_Users_RoleUsers" Association="Self.FK_Users_RoleUsers">
             <End Role="RoleUsers" EntitySet="RoleUsers" />
@@ -600,23 +731,48 @@
             <End Role="Films" EntitySet="Films" />
             <End Role="Genres" EntitySet="Genres" />
           </AssociationSet>
-          <AssociationSet Name="FK_HallsSeats_Halls" Association="CinemaModel.FK_HallsSeats_Halls">
-            <End Role="Halls" EntitySet="Halls" />
-            <End Role="HallsSeats" EntitySet="HallsSeats" />
-          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(CinemaModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(CinemaModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
-        <Association Name="FK_HallsSeats_Halls">
-          <End Type="CinemaModel.Halls" Role="Halls" Multiplicity="1" />
-          <End Type="CinemaModel.HallsSeats" Role="HallsSeats" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Halls">
-              <PropertyRef Name="IdHall" />
-            </Principal>
-            <Dependent Role="HallsSeats">
-              <PropertyRef Name="IdHall" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -643,9 +799,9 @@
             <EntityTypeMapping TypeName="CinemaModel.Films">
               <MappingFragment StoreEntitySet="Films">
                 <ScalarProperty Name="IdFilm" ColumnName="IdFilm" />
-                <ScalarProperty Name="NameFIlm" ColumnName="NameFIlm" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="IdAgeLimits" ColumnName="IdAgeLimits" />
+                <ScalarProperty Name="NameFilm" ColumnName="NameFilm" />
+                <ScalarProperty Name="DescriptionFilm" ColumnName="DescriptionFilm" />
+                <ScalarProperty Name="IdAgeLimit" ColumnName="IdAgeLimit" />
                 <ScalarProperty Name="Duration" ColumnName="Duration" />
                 <ScalarProperty Name="Actors" ColumnName="Actors" />
                 <ScalarProperty Name="FilmsCompany" ColumnName="FilmsCompany" />
@@ -662,12 +818,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Formats">
+            <EntityTypeMapping TypeName="CinemaModel.Formats">
+              <MappingFragment StoreEntitySet="Formats">
+                <ScalarProperty Name="IdFormat" ColumnName="IdFormat" />
+                <ScalarProperty Name="Format" ColumnName="Format" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Genres">
             <EntityTypeMapping TypeName="CinemaModel.Genres">
               <MappingFragment StoreEntitySet="Genres">
                 <ScalarProperty Name="IdGenre" ColumnName="IdGenre" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="NameGenre" ColumnName="NameGenre" />
+                <ScalarProperty Name="DescriptionGenre" ColumnName="DescriptionGenre" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -677,7 +841,7 @@
                 <ScalarProperty Name="IdHall" ColumnName="IdHall" />
                 <ScalarProperty Name="NameHall" ColumnName="NameHall" />
                 <ScalarProperty Name="CountSeats" ColumnName="CountSeats" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DescriptionHall" ColumnName="DescriptionHall" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -704,8 +868,9 @@
               <MappingFragment StoreEntitySet="Sessions">
                 <ScalarProperty Name="IdSession" ColumnName="IdSession" />
                 <ScalarProperty Name="IdFilm" ColumnName="IdFilm" />
-                <ScalarProperty Name="IdSeat" ColumnName="IdSeat" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IdHall" ColumnName="IdHall" />
+                <ScalarProperty Name="IdFormat" ColumnName="IdFormat" />
+                <ScalarProperty Name="DateSession" ColumnName="DateSession" />
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />
                 <ScalarProperty Name="CostTicket" ColumnName="CostTicket" />
@@ -728,8 +893,7 @@
               <MappingFragment StoreEntitySet="Tickets">
                 <ScalarProperty Name="IdTicket" ColumnName="IdTicket" />
                 <ScalarProperty Name="IdSession" ColumnName="IdSession" />
-                <ScalarProperty Name="NumberRow" ColumnName="NumberRow" />
-                <ScalarProperty Name="NumberSeat" ColumnName="NumberSeat" />
+                <ScalarProperty Name="IdSeat" ColumnName="IdSeat" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -764,6 +928,30 @@
               <ScalarProperty Name="IdGenre" ColumnName="IdGenre" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище CinemaModel.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище CinemaModel.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище CinemaModel.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище CinemaModel.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CinemaModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище CinemaModel.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CinemaModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище CinemaModel.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище CinemaModel.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -24,9 +24,9 @@ namespace Cinema.Model
         }
     
         public int IdFilm { get; set; }
-        public string NameFIlm { get; set; }
-        public string Description { get; set; }
-        public int IdAgeLimits { get; set; }
+        public string NameFilm { get; set; }
+        public string DescriptionFilm { get; set; }
+        public int IdAgeLimit { get; set; }
         public System.TimeSpan Duration { get; set; }
         public string Actors { get; set; }
         public string FilmsCompany { get; set; }

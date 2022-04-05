@@ -49,61 +49,76 @@
             </Button>
             <Button Style="{StaticResource DateButtons}" Grid.Column="4">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <TextBlock x:Name="DateTextBlock" TextAlignment="Center" FontSize="15" Background="Transparent" Width="120"></TextBlock>
+                    <TextBlock x:Name="DateTextBlock" TextAlignment="Center" FontSize="15" Background="Transparent" Width="120" VerticalAlignment="Center">Выбрать день</TextBlock>
                     <DatePicker x:Name="PickDatePicker" Width="30" Visibility="Visible" FlowDirection="LeftToRight" FirstDayOfWeek="Monday" BorderBrush="Transparent"/>
                 </StackPanel>
             </Button>
             <ComboBox x:Name="FiltersComboBox" Grid.Column="6" Text="Фильтры"/>
 
-
-
-
         </Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
-            <ListView x:Name="FilmsListView" HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="#543964">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Border BorderBrush="Aqua" CornerRadius="5" BorderThickness="2" Padding="5">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition Width="7*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="2*"/>
-                                    <RowDefinition Height="8*"/>
-                                </Grid.RowDefinitions>
-                                <Image Grid.RowSpan="3"/>
-                                <StackPanel Grid.Column="1" Orientation="Vertical">
-                                    <TextBlock x:Name="NameFilmTextBlock" Style="{StaticResource YellowText}" Text="{Binding}" FontSize="24" FontWeight="SemiBold"/>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="150"/>
-                                            <ColumnDefinition Width="692"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Border CornerRadius="50" BorderBrush="White" Width="30">
-                                            <TextBlock x:Name="AgeTextBlock" Text="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                        <StackPanel Grid.Column="1" Orientation="Vertical">
-                                            <TextBlock x:Name="GenresTextBlock" Text="{Binding}"/>
-                                            <TextBlock x:Name="DurationTextBlock" Text="{Binding}"/>
-                                        </StackPanel>
-                                    </Grid>
-                                    <StackPanel x:Name="SessionsStackPanel" Width="120" Orientation="Vertical">
-                                        <TextBlock x:Name="FormatTextBlock" Text="{Binding}"/>
-                                        <TextBlock x:Name="HallTextBlock" Text="{Binding}"/>
+        <!--<StackPanel x:Name="MainStackPanel" Grid.Row="1"/>-->
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2">
+            <Border BorderBrush="#6A4C8A" CornerRadius="5" BorderThickness="0.5" Padding="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="160"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <ListView x:Name="FilmsListView" HorizontalContentAlignment="Left" Grid.Column="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="#543964" BorderBrush="Transparent">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                        
+                                <Grid>
+                                
+                                    <Image Grid.RowSpan="3"/>
+                                    <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
+                                        <TextBlock x:Name="NameFilmTextBlock" Style="{StaticResource YellowText}" Text="{Binding NameFilm}" FontSize="24" FontWeight="SemiBold" TextWrapping="Wrap"/>
+                                        <Grid Grid.Row="2" HorizontalAlignment="Left">
+                                            <Border CornerRadius="50" BorderBrush="White" BorderThickness="1.5" Width="30" Height="30">
+                                                <TextBlock x:Name="AgeTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding AgeLimits.Limit}"/>
+                                            </Border>
+                                            <StackPanel Grid.Column="1" Orientation="Vertical">
+                                                <TextBlock x:Name="GenresTextBlock" Text="{Binding NameGenre}"/>
+                                                <TextBlock x:Name="DurationTextBlock" Text="{Binding Films.Duration,StringFormat={}{0:hh} ч. {0:mm} мин.}"/>
+                                            </StackPanel>
+                                        </Grid>
+                                  
+                                    
+                                    </StackPanel>
+                                </Grid>
+                        
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <ListView Grid.Column="1" Grid.Row="1" x:Name="SessionsListView" Background="#543964" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="Transparent">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="#6A4C8A" BorderThickness="0.5" Padding="5">
+
+                                    <StackPanel x:Name="SessionsStackPanel" Width="120" Orientation="Vertical" HorizontalAlignment="Left">
+                                        <TextBlock x:Name="FormatTextBlock" Text="{Binding Formats.Format}"/>
+                                        <TextBlock x:Name="HallTextBlock" Text="{Binding Halls.NameHall, StringFormat={}Зал {0:F0}}"/>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock x:Name="TimeTextBlock" Style="{StaticResource YellowText}" Text="{Binding}"/>
+                                            <TextBlock x:Name="TimeTextBlock" Style="{StaticResource YellowText}" Text="{Binding StartTime, StringFormat={}{0:hh}:{0:mm}}"/>
                                             <TextBlock x:Name="CostTextBlock" Text="{Binding CostTicket, StringFormat={}{0:F0} ₽}"/>
                                         </StackPanel>
                                     </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </Grid>
+            </Border>
         </ScrollViewer>
     </Grid>
 </Page>

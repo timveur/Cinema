@@ -23,6 +23,7 @@ namespace Cinema.View
     {
         Core db = new Core();
         List<Sessions> arraySessions;
+        List<Films> arrayFilms;
         public MainPage()
         {
             InitializeComponent();
@@ -50,8 +51,25 @@ namespace Cinema.View
             DayFourDateTextBlock.Text = today.AddDays(3).ToString("d MMMM");
 
 
+            //arrayFilms = db.context.Films.ToList();
+            //foreach (var item in arrayFilms)
+            //{
+            //    TextBlock newImage = new TextBlock
+            //    {
+            //        Text= item.NameFilm
+            //    };
+            //    MainStackPanel.Children.Add(newImage);
+
+            //}
+
+            arrayFilms = db.context.Films.ToList();
+            FilmsListView.ItemsSource = arrayFilms;
             arraySessions = db.context.Sessions.ToList();
-            FilmsListView.ItemsSource = arraySessions;
+            SessionsListView.ItemsSource = arraySessions;
+
+
+
+
         }
     }
 }

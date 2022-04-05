@@ -22,13 +22,15 @@ namespace Cinema.Model
     
         public int IdSession { get; set; }
         public int IdFilm { get; set; }
-        public int IdSeat { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
-        public Nullable<System.TimeSpan> StartTime { get; set; }
-        public Nullable<System.TimeSpan> EndTime { get; set; }
-        public Nullable<decimal> CostTicket { get; set; }
+        public int IdHall { get; set; }
+        public int IdFormat { get; set; }
+        public System.DateTime DateSession { get; set; }
+        public System.TimeSpan StartTime { get; set; }
+        public System.TimeSpan EndTime { get; set; }
+        public decimal CostTicket { get; set; }
     
         public virtual Films Films { get; set; }
+        public virtual Formats Formats { get; set; }
         public virtual Halls Halls { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tickets> Tickets { get; set; }

@@ -12,19 +12,18 @@ namespace Cinema.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Genres
+    public partial class Formats
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Genres()
+        public Formats()
         {
-            this.Films = new HashSet<Films>();
+            this.Sessions = new HashSet<Sessions>();
         }
     
-        public int IdGenre { get; set; }
-        public string NameGenre { get; set; }
-        public string DescriptionGenre { get; set; }
+        public int IdFormat { get; set; }
+        public string Format { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Films> Films { get; set; }
+        public virtual ICollection<Sessions> Sessions { get; set; }
     }
 }

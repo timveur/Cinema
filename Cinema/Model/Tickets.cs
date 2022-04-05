@@ -16,9 +16,9 @@ namespace Cinema.Model
     {
         public int IdTicket { get; set; }
         public int IdSession { get; set; }
-        public Nullable<int> NumberRow { get; set; }
-        public Nullable<int> NumberSeat { get; set; }
+        public int IdSeat { get; set; }
     
+        public virtual HallsSeats HallsSeats { get; set; }
         public virtual Sessions Sessions { get; set; }
     }
 }

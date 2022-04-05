@@ -10,21 +10,10 @@
 namespace Cinema.Model
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Genres
+    public partial class sp_helpdiagramdefinition_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Genres()
-        {
-            this.Films = new HashSet<Films>();
-        }
-    
-        public int IdGenre { get; set; }
-        public string NameGenre { get; set; }
-        public string DescriptionGenre { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Films> Films { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
