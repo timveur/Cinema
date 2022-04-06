@@ -23,31 +23,31 @@
                 <ColumnDefinition Width="90"/>
                 <ColumnDefinition Width="120"/>
             </Grid.ColumnDefinitions>
-            <Button Style="{StaticResource DateButtons}">
+            <Button>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <TextBlock x:Name="TodayTextBlock" TextAlignment="Center" FontSize="20"></TextBlock>
                     <TextBlock x:Name="TodayDateTextBlock" TextAlignment="Center" FontSize="12"/>
                 </StackPanel>
             </Button>
-            <Button Style="{StaticResource DateButtons}"  Grid.Column="1">
+            <Button Grid.Column="1">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <TextBlock x:Name="TomorrowTextBlock" TextAlignment="Center" FontSize="20"></TextBlock>
                     <TextBlock x:Name="TomorrowDateTextBlock" TextAlignment="Center" FontSize="12"/>
                 </StackPanel>
             </Button>
-            <Button Style="{StaticResource DateButtons}" Grid.Column="2">
+            <Button Grid.Column="2">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <TextBlock x:Name="DayThreeTextBlock" TextAlignment="Center" FontSize="20"></TextBlock>
                     <TextBlock x:Name="DayThreeDateTextBlock" TextAlignment="Center" FontSize="12"/>
                 </StackPanel>
             </Button>
-            <Button Style="{StaticResource DateButtons}" Grid.Column="3">
+            <Button Grid.Column="3">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <TextBlock x:Name="DayFourTextBlock" TextAlignment="Center" FontSize="20"></TextBlock>
                     <TextBlock x:Name="DayFourDateTextBlock" TextAlignment="Center" FontSize="12"/>
                 </StackPanel>
             </Button>
-            <Button Style="{StaticResource DateButtons}" Grid.Column="4">
+            <Button Grid.Column="4">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <TextBlock x:Name="DateTextBlock" TextAlignment="Center" FontSize="15" Background="Transparent" Width="120" VerticalAlignment="Center">Выбрать день</TextBlock>
                     <DatePicker x:Name="PickDatePicker" Width="30" Visibility="Visible" FlowDirection="LeftToRight" FirstDayOfWeek="Monday" BorderBrush="Transparent"/>
@@ -61,7 +61,7 @@
             <Border BorderBrush="#6A4C8A" CornerRadius="5" BorderThickness="0.5" Padding="5">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="160"/>
+                        <ColumnDefinition Width="165"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -69,46 +69,57 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <ListView x:Name="FilmsListView" HorizontalContentAlignment="Left" Grid.Column="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="#543964" BorderBrush="Transparent">
+                    <ListView x:Name="FilmsListView" HorizontalContentAlignment="Left" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="#543964" BorderBrush="Transparent">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                        
                                 <Grid>
-                                
-                                    <Image Grid.RowSpan="3"/>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="165"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="70"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Image Grid.RowSpan="2" Source="{Binding FullPhotoPath}" HorizontalAlignment="Left" Width="150"/>
                                     <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
-                                        <TextBlock x:Name="NameFilmTextBlock" Style="{StaticResource YellowText}" Text="{Binding NameFilm}" FontSize="24" FontWeight="SemiBold" TextWrapping="Wrap"/>
-                                        <Grid Grid.Row="2" HorizontalAlignment="Left">
-                                            <Border CornerRadius="50" BorderBrush="White" BorderThickness="1.5" Width="30" Height="30">
-                                                <TextBlock x:Name="AgeTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding AgeLimits.Limit}"/>
+                                        <TextBlock x:Name="NameFilmTextBlock" Style="{StaticResource ImportantTextBlock}" Text="{Binding Films.NameFilm}" FontSize="24" FontWeight="SemiBold" TextWrapping="Wrap"/>
+                                        <Grid Grid.Row="1" HorizontalAlignment="Left">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <Border Grid.RowSpan="2" HorizontalAlignment="Left" CornerRadius="50" BorderBrush="White" BorderThickness="1.5" Width="30" Height="30">
+                                                <TextBlock x:Name="AgeTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Films.AgeLimits.Limit}"/>
                                             </Border>
-                                            <StackPanel Grid.Column="1" Orientation="Vertical">
-                                                <TextBlock x:Name="GenresTextBlock" Text="{Binding NameGenre}"/>
-                                                <TextBlock x:Name="DurationTextBlock" Text="{Binding Films.Duration,StringFormat={}{0:hh} ч. {0:mm} мин.}"/>
+                                            <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5 0 0 0">
+                                                <TextBlock x:Name="GenresTextBlock" Text="{Binding Films.result}"/>
+                                                <TextBlock Grid.Row="1" x:Name="DurationTextBlock" Text="{Binding Films.Duration,StringFormat={}{0:hh} ч. {0:mm} мин.}"/>
                                             </StackPanel>
                                         </Grid>
-                                  
-                                    
                                     </StackPanel>
                                 </Grid>
-                        
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <ListView Grid.Column="1" Grid.Row="1" x:Name="SessionsListView" Background="#543964" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="Transparent">
+                    <ListView Grid.Row="1" Grid.Column="1" x:Name="SessionsListView" Background="#543964" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="Transparent">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Border BorderBrush="#6A4C8A" BorderThickness="0.5" Padding="5">
-
+                                <Button Padding="5">
                                     <StackPanel x:Name="SessionsStackPanel" Width="120" Orientation="Vertical" HorizontalAlignment="Left">
-                                        <TextBlock x:Name="FormatTextBlock" Text="{Binding Formats.Format}"/>
-                                        <TextBlock x:Name="HallTextBlock" Text="{Binding Halls.NameHall, StringFormat={}Зал {0:F0}}"/>
+                                        <TextBlock x:Name="FormatTextBlock" Style="{StaticResource CaptionTextBlock}" Text="{Binding Formats.Format}"/>
+                                        <TextBlock x:Name="HallTextBlock" Style="{StaticResource CaptionTextBlock}" Text="{Binding Halls.NameHall, StringFormat={}Зал {0:F0}}"/>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock x:Name="TimeTextBlock" Style="{StaticResource YellowText}" Text="{Binding StartTime, StringFormat={}{0:hh}:{0:mm}}"/>
-                                            <TextBlock x:Name="CostTextBlock" Text="{Binding CostTicket, StringFormat={}{0:F0} ₽}"/>
+                                            <TextBlock x:Name="TimeTextBlock" Style="{StaticResource ImportantTextBlock}" FontSize="18" Text="{Binding StartTime, StringFormat={}{0:hh}:{0:mm}}"/>
+                                            <TextBlock x:Name="CostTextBlock" Style="{StaticResource CaptionImportantTextBlock}" Padding="2 0 0 0" Text="{Binding CostTicket, StringFormat={}{0:F0} ₽}"/>
                                         </StackPanel>
                                     </StackPanel>
-                                </Border>
+                                </Button>
+                                
                             </DataTemplate>
                         </ListView.ItemTemplate>
                         <ListView.ItemsPanel>

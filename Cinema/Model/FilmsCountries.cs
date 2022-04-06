@@ -12,12 +12,10 @@ namespace Cinema.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class FilmsPhotos
+    public partial class FilmsCountries
     {
-        public int IdPhotos { get; set; }
+        public int IdFilmCountry { get; set; }
         public int IdFilm { get; set; }
-        public string PhotoPath { get; set; }
-    
-        public virtual Films Films { get; set; }
+        public int IdCountry { get; set; }
     }
 }

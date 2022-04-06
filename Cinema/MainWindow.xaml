@@ -15,10 +15,10 @@
         <Grid>
             <Image Source="Resources/cinema.png" HorizontalAlignment="Left"/>
             <Label Style="{StaticResource HeaderLabel}" HorizontalAlignment="Center" VerticalAlignment="Center">Кинотеатр «Friends»</Label>
-            <Button x:Name="AuthButton" HorizontalAlignment="Right" Width="100" Click="AuthButtonClick">Войти</Button>
+            <Button Style="{StaticResource ActionButton}" x:Name="AuthButton" HorizontalAlignment="Right" Width="100" Click="AuthButtonClick">Войти</Button>
             <StackPanel x:Name="ButtonsStackPanel" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="ExitButton" HorizontalAlignment="Right" Width="80" Click="ExitButtonClick" Margin="0 0 10 0">Выйти</Button>
-                <Button x:Name="BackButton" HorizontalAlignment="Right" Width="80" Click="BackButtonClick">Назад</Button>
+                <Button Style="{StaticResource ActionButton}" x:Name="ExitButton" HorizontalAlignment="Right" Width="80" Click="ExitButtonClick" Margin="0 0 10 0">Выйти</Button>
+                <Button Style="{StaticResource ActionButton}" x:Name="BackButton" HorizontalAlignment="Right" Width="80" Click="BackButtonClick">Назад</Button>
             </StackPanel> 
             
         </Grid>

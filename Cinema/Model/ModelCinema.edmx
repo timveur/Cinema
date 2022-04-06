@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище CinemaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище CinemaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AgeLimits">
           <Key>
             <PropertyRef Name="IdAgeLimit" />
@@ -32,23 +32,19 @@
           <Property Name="FilmsCompany" Type="nvarchar(max)" />
           <Property Name="FilmsDirectors" Type="nvarchar(max)" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "Cinema.dbo.FilmsCountries" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="FilmsCountries">
           <Key>
-            <PropertyRef Name="IdFilm" />
-            <PropertyRef Name="IdCountry" />
+            <PropertyRef Name="IdFilmCountry" />
           </Key>
+          <Property Name="IdFilmCountry" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdFilm" Type="int" Nullable="false" />
           <Property Name="IdCountry" Type="int" Nullable="false" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "Cinema.dbo.FilmsGenres" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="FilmsGenres">
           <Key>
-            <PropertyRef Name="IdFilm" />
-            <PropertyRef Name="IdGenre" />
+            <PropertyRef Name="IdFilmGenre" />
           </Key>
+          <Property Name="IdFilmGenre" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdFilm" Type="int" Nullable="false" />
           <Property Name="IdGenre" Type="int" Nullable="false" />
         </EntityType>
@@ -58,7 +54,7 @@
           </Key>
           <Property Name="IdPhotos" Type="int" Nullable="false" />
           <Property Name="IdFilm" Type="int" Nullable="false" />
-          <Property Name="Photo" Type="image" />
+          <Property Name="PhotoPath" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Formats">
           <Key>
@@ -154,30 +150,6 @@
             </Principal>
             <Dependent Role="Films">
               <PropertyRef Name="IdAgeLimit" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FilmsCountries_Countries">
-          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
-          <End Role="FilmsCountries" Type="Self.FilmsCountries" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Countries">
-              <PropertyRef Name="IdCountry" />
-            </Principal>
-            <Dependent Role="FilmsCountries">
-              <PropertyRef Name="IdCountry" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FilmsCountries_Films">
-          <End Role="Films" Type="Self.Films" Multiplicity="1" />
-          <End Role="FilmsCountries" Type="Self.FilmsCountries" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Films">
-              <PropertyRef Name="IdFilm" />
-            </Principal>
-            <Dependent Role="FilmsCountries">
-              <PropertyRef Name="IdFilm" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -336,6 +308,8 @@
           <EntitySet Name="AgeLimits" EntityType="Self.AgeLimits" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Films" EntityType="Self.Films" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FilmsCountries" EntityType="Self.FilmsCountries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FilmsGenres" EntityType="Self.FilmsGenres" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FilmsPhotos" EntityType="Self.FilmsPhotos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Formats" EntityType="Self.Formats" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genres" EntityType="Self.Genres" Schema="dbo" store:Type="Tables" />
@@ -346,29 +320,9 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tickets" EntityType="Self.Tickets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FilmsCountries" EntityType="Self.FilmsCountries" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [FilmsCountries].[IdFilm] AS [IdFilm], 
-    [FilmsCountries].[IdCountry] AS [IdCountry]
-    FROM [dbo].[FilmsCountries] AS [FilmsCountries]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="FilmsGenres" EntityType="Self.FilmsGenres" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [FilmsGenres].[IdFilm] AS [IdFilm], 
-    [FilmsGenres].[IdGenre] AS [IdGenre]
-    FROM [dbo].[FilmsGenres] AS [FilmsGenres]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Films_AgeLimits" Association="Self.FK_Films_AgeLimits">
             <End Role="AgeLimits" EntitySet="AgeLimits" />
             <End Role="Films" EntitySet="Films" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FilmsCountries_Countries" Association="Self.FK_FilmsCountries_Countries">
-            <End Role="Countries" EntitySet="Countries" />
-            <End Role="FilmsCountries" EntitySet="FilmsCountries" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FilmsCountries_Films" Association="Self.FK_FilmsCountries_Films">
-            <End Role="Films" EntitySet="Films" />
-            <End Role="FilmsCountries" EntitySet="FilmsCountries" />
           </AssociationSet>
           <AssociationSet Name="FK_FilmsGenres_Films" Association="Self.FK_FilmsGenres_Films">
             <End Role="Films" EntitySet="Films" />
@@ -411,7 +365,8 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CinemaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -429,7 +384,6 @@
           </Key>
           <Property Name="IdCountry" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NameCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Films" Relationship="Self.FilmsCountries" FromRole="Countries" ToRole="Films" />
         </EntityType>
         <EntityType Name="Films">
           <Key>
@@ -444,10 +398,27 @@
           <Property Name="FilmsCompany" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="FilmsDirectors" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AgeLimits" Relationship="Self.FK_Films_AgeLimits" FromRole="Films" ToRole="AgeLimits" />
+          <NavigationProperty Name="FilmsGenres" Relationship="Self.FK_FilmsGenres_Films" FromRole="Films" ToRole="FilmsGenres" />
           <NavigationProperty Name="FilmsPhotos" Relationship="Self.FK_FilmsPhotos_Films" FromRole="Films" ToRole="FilmsPhotos" />
           <NavigationProperty Name="Sessions" Relationship="Self.FK_Sessions_Films" FromRole="Films" ToRole="Sessions" />
-          <NavigationProperty Name="Countries" Relationship="Self.FilmsCountries" FromRole="Films" ToRole="Countries" />
-          <NavigationProperty Name="Genres" Relationship="Self.FilmsGenres" FromRole="Films" ToRole="Genres" />
+        </EntityType>
+        <EntityType Name="FilmsCountries">
+          <Key>
+            <PropertyRef Name="IdFilmCountry" />
+          </Key>
+          <Property Name="IdFilmCountry" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFilm" Type="Int32" Nullable="false" />
+          <Property Name="IdCountry" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FilmsGenres">
+          <Key>
+            <PropertyRef Name="IdFilmGenre" />
+          </Key>
+          <Property Name="IdFilmGenre" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFilm" Type="Int32" Nullable="false" />
+          <Property Name="IdGenre" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Films" Relationship="Self.FK_FilmsGenres_Films" FromRole="FilmsGenres" ToRole="Films" />
+          <NavigationProperty Name="Genres" Relationship="Self.FK_FilmsGenres_Genres" FromRole="FilmsGenres" ToRole="Genres" />
         </EntityType>
         <EntityType Name="FilmsPhotos">
           <Key>
@@ -455,7 +426,7 @@
           </Key>
           <Property Name="IdPhotos" Type="Int32" Nullable="false" />
           <Property Name="IdFilm" Type="Int32" Nullable="false" />
-          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PhotoPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Films" Relationship="Self.FK_FilmsPhotos_Films" FromRole="FilmsPhotos" ToRole="Films" />
         </EntityType>
         <EntityType Name="Formats">
@@ -473,7 +444,7 @@
           <Property Name="IdGenre" Type="Int32" Nullable="false" />
           <Property Name="NameGenre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DescriptionGenre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Films" Relationship="Self.FilmsGenres" FromRole="Genres" ToRole="Films" />
+          <NavigationProperty Name="FilmsGenres" Relationship="Self.FK_FilmsGenres_Genres" FromRole="Genres" ToRole="FilmsGenres" />
         </EntityType>
         <EntityType Name="Halls">
           <Key>
@@ -569,6 +540,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FilmsGenres_Films">
+          <End Role="Films" Type="Self.Films" Multiplicity="1" />
+          <End Role="FilmsGenres" Type="Self.FilmsGenres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Films">
+              <PropertyRef Name="IdFilm" />
+            </Principal>
+            <Dependent Role="FilmsGenres">
+              <PropertyRef Name="IdFilm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_FilmsPhotos_Films">
           <End Role="Films" Type="Self.Films" Multiplicity="1" />
           <End Role="FilmsPhotos" Type="Self.FilmsPhotos" Multiplicity="*" />
@@ -590,6 +573,18 @@
             </Principal>
             <Dependent Role="Sessions">
               <PropertyRef Name="IdFilm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FilmsGenres_Genres">
+          <End Role="Genres" Type="Self.Genres" Multiplicity="1" />
+          <End Role="FilmsGenres" Type="Self.FilmsGenres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genres">
+              <PropertyRef Name="IdGenre" />
+            </Principal>
+            <Dependent Role="FilmsGenres">
+              <PropertyRef Name="IdGenre" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -665,18 +660,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FilmsCountries">
-          <End Role="Countries" Type="Self.Countries" Multiplicity="*" />
-          <End Role="Films" Type="Self.Films" Multiplicity="*" />
-        </Association>
-        <Association Name="FilmsGenres">
-          <End Role="Films" Type="Self.Films" Multiplicity="*" />
-          <End Role="Genres" Type="Self.Genres" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="CinemaEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AgeLimits" EntityType="Self.AgeLimits" />
           <EntitySet Name="Countries" EntityType="Self.Countries" />
           <EntitySet Name="Films" EntityType="Self.Films" />
+          <EntitySet Name="FilmsCountries" EntityType="Self.FilmsCountries" />
+          <EntitySet Name="FilmsGenres" EntityType="Self.FilmsGenres" />
           <EntitySet Name="FilmsPhotos" EntityType="Self.FilmsPhotos" />
           <EntitySet Name="Formats" EntityType="Self.Formats" />
           <EntitySet Name="Genres" EntityType="Self.Genres" />
@@ -691,6 +680,10 @@
             <End Role="AgeLimits" EntitySet="AgeLimits" />
             <End Role="Films" EntitySet="Films" />
           </AssociationSet>
+          <AssociationSet Name="FK_FilmsGenres_Films" Association="Self.FK_FilmsGenres_Films">
+            <End Role="Films" EntitySet="Films" />
+            <End Role="FilmsGenres" EntitySet="FilmsGenres" />
+          </AssociationSet>
           <AssociationSet Name="FK_FilmsPhotos_Films" Association="Self.FK_FilmsPhotos_Films">
             <End Role="Films" EntitySet="Films" />
             <End Role="FilmsPhotos" EntitySet="FilmsPhotos" />
@@ -698,6 +691,10 @@
           <AssociationSet Name="FK_Sessions_Films" Association="Self.FK_Sessions_Films">
             <End Role="Films" EntitySet="Films" />
             <End Role="Sessions" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilmsGenres_Genres" Association="Self.FK_FilmsGenres_Genres">
+            <End Role="Genres" EntitySet="Genres" />
+            <End Role="FilmsGenres" EntitySet="FilmsGenres" />
           </AssociationSet>
           <AssociationSet Name="FK_Sessions_Formats" Association="Self.FK_Sessions_Formats">
             <End Role="Formats" EntitySet="Formats" />
@@ -722,14 +719,6 @@
           <AssociationSet Name="FK_Tickets_Sessions" Association="Self.FK_Tickets_Sessions">
             <End Role="Sessions" EntitySet="Sessions" />
             <End Role="Tickets" EntitySet="Tickets" />
-          </AssociationSet>
-          <AssociationSet Name="FilmsCountries" Association="Self.FilmsCountries">
-            <End Role="Countries" EntitySet="Countries" />
-            <End Role="Films" EntitySet="Films" />
-          </AssociationSet>
-          <AssociationSet Name="FilmsGenres" Association="Self.FilmsGenres">
-            <End Role="Films" EntitySet="Films" />
-            <End Role="Genres" EntitySet="Genres" />
           </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -809,12 +798,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="FilmsCountries">
+            <EntityTypeMapping TypeName="CinemaModel.FilmsCountries">
+              <MappingFragment StoreEntitySet="FilmsCountries">
+                <ScalarProperty Name="IdFilmCountry" ColumnName="IdFilmCountry" />
+                <ScalarProperty Name="IdFilm" ColumnName="IdFilm" />
+                <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FilmsGenres">
+            <EntityTypeMapping TypeName="CinemaModel.FilmsGenres">
+              <MappingFragment StoreEntitySet="FilmsGenres">
+                <ScalarProperty Name="IdFilmGenre" ColumnName="IdFilmGenre" />
+                <ScalarProperty Name="IdFilm" ColumnName="IdFilm" />
+                <ScalarProperty Name="IdGenre" ColumnName="IdGenre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="FilmsPhotos">
             <EntityTypeMapping TypeName="CinemaModel.FilmsPhotos">
               <MappingFragment StoreEntitySet="FilmsPhotos">
                 <ScalarProperty Name="IdPhotos" ColumnName="IdPhotos" />
                 <ScalarProperty Name="IdFilm" ColumnName="IdFilm" />
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -912,22 +919,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="FilmsCountries" TypeName="CinemaModel.FilmsCountries" StoreEntitySet="FilmsCountries">
-            <EndProperty Name="Countries">
-              <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
-            </EndProperty>
-            <EndProperty Name="Films">
-              <ScalarProperty Name="IdFilm" ColumnName="IdFilm" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="FilmsGenres" TypeName="CinemaModel.FilmsGenres" StoreEntitySet="FilmsGenres">
-            <EndProperty Name="Films">
-              <ScalarProperty Name="IdFilm" ColumnName="IdFilm" />
-            </EndProperty>
-            <EndProperty Name="Genres">
-              <ScalarProperty Name="IdGenre" ColumnName="IdGenre" />
-            </EndProperty>
-          </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище CinemaModel.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище CinemaModel.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище CinemaModel.sp_dropdiagram" />

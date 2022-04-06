@@ -17,7 +17,7 @@ namespace Cinema.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Genres()
         {
-            this.Films = new HashSet<Films>();
+            this.FilmsGenres = new HashSet<FilmsGenres>();
         }
     
         public int IdGenre { get; set; }
@@ -25,6 +25,6 @@ namespace Cinema.Model
         public string DescriptionGenre { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Films> Films { get; set; }
+        public virtual ICollection<FilmsGenres> FilmsGenres { get; set; }
     }
 }

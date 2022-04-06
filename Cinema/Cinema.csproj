@@ -76,6 +76,12 @@
     <Compile Include="Model\Films.cs">
       <DependentUpon>ModelCinema.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\FilmsCountries.cs">
+      <DependentUpon>ModelCinema.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FilmsGenres.cs">
+      <DependentUpon>ModelCinema.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\FilmsPhotos.cs">
       <DependentUpon>ModelCinema.tt</DependentUpon>
     </Compile>
@@ -106,6 +112,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelCinema.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\PartialClasses\FilmsPhotos.cs" />
+    <Compile Include="Model\PartialClasses\Genres.cs" />
     <Compile Include="Model\RoleUsers.cs">
       <DependentUpon>ModelCinema.tt</DependentUpon>
     </Compile>
@@ -191,6 +199,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Assets\Fonts\Inter-Regular.ttf" />
+    <Resource Include="Assets\Fonts\Inter-SemiBold.ttf" />
     <EntityDeploy Include="Model\ModelCinema.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModelCinema.Designer.cs</LastGenOutput>
@@ -214,6 +224,16 @@
     <Resource Include="Resources\cinema.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Assets\Images\Films\ancharted.jpg" />
+    <Resource Include="Assets\Images\Films\potustoronnee.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\calendar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Model\ModelCinema.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelCinema.edmx</DependentUpon>
@@ -224,15 +244,6 @@
       <DependentUpon>ModelCinema.edmx</DependentUpon>
       <LastGenOutput>ModelCinema.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\calendar.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets\Fonts\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -52,6 +52,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Grid.Row="2" Width="150" HorizontalAlignment="Right" Content="Купить"/>
+        <Button Style="{StaticResource ActionButton}" Grid.Row="2" Width="150" HorizontalAlignment="Right" Content="Купить"/>
     </Grid>
 </Page>

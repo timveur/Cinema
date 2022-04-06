@@ -23,11 +23,25 @@ namespace Cinema.View
     {
         Core db = new Core();
         List<Sessions> arraySessions;
-        List<Films> arrayFilms;
+        List<FilmsPhotos> arrayFilms;
         public MainPage()
         {
             InitializeComponent();
+            var result = from Genres in db.context.Genres
+                         join FilmsGenres in db.context.FilmsGenres on Genres.IdGenre equals FilmsGenres.IdGenre
+                        
+                         select new
+                         {
+                             NameGenre = Genres.NameGenre,
+                             NameFilm = FilmsGenres.Films.NameFilm
+                           
 
+                         };
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.NameGenre);
+            }
+           
             DateTime today = DateTime.Today;
             DateTime tomorrow = today.AddDays(1);
             var dayThreeLower = new StringBuilder(today.AddDays(2).ToString("dddd"));
@@ -62,7 +76,8 @@ namespace Cinema.View
 
             //}
 
-            arrayFilms = db.context.Films.ToList();
+            arrayFilms = db.context.FilmsPhotos.ToList();
+            
             FilmsListView.ItemsSource = arrayFilms;
             arraySessions = db.context.Sessions.ToList();
             SessionsListView.ItemsSource = arraySessions;

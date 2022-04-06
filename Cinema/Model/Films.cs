@@ -17,10 +17,9 @@ namespace Cinema.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Films()
         {
+            this.FilmsGenres = new HashSet<FilmsGenres>();
             this.FilmsPhotos = new HashSet<FilmsPhotos>();
             this.Sessions = new HashSet<Sessions>();
-            this.Countries = new HashSet<Countries>();
-            this.Genres = new HashSet<Genres>();
         }
     
         public int IdFilm { get; set; }
@@ -34,12 +33,10 @@ namespace Cinema.Model
     
         public virtual AgeLimits AgeLimits { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FilmsGenres> FilmsGenres { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FilmsPhotos> FilmsPhotos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sessions> Sessions { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Countries> Countries { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Genres> Genres { get; set; }
     }
 }

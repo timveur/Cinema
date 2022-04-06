@@ -14,16 +14,7 @@ namespace Cinema.Model
     
     public partial class Countries
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Countries()
-        {
-            this.Films = new HashSet<Films>();
-        }
-    
         public int IdCountry { get; set; }
         public string NameCountry { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Films> Films { get; set; }
     }
 }

@@ -14,7 +14,7 @@
             <TextBox x:Name="LoginTextBox" Height="25" VerticalContentAlignment="Center"></TextBox>
             <TextBlock>Пароль</TextBlock>
             <PasswordBox x:Name="AuthPasswordBox" Height="25" VerticalContentAlignment="Center"></PasswordBox>
-            <Button x:Name="LoginButton" Margin="0 30 0 10" Height="30" FontSize="16" Click="LoginButtonClick">Войти</Button>
+            <Button  Style="{StaticResource ActionButton}" x:Name="LoginButton" Margin="0 30 0 10" Height="30" FontSize="16" Click="LoginButtonClick" >Войти</Button>
             <TextBlock x:Name="RegTextBlock" MouseLeftButtonDown="RegTextBlockMouseLeftButtonDown" FontSize="12" Cursor="Hand" HorizontalAlignment="Center" TextDecorations="Underline">Зарегистрироваться</TextBlock>
         </StackPanel>
     </Grid>
