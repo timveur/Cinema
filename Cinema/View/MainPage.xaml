@@ -13,49 +13,50 @@
             <RowDefinition Height="90"/>
             <RowDefinition Height="8*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="854" Height="55">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="164"/>
-                <ColumnDefinition Width="90"/>
-                <ColumnDefinition Width="120"/>
-            </Grid.ColumnDefinitions>
-            <Button>
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock x:Name="TodayTextBlock" TextAlignment="Center" FontSize="20"></TextBlock>
-                    <TextBlock x:Name="TodayDateTextBlock" TextAlignment="Center" FontSize="12"/>
-                </StackPanel>
-            </Button>
-            <Button Grid.Column="1">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock x:Name="TomorrowTextBlock" TextAlignment="Center" FontSize="20"></TextBlock>
-                    <TextBlock x:Name="TomorrowDateTextBlock" TextAlignment="Center" FontSize="12"/>
-                </StackPanel>
-            </Button>
-            <Button Grid.Column="2">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock x:Name="DayThreeTextBlock" TextAlignment="Center" FontSize="20"></TextBlock>
-                    <TextBlock x:Name="DayThreeDateTextBlock" TextAlignment="Center" FontSize="12"/>
-                </StackPanel>
-            </Button>
-            <Button Grid.Column="3">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock x:Name="DayFourTextBlock" TextAlignment="Center" FontSize="20"></TextBlock>
-                    <TextBlock x:Name="DayFourDateTextBlock" TextAlignment="Center" FontSize="12"/>
-                </StackPanel>
-            </Button>
-            <Button Grid.Column="4">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <TextBlock x:Name="DateTextBlock" TextAlignment="Center" FontSize="15" Background="Transparent" Width="120" VerticalAlignment="Center">Выбрать день</TextBlock>
-                    <DatePicker x:Name="PickDatePicker" Width="30" Visibility="Visible" FlowDirection="LeftToRight" FirstDayOfWeek="Monday" BorderBrush="Transparent"/>
-                </StackPanel>
-            </Button>
-            <ComboBox x:Name="FiltersComboBox" Grid.Column="6" Text="Фильтры"/>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Width="854" Height="55">
+            <Grid Width="735">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="164"/>
+                </Grid.ColumnDefinitions>
+                <Button >
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15 0 15 0">
+                        <TextBlock x:Name="TodayTextBlock" TextAlignment="Center" FontSize="20"></TextBlock>
+                        <TextBlock x:Name="TodayDateTextBlock" TextAlignment="Center" FontSize="12"/>
+                    </StackPanel>
+                </Button>
+                <Button Grid.Column="1">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15 0 15 0">
+                        <TextBlock x:Name="TomorrowTextBlock" TextAlignment="Center" FontSize="20"></TextBlock>
+                        <TextBlock x:Name="TomorrowDateTextBlock" TextAlignment="Center" FontSize="12"/>
+                    </StackPanel>
+                </Button>
+                <Button Grid.Column="2">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15 0 15 0">
+                        <TextBlock x:Name="DayThreeTextBlock" TextAlignment="Center" FontSize="20"></TextBlock>
+                        <TextBlock x:Name="DayThreeDateTextBlock" TextAlignment="Center" FontSize="12"/>
+                    </StackPanel>
+                </Button>
+                <Button Grid.Column="3">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15 0 15 0">
+                        <TextBlock x:Name="DayFourTextBlock" TextAlignment="Center" FontSize="20"></TextBlock>
+                        <TextBlock x:Name="DayFourDateTextBlock" TextAlignment="Center" FontSize="12"/>
+                    </StackPanel>
+                </Button>
+                <Button Grid.Column="4" x:Name="DateButton" Click="DateButtonClick">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock x:Name="DateTextBlock" TextAlignment="Center" FontSize="15" Background="Transparent" Width="120" VerticalAlignment="Center">Выбрать день</TextBlock>
+                        <DatePicker CalendarStyle="{DynamicResource DatePickerCalendarStyle}" Style="{DynamicResource DatePickerStyle}" x:Name="PickDatePicker" Width="25" Visibility="Visible" FlowDirection="LeftToRight" FirstDayOfWeek="Monday" BorderBrush="Transparent" ></DatePicker>
+                    </StackPanel>
+                </Button>
+            </Grid>
+            
+            <ComboBox Style="{DynamicResource ComboBoxStyle}" x:Name="FiltersComboBox" Width="120" HorizontalAlignment="Right" Text="Фильтры"/>
 
-        </Grid>
+        </StackPanel>
         <!--<StackPanel x:Name="MainStackPanel" Grid.Row="1"/>-->
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2">
             <Border BorderBrush="#6A4C8A" CornerRadius="5" BorderThickness="0.5" Padding="5">

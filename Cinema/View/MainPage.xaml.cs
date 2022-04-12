@@ -86,5 +86,12 @@ namespace Cinema.View
 
 
         }
+
+
+
+        private void DateButtonClick(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
