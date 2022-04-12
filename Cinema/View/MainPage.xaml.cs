@@ -32,14 +32,15 @@ namespace Cinema.View
                         
                          select new
                          {
-                             NameGenre = Genres.NameGenre,
-                             NameFilm = FilmsGenres.Films.NameFilm
+                             nameGenre = Genres.NameGenre,
+                             nameFilm = FilmsGenres.Films.NameFilm,
+                             
                            
 
                          };
             foreach (var item in result)
             {
-                Console.WriteLine(item.NameGenre);
+                Console.WriteLine(item.nameGenre);
             }
            
             DateTime today = DateTime.Today;
@@ -82,6 +83,7 @@ namespace Cinema.View
             arraySessions = db.context.Sessions.ToList();
             SessionsListView.ItemsSource = arraySessions;
 
+            
 
 
 
@@ -92,6 +94,12 @@ namespace Cinema.View
         private void DateButtonClick(object sender, RoutedEventArgs e)
         {
             
+        }
+
+  
+        private void ScrollViewerMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+
         }
     }
 }

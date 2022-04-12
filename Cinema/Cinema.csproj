@@ -234,6 +234,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Assets\Images\Films\leloupetlelion.jpg" />
+    <Resource Include="Assets\Images\Films\naemnik2022.jpg" />
+    <Resource Include="Assets\Images\Films\finnik.jpg" />
+    <Resource Include="Assets\Images\Films\thesurvivor.jpg" />
     <Content Include="Model\ModelCinema.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelCinema.edmx</DependentUpon>
