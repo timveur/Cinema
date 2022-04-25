@@ -23,6 +23,7 @@
     <Style TargetType="TextBlock">
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontFamily" Value="{StaticResource Inter-Regular}"/>
+        <Setter Property="FontSize" Value="14"/>
     </Style>
     <Style TargetType="TextBlock" x:Key="ImportantTextBlock">
         <Setter Property="Foreground" Value="#ffe45c"/>
@@ -35,6 +36,10 @@
     </Style>
     <Style TargetType="TextBlock" x:Key="CaptionTextBlock">
         <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="#BEBEBE"/>
+    </Style>
+    <Style TargetType="TextBlock" x:Key="GrayTextBlock">
+        <Setter Property="FontSize" Value="20"/>
         <Setter Property="Foreground" Value="#BEBEBE"/>
     </Style>
     

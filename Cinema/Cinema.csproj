@@ -112,6 +112,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelCinema.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\PartialClasses\FilmsGenres.cs" />
     <Compile Include="Model\PartialClasses\FilmsPhotos.cs" />
     <Compile Include="Model\PartialClasses\Genres.cs" />
     <Compile Include="Model\RoleUsers.cs">
@@ -139,6 +140,9 @@
     <Compile Include="View\AuthPage.xaml.cs">
       <DependentUpon>AuthPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\FilmPage.xaml.cs">
+      <DependentUpon>FilmPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\HallPage.xaml.cs">
       <DependentUpon>HallPage.xaml</DependentUpon>
     </Compile>
@@ -165,6 +169,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\AuthPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FilmPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

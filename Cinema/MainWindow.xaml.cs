@@ -64,14 +64,20 @@ namespace Cinema
             if (String.IsNullOrEmpty(Properties.Settings.Default.loginClient))
             {
                 ExitButton.Visibility = Visibility.Collapsed;
-                BackButton.Visibility = Visibility.Collapsed;
                 AuthButton.Visibility = Visibility.Visible;
             }
             else
             {
                 AuthButton.Visibility = Visibility.Collapsed;
-                BackButton.Visibility = Visibility.Visible;
                 ExitButton.Visibility = Visibility.Visible;
+            }
+            if (MainFrame.CanGoBack)
+            {
+                BackButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                BackButton.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -80,6 +86,7 @@ namespace Cinema
         {
             if (MainFrame.CanGoBack)
             {
+                
                 MainFrame.GoBack();
             }
         }

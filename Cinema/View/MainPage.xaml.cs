@@ -24,6 +24,7 @@ namespace Cinema.View
         Core db = new Core();
         List<Sessions> arraySessions;
         List<FilmsPhotos> arrayFilms;
+        List<Genres> arrayGenres;
         public MainPage()
         {
             InitializeComponent();
@@ -43,27 +44,27 @@ namespace Cinema.View
                 Console.WriteLine(item.nameGenre);
             }
            
-            DateTime today = DateTime.Today;
-            DateTime tomorrow = today.AddDays(1);
-            var dayThreeLower = new StringBuilder(today.AddDays(2).ToString("dddd"));
-            dayThreeLower[0]= char.ToUpper(dayThreeLower[0]);
-            string dayThree = dayThreeLower.ToString();
-            var dayFourLower = new StringBuilder(today.AddDays(3).ToString("dddd"));
-            dayFourLower[0] = char.ToUpper(dayFourLower[0]);
-            string dayFour = dayFourLower.ToString();
+            //DateTime today = DateTime.Today;
+            //DateTime tomorrow = today.AddDays(1);
+            //var dayThreeLower = new StringBuilder(today.AddDays(2).ToString("dddd"));
+            //dayThreeLower[0]= char.ToUpper(dayThreeLower[0]);
+            //string dayThree = dayThreeLower.ToString();
+            //var dayFourLower = new StringBuilder(today.AddDays(3).ToString("dddd"));
+            //dayFourLower[0] = char.ToUpper(dayFourLower[0]);
+            //string dayFour = dayFourLower.ToString();
 
 
-            TodayTextBlock.Text = "Сегодня";
-            TodayDateTextBlock.Text = today.ToString("d MMMM");
+            //TodayTextBlock.Text = "Сегодня";
+            //TodayDateTextBlock.Text = today.ToString("d MMMM");
 
-            TomorrowTextBlock.Text = "Завтра";
-            TomorrowDateTextBlock.Text = tomorrow.ToString("d MMMM");
+            //TomorrowTextBlock.Text = "Завтра";
+            //TomorrowDateTextBlock.Text = tomorrow.ToString("d MMMM");
 
-            DayThreeTextBlock.Text = dayThree;
-            DayThreeDateTextBlock.Text = today.AddDays(2).ToString("d MMMM");
+            //DayThreeTextBlock.Text = dayThree;
+            //DayThreeDateTextBlock.Text = today.AddDays(2).ToString("d MMMM");
 
-            DayFourTextBlock.Text = dayFour;
-            DayFourDateTextBlock.Text = today.AddDays(3).ToString("d MMMM");
+            //DayFourTextBlock.Text = dayFour;
+            //DayFourDateTextBlock.Text = today.AddDays(3).ToString("d MMMM");
 
 
             //arrayFilms = db.context.Films.ToList();
@@ -81,15 +82,21 @@ namespace Cinema.View
             
             FilmsListView.ItemsSource = arrayFilms;
             arraySessions = db.context.Sessions.ToList();
-            SessionsListView.ItemsSource = arraySessions;
 
-            
+            arrayGenres = db.context.Genres.ToList();
+
+            FiltersComboBox.DataContext = arrayGenres;
+
 
 
 
         }
 
 
+        private void EditButtonClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Страница в разработке.");
+        }
 
         private void DateButtonClick(object sender, RoutedEventArgs e)
         {
@@ -101,5 +108,25 @@ namespace Cinema.View
         {
 
         }
+
+
+        private void FilmPreviewImageMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Image activeElement = sender as Image;
+            FilmsPhotos activeFilmsPhotos = activeElement.DataContext as FilmsPhotos;
+            int idFilm = activeFilmsPhotos.IdFilm;
+            this.NavigationService.Navigate(new FilmPage(idFilm));
+        }
+
+
+        private void NameFilmTextBlockMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            TextBlock activeElement = sender as TextBlock;
+            FilmsPhotos activeFilmsPhotos = activeElement.DataContext as FilmsPhotos;
+            int idFilm = activeFilmsPhotos.IdFilm;
+            this.NavigationService.Navigate(new FilmPage(idFilm));
+        }
+
+        
     }
 }

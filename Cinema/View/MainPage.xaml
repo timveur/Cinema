@@ -13,50 +13,26 @@
             <RowDefinition Height="90"/>
             <RowDefinition Height="8*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Width="854" Height="55">
-            <Grid Width="735">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="164"/>
-                </Grid.ColumnDefinitions>
-                <Button >
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15 0 15 0">
-                        <TextBlock x:Name="TodayTextBlock" TextAlignment="Center" FontSize="20"></TextBlock>
-                        <TextBlock x:Name="TodayDateTextBlock" TextAlignment="Center" FontSize="12"/>
-                    </StackPanel>
-                </Button>
-                <Button Grid.Column="1">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15 0 15 0">
-                        <TextBlock x:Name="TomorrowTextBlock" TextAlignment="Center" FontSize="20"></TextBlock>
-                        <TextBlock x:Name="TomorrowDateTextBlock" TextAlignment="Center" FontSize="12"/>
-                    </StackPanel>
-                </Button>
-                <Button Grid.Column="2">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15 0 15 0">
-                        <TextBlock x:Name="DayThreeTextBlock" TextAlignment="Center" FontSize="20"></TextBlock>
-                        <TextBlock x:Name="DayThreeDateTextBlock" TextAlignment="Center" FontSize="12"/>
-                    </StackPanel>
-                </Button>
-                <Button Grid.Column="3">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15 0 15 0">
-                        <TextBlock x:Name="DayFourTextBlock" TextAlignment="Center" FontSize="20"></TextBlock>
-                        <TextBlock x:Name="DayFourDateTextBlock" TextAlignment="Center" FontSize="12"/>
-                    </StackPanel>
-                </Button>
-                <Button Grid.Column="4" x:Name="DateButton" Click="DateButtonClick">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock x:Name="DateTextBlock" TextAlignment="Center" FontSize="15" Background="Transparent" Width="120" VerticalAlignment="Center">Выбрать день</TextBlock>
-                        <DatePicker CalendarStyle="{DynamicResource DatePickerCalendarStyle}" Style="{DynamicResource DatePickerStyle}" x:Name="PickDatePicker" Width="25" Visibility="Visible" FlowDirection="LeftToRight" FirstDayOfWeek="Monday" BorderBrush="Transparent" ></DatePicker>
-                    </StackPanel>
-                </Button>
+        <Grid Grid.Row="0" Width="854" Height="55">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="NowInCinema" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24" FontFamily="{StaticResource Inter-SemiBold}">Сейчас в кино</TextBlock>
+            <Grid Grid.Row="1" HorizontalAlignment="Right" Width="300">
+                <Button x:Name="EditButton" FontSize="16" Width="120" Margin="0 0 80 0" Click="EditButtonClick">Изменить</Button>
+                <ComboBox Style="{DynamicResource ComboBoxStyle}" x:Name="FiltersComboBox" Width="120" HorizontalAlignment="Right">
+                    
+                            <StackPanel x:Name="GenresStackPanelComboBox" Orientation="Horizontal">
+                                <CheckBox Width="20" Content="{Binding NameGenre}"/>
+                                <TextBlock Text="{Binding NameGenre}" Width="100" Foreground="Black"/>
+                            </StackPanel>
+                       
+                </ComboBox>
             </Grid>
             
-            <ComboBox Style="{DynamicResource ComboBoxStyle}" x:Name="FiltersComboBox" Width="120" HorizontalAlignment="Right" Text="Фильтры"/>
 
-        </StackPanel>
+        </Grid>
         <!--<StackPanel x:Name="MainStackPanel" Grid.Row="1"/>-->
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2" MouseWheel="ScrollViewerMouseWheel">
             <Border BorderBrush="#6A4C8A" CornerRadius="5" BorderThickness="0.5" Padding="5">
@@ -77,16 +53,16 @@
                                 <Grid>
                                     <Grid Margin="0 10 0 20">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="175"/>
+                                            <ColumnDefinition Width="155"/>
                                             <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="70"/>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <Image Grid.RowSpan="2" Source="{Binding FullPhotoPath}" HorizontalAlignment="Left" Width="160"/>
+                                        <Image x:Name="FilmPreviewImage" Grid.RowSpan="2" Source="{Binding FullPhotoPath}" HorizontalAlignment="Left" Width="140" MouseLeftButtonDown="FilmPreviewImageMouseLeftButtonDown" Cursor="Hand"/>
                                         <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
-                                            <TextBlock x:Name="NameFilmTextBlock" Style="{StaticResource ImportantTextBlock}" Text="{Binding Films.NameFilm}" FontSize="24" FontWeight="SemiBold" TextWrapping="Wrap"/>
+                                            <TextBlock x:Name="NameFilmTextBlock" Style="{StaticResource ImportantTextBlock}" Text="{Binding Films.NameFilm}" FontSize="20" FontWeight="SemiBold" TextWrapping="Wrap" MouseLeftButtonDown="NameFilmTextBlockMouseLeftButtonDown" Cursor="Hand"/>
                                             <Grid Grid.Row="1" HorizontalAlignment="Left">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition/>
@@ -96,43 +72,24 @@
                                                     <RowDefinition/>
                                                     <RowDefinition/>
                                                 </Grid.RowDefinitions>
-                                                <Border Grid.RowSpan="2" HorizontalAlignment="Left" CornerRadius="50" BorderBrush="White" BorderThickness="1.5" Width="30" Height="30">
-                                                    <TextBlock x:Name="AgeTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Films.AgeLimits.Limit}"/>
+                                                <Border Grid.RowSpan="2" HorizontalAlignment="Left" CornerRadius="50" BorderBrush="White" BorderThickness="1.5" Width="40" Height="40">
+                                                    <TextBlock x:Name="AgeTextBlock" Style="{StaticResource CaptionImportantTextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Films.AgeLimits.Limit}"/>
                                                 </Border>
                                                 <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5 0 0 0">
                                                     <TextBlock x:Name="GenresTextBlock" Text="{Binding result.NameGenre}"/>
                                                     <TextBlock Grid.Row="1" x:Name="DurationTextBlock" Text="{Binding Films.Duration,StringFormat={}{0:hh} ч. {0:mm} мин.}"/>
                                                 </StackPanel>
                                             </Grid>
+                                            
                                         </StackPanel>
+                                        <Button x:Name="SessionsButton" Grid.Column="1" Grid.Row="1" Width="130" Height="45" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="20" FontFamily="{StaticResource Inter-SemiBold}">Сеансы</Button>
                                     </Grid>
-                                    <Separator VerticalAlignment="Bottom" Background="#8768A8" Width="auto" MinWidth="640"/>
+                                    <Separator VerticalAlignment="Bottom" Background="#8768A8" Width="880"/>
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <ListView Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" x:Name="SessionsListView" Background="#543964" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="Transparent">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Button Padding="5">
-                                    <StackPanel x:Name="SessionsStackPanel" Width="120" Orientation="Vertical" HorizontalAlignment="Left">
-                                        <TextBlock x:Name="FormatTextBlock" Style="{StaticResource CaptionTextBlock}" Text="{Binding Formats.Format}"/>
-                                        <TextBlock x:Name="HallTextBlock" Style="{StaticResource CaptionTextBlock}" Text="{Binding Halls.NameHall, StringFormat={}Зал {0:F0}}"/>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock x:Name="TimeTextBlock" Style="{StaticResource ImportantTextBlock}" FontSize="18" Text="{Binding StartTime, StringFormat={}{0:hh}:{0:mm}}"/>
-                                            <TextBlock x:Name="CostTextBlock" Style="{StaticResource CaptionImportantTextBlock}" Padding="2 0 0 0" Text="{Binding CostTicket, StringFormat={}{0:F0} ₽}"/>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Button>
-                                
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                        <ListView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel />
-                            </ItemsPanelTemplate>
-                        </ListView.ItemsPanel>
-                    </ListView>
+                    
                 </Grid>
             </Border>
         </ScrollViewer>
