@@ -18,17 +18,23 @@
                 <ColumnDefinition Width="100*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock x:Name="NowInCinema" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24" FontFamily="{StaticResource Inter-SemiBold}">Сейчас в кино</TextBlock>
-            <Grid Grid.Row="1" HorizontalAlignment="Right" Width="300">
-                <Button x:Name="EditButton" FontSize="16" Width="120" Margin="0 0 80 0" Click="EditButtonClick">Изменить</Button>
-                <ComboBox Style="{DynamicResource ComboBoxStyle}" x:Name="FiltersComboBox" Width="120" HorizontalAlignment="Right">
+            <TextBlock x:Name="NowInCinemaTextBlock" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24" FontFamily="{StaticResource Inter-SemiBold}">Сейчас в кино</TextBlock>
+            <TextBlock x:Name="DeleteModeTextBlock" HorizontalAlignment="Left" Margin="250 0 0 0" Width="200" VerticalAlignment="Center" FontSize="20" Visibility="Collapsed" Opacity="0.7">Режим удаления</TextBlock>
+            
+            <Grid Grid.Row="1" HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                     <Button x:Name="AddButton" FontSize="16" Width="120" Margin="0 0 10 0" Click="AddButtonClick">Добавить</Button>
+                    <Button x:Name="DeleteButton" FontSize="16" Width="120" Margin="0 0 10 0" Click="DeleteButtonClick">Удалить</Button>
+                    <Button x:Name="ReturnButton" FontSize="16" Width="120" Margin="0 0 10 0" Click="ReturnButtonClick" Visibility="Collapsed">Вернуться</Button>
+                    <ComboBox x:Name="FiltersComboBox" Style="{DynamicResource ComboBoxStyle}" Width="120" HorizontalAlignment="Right">
                     
-                            <StackPanel x:Name="GenresStackPanelComboBox" Orientation="Horizontal">
-                                <CheckBox Width="20" Content="{Binding NameGenre}"/>
-                                <TextBlock Text="{Binding NameGenre}" Width="100" Foreground="Black"/>
-                            </StackPanel>
+                                <StackPanel x:Name="GenresStackPanelComboBox" >
+                                
+                                </StackPanel>
                        
-                </ComboBox>
+                    </ComboBox>
+                </StackPanel>
+               
             </Grid>
             
 
@@ -75,8 +81,8 @@
                                                 <Border Grid.RowSpan="2" HorizontalAlignment="Left" CornerRadius="50" BorderBrush="White" BorderThickness="1.5" Width="40" Height="40">
                                                     <TextBlock x:Name="AgeTextBlock" Style="{StaticResource CaptionImportantTextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Films.AgeLimits.Limit}"/>
                                                 </Border>
-                                                <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5 0 0 0">
-                                                    <TextBlock x:Name="GenresTextBlock" Text="{Binding result.NameGenre}"/>
+                                                <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5 0 0 0" x:Name="InfoFilmStackPanel">
+                                                    <TextBlock x:Name="GenresTextBlock" Text="{}" />
                                                     <TextBlock Grid.Row="1" x:Name="DurationTextBlock" Text="{Binding Films.Duration,StringFormat={}{0:hh} ч. {0:mm} мин.}"/>
                                                 </StackPanel>
                                             </Grid>

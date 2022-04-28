@@ -1,0 +1,74 @@
+﻿<Page x:Class="Cinema.View._AddFilmPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Cinema.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="900"
+      Title="Дообавление фильма">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Height="20" Margin="0 0 0 10">
+                <TextBlock Width="200" Text="Название фильма:" VerticalAlignment="Center"></TextBlock>
+                <TextBox x:Name="NameFilmTextBox" Width="400"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="20" Margin="0 0 0 10">
+                <TextBlock Width="200" Text="Описание фильма:" VerticalAlignment="Center"></TextBlock>
+                <TextBox x:Name="DescriptionFilmTextBox" Width="400"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="20" Margin="0 0 0 10">
+                <TextBlock Width="200" Text="Страна(-ы) производства:" VerticalAlignment="Center"></TextBlock>
+                <ComboBox x:Name="CountriesComboBox" Width="80" HorizontalAlignment="Right" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                    <StackPanel x:Name="CountriesStackPanelComboBox" Background="#543964" Width="200">
+
+                    </StackPanel>
+
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"  Margin="0 0 0 10">
+                <TextBlock Width="200" Text="Жанр(-ы):" VerticalAlignment="Center" Height="20"></TextBlock>
+                <ComboBox x:Name="GenresComboBox" Width="80" HorizontalAlignment="Right" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                    <StackPanel x:Name="GenresStackPanelComboBox" Width="200">
+
+                    </StackPanel>
+
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="20" Margin="0 0 0 10">
+                <TextBlock Width="200" Text="Возрастное ограничение:" VerticalAlignment="Center"></TextBlock>
+                <ComboBox x:Name="AgeLimitComboBox" Width="80"></ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="20" Margin="0 0 0 10">
+                <TextBlock Width="200" Text="Длительность:" VerticalAlignment="Center"></TextBlock>
+                <TextBox x:Name="DurationHoursFilmTextBox" Width="30"></TextBox>
+                <TextBlock Text=" ч. " VerticalAlignment="Bottom"></TextBlock>
+                <TextBox x:Name="DurationMinutesFilmTextBox" Width="30"></TextBox>
+                <TextBlock Text=" мин." VerticalAlignment="Bottom"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="20" Margin="0 0 0 10">
+                <TextBlock Width="200" Text="Актеры:" VerticalAlignment="Center"></TextBlock>
+                <TextBox x:Name="ActorsTextBox" Width="400"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="20" Margin="0 0 0 10">
+                <TextBlock Width="200" Text="Кинокомпания:" VerticalAlignment="Center"></TextBlock>
+                <TextBox x:Name="FilmsCompanyTextBox" Width="400"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="20" Margin="0 0 0 10">
+                <TextBlock Width="200" Text="Режиссер(-ы):" VerticalAlignment="Center"></TextBlock>
+                <TextBox x:Name="FilmsDirectorsTextBox" Width="400"></TextBox>
+            </StackPanel>
+            
+            
+        </StackPanel>
+        
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <Button x:Name="AddFilmButton" Width="150" Height="30" Margin="5" Click="AddFilmButtonClick">Добавить фильм</Button>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -20,6 +20,7 @@ namespace Cinema.Model
             this.FilmsGenres = new HashSet<FilmsGenres>();
             this.FilmsPhotos = new HashSet<FilmsPhotos>();
             this.Sessions = new HashSet<Sessions>();
+            this.FilmsCountries = new HashSet<FilmsCountries>();
         }
     
         public int IdFilm { get; set; }
@@ -38,5 +39,7 @@ namespace Cinema.Model
         public virtual ICollection<FilmsPhotos> FilmsPhotos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sessions> Sessions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FilmsCountries> FilmsCountries { get; set; }
     }
 }

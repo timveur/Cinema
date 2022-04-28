@@ -25,46 +25,28 @@ namespace Cinema.View
         List<Sessions> arraySessions;
         List<FilmsPhotos> arrayFilms;
         List<Genres> arrayGenres;
+        List<FilmsGenres> arrayFilmsGenres;
+        List<string> arrayAllGenres = new List<string>();
         public MainPage()
         {
             InitializeComponent();
-            var result = from Genres in db.context.Genres
-                         join FilmsGenres in db.context.FilmsGenres on Genres.IdGenre equals FilmsGenres.IdGenre
-                        
-                         select new
-                         {
-                             nameGenre = Genres.NameGenre,
-                             nameFilm = FilmsGenres.Films.NameFilm,
-                             
-                           
+            //var result = from Genres in db.context.Genres
+            //             join FilmsGenres in db.context.FilmsGenres on Genres.IdGenre equals FilmsGenres.IdGenre
 
-                         };
-            foreach (var item in result)
-            {
-                Console.WriteLine(item.nameGenre);
-            }
+            //             select new
+            //             {
+            //                 nameGenre = Genres.NameGenre,
+            //                 nameFilm = FilmsGenres.Films.NameFilm,
+
+
+
+            //             };
+            //foreach (var item in result)
+            //{
+            //    Console.WriteLine(item.nameGenre);
+            //}
+
            
-            //DateTime today = DateTime.Today;
-            //DateTime tomorrow = today.AddDays(1);
-            //var dayThreeLower = new StringBuilder(today.AddDays(2).ToString("dddd"));
-            //dayThreeLower[0]= char.ToUpper(dayThreeLower[0]);
-            //string dayThree = dayThreeLower.ToString();
-            //var dayFourLower = new StringBuilder(today.AddDays(3).ToString("dddd"));
-            //dayFourLower[0] = char.ToUpper(dayFourLower[0]);
-            //string dayFour = dayFourLower.ToString();
-
-
-            //TodayTextBlock.Text = "Сегодня";
-            //TodayDateTextBlock.Text = today.ToString("d MMMM");
-
-            //TomorrowTextBlock.Text = "Завтра";
-            //TomorrowDateTextBlock.Text = tomorrow.ToString("d MMMM");
-
-            //DayThreeTextBlock.Text = dayThree;
-            //DayThreeDateTextBlock.Text = today.AddDays(2).ToString("d MMMM");
-
-            //DayFourTextBlock.Text = dayFour;
-            //DayFourDateTextBlock.Text = today.AddDays(3).ToString("d MMMM");
 
 
             //arrayFilms = db.context.Films.ToList();
@@ -79,31 +61,78 @@ namespace Cinema.View
             //}
 
             arrayFilms = db.context.FilmsPhotos.ToList();
-            
             FilmsListView.ItemsSource = arrayFilms;
             arraySessions = db.context.Sessions.ToList();
 
+
+            int idFilm = 0;
+            foreach (var item in arrayFilms)
+            {
+                idFilm = item.IdFilm;
+            }
+
             arrayGenres = db.context.Genres.ToList();
+            arrayFilmsGenres = db.context.FilmsGenres.Where(x => x.IdFilm == idFilm).ToList();
+            foreach (var item in arrayFilmsGenres)
+            {
+                arrayAllGenres.Add(item.Genres.NameGenre);
+            }
+            string allGenres = String.Join(", ", arrayAllGenres);
 
-            FiltersComboBox.DataContext = arrayGenres;
+            
 
+            foreach (MainPage obj in FilmsListView.Items.OfType<MainPage>())
+            {
+                
+            }
 
+            foreach (var item in arrayGenres)
+            {
+                CheckBox newCheck = new CheckBox
+                {
+                    Content = item.NameGenre
+                };
+                newCheck.Checked += NewCheck_Checked;
+                newCheck.Unchecked += NewCheck_Unchecked;
+                GenresStackPanelComboBox.Children.Add(newCheck);
+
+            }
 
 
         }
 
+        
+        private void DisplayInfo()
+        {
+            
+        }
+
+        /// <summary>
+        /// Отключение выбора жанра
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NewCheck_Unchecked(object sender, RoutedEventArgs e)
+        {
+            DisplayInfo();
+        }
+
+        /// <summary>
+        /// Включение выбора жанра
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NewCheck_Checked(object sender, RoutedEventArgs e)
+        {
+           
+        }
 
         private void EditButtonClick(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Страница в разработке.");
         }
 
-        private void DateButtonClick(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-  
+      
         private void ScrollViewerMouseWheel(object sender, MouseWheelEventArgs e)
         {
 
@@ -124,9 +153,47 @@ namespace Cinema.View
             TextBlock activeElement = sender as TextBlock;
             FilmsPhotos activeFilmsPhotos = activeElement.DataContext as FilmsPhotos;
             int idFilm = activeFilmsPhotos.IdFilm;
-            this.NavigationService.Navigate(new FilmPage(idFilm));
+            if (DeleteModeTextBlock.Visibility == Visibility.Visible)
+            {
+                Films objFilms = activeElement.DataContext as Films;
+                
+                MessageBoxResult rez = MessageBox.Show($"Удалить \"{activeElement.Text}\"?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (rez == MessageBoxResult.Yes)
+                {
+                    db.context.Films.Remove(objFilms);
+                   
+                    db.context.SaveChanges();
+                    MessageBox.Show("Данные успешно удалены.", "Удаление", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                FilmsListView.ItemsSource = arrayFilms;
+                DeleteModeTextBlock.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                this.NavigationService.Navigate(new FilmPage(idFilm));
+            }
+            
         }
 
-        
+        private void AddButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new _AddFilmPage());
+        }
+
+        private void DeleteButtonClick(object sender, RoutedEventArgs e)
+        {
+            DeleteButton.Visibility = Visibility.Collapsed;
+            DeleteModeTextBlock.Visibility = Visibility.Visible;
+            ReturnButton.Visibility = Visibility.Visible;
+
+
+        }
+
+        private void ReturnButtonClick(object sender, RoutedEventArgs e)
+        {
+            DeleteModeTextBlock.Visibility = Visibility.Collapsed;
+            ReturnButton.Visibility = Visibility.Collapsed;
+            DeleteButton.Visibility = Visibility.Visible;
+        }
     }
 }

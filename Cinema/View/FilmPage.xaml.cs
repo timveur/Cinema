@@ -24,13 +24,17 @@ namespace Cinema.View
         Core db = new Core();
         List<Sessions> arraySessions;
         List<FilmsPhotos> arrayFilmsPhotos;
-        //List<FilmsGenres> arrayFilmsGenres;
-        //List<FilmsCountries> arrayFilmsCountries;
+        List<FilmsGenres> arrayFilmsGenres;
+        List<FilmsCountries> arrayFilmsCountries;
+        List<string> arrayAllGenres = new List<string>();
+        List<string> arrayAllCountries = new List<string>();
         DateTime selectDate = new DateTime();
+        int selectedIdFilm;
         //string selectDate;
         public FilmPage(int idFilm)
         {
             InitializeComponent();
+            selectedIdFilm = idFilm;
             arrayFilmsPhotos = db.context.FilmsPhotos.Where(x => x.IdFilm == idFilm).ToList();
             this.DataContext = arrayFilmsPhotos;
 
@@ -61,11 +65,30 @@ namespace Cinema.View
             arraySessions = db.context.Sessions.Where(x => x.IdFilm == idFilm).ToList();
             SessionsListView.ItemsSource = arraySessions;
 
-            
 
-            //arrayFilmsGenres = db.context.FilmsGenres.Where(x => x.IdFilm == idFilm).ToList();
-            //string allGenres = String.Join(",", arrayFilmsGenres);
-            //GenresTextBlock.Text = allGenres;
+
+            arrayFilmsGenres = db.context.FilmsGenres.Where(x => x.IdFilm == idFilm).ToList();
+            foreach (var item in arrayFilmsGenres)
+            {
+                arrayAllGenres.Add(item.Genres.NameGenre);
+            }
+            string allGenres = String.Join(", ", arrayAllGenres);
+            GenresTextBlock.Text = allGenres;
+
+
+
+
+            arrayFilmsCountries = db.context.FilmsCountries.Where(x => x.IdFilm == idFilm).ToList();
+            foreach (var item in arrayFilmsCountries)
+            {
+                Console.WriteLine(item.Countries.NameCountry);
+                arrayAllCountries.Add(item.Countries.NameCountry);
+                
+            }
+            string allCountries = String.Join(", ", arrayAllCountries);
+            CountriesTextBlock.Text = allCountries;
+
+
         }
 
         private void EditButtonClick(object sender, RoutedEventArgs e)
@@ -90,7 +113,10 @@ namespace Cinema.View
             DateTextBlock.Text = TodayTextBlock.Text;
         }
 
-      
-        
+
+        private void AddSessionButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new _AddSessionPage(selectedIdFilm));
+        }
     }
 }

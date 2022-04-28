@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cinema"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="900" Icon="Resources/cinema.ico"
+        Title="Кинотеатр «Friends»" Height="650" Width="900" Icon="Resources/cinema.ico"
         Closed="WindowClosed">
     <Grid Background="#6a4c8a">
         <Grid.RowDefinitions>

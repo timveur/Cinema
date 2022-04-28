@@ -17,5 +17,8 @@ namespace Cinema.Model
         public int IdFilmCountry { get; set; }
         public int IdFilm { get; set; }
         public int IdCountry { get; set; }
+    
+        public virtual Countries Countries { get; set; }
+        public virtual Films Films { get; set; }
     }
 }

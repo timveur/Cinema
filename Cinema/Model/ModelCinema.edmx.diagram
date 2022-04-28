@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="490aa40af1a74d0c8d85fec349ac6a81" Name="Diagram1">
+      <Diagram DiagramId="490aa40af1a74d0c8d85fec349ac6a81" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="CinemaModel.AgeLimits" Width="1.5" PointX="1.5" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CinemaModel.Countries" Width="1.5" PointX="7.75" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CinemaModel.Films" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
@@ -31,6 +31,8 @@
         <AssociationConnector Association="CinemaModel.FK_Tickets_HallsSeats" ManuallyRouted="false" />
         <AssociationConnector Association="CinemaModel.FK_Users_RoleUsers" ManuallyRouted="false" />
         <AssociationConnector Association="CinemaModel.FK_Tickets_Sessions" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModel.FK_FilmsCountries_Countries" />
+        <AssociationConnector Association="CinemaModel.FK_FilmsCountries_Films" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

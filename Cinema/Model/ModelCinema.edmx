@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище CinemaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище CinemaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AgeLimits">
           <Key>
             <PropertyRef Name="IdAgeLimit" />
@@ -150,6 +150,30 @@
             </Principal>
             <Dependent Role="Films">
               <PropertyRef Name="IdAgeLimit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FilmsCountries_Countries">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+          <End Role="FilmsCountries" Type="Self.FilmsCountries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="IdCountry" />
+            </Principal>
+            <Dependent Role="FilmsCountries">
+              <PropertyRef Name="IdCountry" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FilmsCountries_Films">
+          <End Role="Films" Type="Self.Films" Multiplicity="1" />
+          <End Role="FilmsCountries" Type="Self.FilmsCountries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Films">
+              <PropertyRef Name="IdFilm" />
+            </Principal>
+            <Dependent Role="FilmsCountries">
+              <PropertyRef Name="IdFilm" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -324,6 +348,14 @@
             <End Role="AgeLimits" EntitySet="AgeLimits" />
             <End Role="Films" EntitySet="Films" />
           </AssociationSet>
+          <AssociationSet Name="FK_FilmsCountries_Countries" Association="Self.FK_FilmsCountries_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="FilmsCountries" EntitySet="FilmsCountries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilmsCountries_Films" Association="Self.FK_FilmsCountries_Films">
+            <End Role="Films" EntitySet="Films" />
+            <End Role="FilmsCountries" EntitySet="FilmsCountries" />
+          </AssociationSet>
           <AssociationSet Name="FK_FilmsGenres_Films" Association="Self.FK_FilmsGenres_Films">
             <End Role="Films" EntitySet="Films" />
             <End Role="FilmsGenres" EntitySet="FilmsGenres" />
@@ -365,8 +397,7 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CinemaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -384,6 +415,7 @@
           </Key>
           <Property Name="IdCountry" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NameCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="FilmsCountries" Relationship="CinemaModel.FK_FilmsCountries_Countries" FromRole="Countries" ToRole="FilmsCountries" />
         </EntityType>
         <EntityType Name="Films">
           <Key>
@@ -401,6 +433,7 @@
           <NavigationProperty Name="FilmsGenres" Relationship="Self.FK_FilmsGenres_Films" FromRole="Films" ToRole="FilmsGenres" />
           <NavigationProperty Name="FilmsPhotos" Relationship="Self.FK_FilmsPhotos_Films" FromRole="Films" ToRole="FilmsPhotos" />
           <NavigationProperty Name="Sessions" Relationship="Self.FK_Sessions_Films" FromRole="Films" ToRole="Sessions" />
+          <NavigationProperty Name="FilmsCountries" Relationship="CinemaModel.FK_FilmsCountries_Films" FromRole="Films" ToRole="FilmsCountries" />
         </EntityType>
         <EntityType Name="FilmsCountries">
           <Key>
@@ -409,6 +442,8 @@
           <Property Name="IdFilmCountry" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdFilm" Type="Int32" Nullable="false" />
           <Property Name="IdCountry" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Countries" Relationship="CinemaModel.FK_FilmsCountries_Countries" FromRole="FilmsCountries" ToRole="Countries" />
+          <NavigationProperty Name="Films" Relationship="CinemaModel.FK_FilmsCountries_Films" FromRole="FilmsCountries" ToRole="Films" />
         </EntityType>
         <EntityType Name="FilmsGenres">
           <Key>
@@ -750,6 +785,14 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <AssociationSet Name="FK_FilmsCountries_Countries" Association="CinemaModel.FK_FilmsCountries_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="FilmsCountries" EntitySet="FilmsCountries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilmsCountries_Films" Association="CinemaModel.FK_FilmsCountries_Films">
+            <End Role="Films" EntitySet="Films" />
+            <End Role="FilmsCountries" EntitySet="FilmsCountries" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -762,6 +805,30 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <Association Name="FK_FilmsCountries_Countries">
+          <End Type="CinemaModel.Countries" Role="Countries" Multiplicity="1" />
+          <End Type="CinemaModel.FilmsCountries" Role="FilmsCountries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="IdCountry" />
+            </Principal>
+            <Dependent Role="FilmsCountries">
+              <PropertyRef Name="IdCountry" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FilmsCountries_Films">
+          <End Type="CinemaModel.Films" Role="Films" Multiplicity="1" />
+          <End Type="CinemaModel.FilmsCountries" Role="FilmsCountries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Films">
+              <PropertyRef Name="IdFilm" />
+            </Principal>
+            <Dependent Role="FilmsCountries">
+              <PropertyRef Name="IdFilm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

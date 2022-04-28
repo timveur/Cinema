@@ -42,8 +42,7 @@
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="Foreground" Value="#BEBEBE"/>
     </Style>
-    
-    
+
     
     
     
@@ -357,6 +356,9 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    
+    
+    
     <Style x:Key="DatePickerStyle" TargetType="{x:Type DatePicker}">
         <Setter Property="Foreground" Value="Transparent"/>
         <Setter Property="IsTodayHighlighted" Value="True"/>

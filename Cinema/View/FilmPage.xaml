@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Cinema.View"
       mc:Ignorable="d" 
       d:DesignHeight="650" d:DesignWidth="900"
-      Title="FilmPage">
+      Title="{Binding Films.NameFilm}">
 
     <Grid Background="#543964">
         <ScrollViewer VerticalScrollBarVisibility="Auto" MouseWheel="ScrollViewerMouseWheel">
@@ -43,7 +43,7 @@
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock HorizontalAlignment="Left" Width="210" Style="{StaticResource GrayTextBlock}">Страна:</TextBlock>
-                                <TextBlock HorizontalAlignment="Left" FontSize="20" Text="{Binding Films.FilmsCountries.Countries.NameCountry}"></TextBlock>
+                                <TextBlock HorizontalAlignment="Left" FontSize="20" x:Name="CountriesTextBlock"></TextBlock>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock HorizontalAlignment="Left" Width="210" Style="{StaticResource GrayTextBlock}">Режиссер:</TextBlock>
@@ -53,14 +53,22 @@
                                 <TextBlock HorizontalAlignment="Left" Width="210" Style="{StaticResource GrayTextBlock}">Кинокомпания:</TextBlock>
                                 <TextBlock HorizontalAlignment="Left" FontSize="20" Text="{Binding Films.FilmsCompany}"></TextBlock>
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock HorizontalAlignment="Left" Width="210" Style="{StaticResource GrayTextBlock}">В ролях:</TextBlock>
-                                <TextBlock FontSize="20" Text="{Binding Films.Actors}" HorizontalAlignment="Stretch" Height="auto" TextWrapping="Wrap"></TextBlock>
-                            </StackPanel>
+                            
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock HorizontalAlignment="Left" Width="210" Style="{StaticResource GrayTextBlock}">Продолжительность:</TextBlock>
                                 <TextBlock HorizontalAlignment="Left" FontSize="20" Text="{Binding Films.Duration,StringFormat={}{0:hh} ч. {0:mm} мин.}"></TextBlock>
                             </StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition  Width="210"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock HorizontalAlignment="Left" Style="{StaticResource GrayTextBlock}">В ролях:</TextBlock>
+                                
+                                    <TextBlock Grid.Column="1" FontSize="20" Text="{Binding Films.Actors}" TextWrapping="Wrap"></TextBlock>
+                                
+                                
+                            </Grid>
                             <Separator VerticalAlignment="Bottom" Background="#8768A8" Margin="0 10 0 10"/>
                             <TextBlock x:Name="DescriptionTextBlock" Text="{Binding Films.DescriptionFilm}" TextWrapping="Wrap" FontSize="20"></TextBlock>
                         </StackPanel>
@@ -76,8 +84,12 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock FontSize="20" FontFamily="{StaticResource Inter-SemiBold}">Расписание</TextBlock>
-
-                        <Grid Grid.Row="1" Height="55"  Margin="0 15 0 15">
+                        <Button x:Name="AddSessionButton" HorizontalAlignment="Right" Height="50" Width="130" Grid.RowSpan="2" VerticalAlignment="Top" Click="AddSessionButtonClick">
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" FontSize="16">
+                                Добавить<LineBreak/>сеанс
+                            </TextBlock>
+                        </Button>
+                        <Grid Grid.Row="1" Height="55"  Margin="0 0 0 15">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="auto"/>
@@ -115,6 +127,7 @@
                                     <DatePicker CalendarStyle="{DynamicResource DatePickerCalendarStyle}" Style="{DynamicResource DatePickerStyle}" x:Name="PickDatePicker" Width="25" Visibility="Visible" FlowDirection="LeftToRight" FirstDayOfWeek="Monday" BorderBrush="Transparent" ></DatePicker>
                                 </StackPanel>
                             </Button>
+                            
                         </Grid>
                         <ListView Grid.Row="2" x:Name="SessionsListView" Background="#543964" BorderBrush="Transparent">
                             <ListView.ItemTemplate>

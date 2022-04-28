@@ -1,0 +1,38 @@
+﻿<Page x:Class="Cinema.View._AddSessionPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Cinema.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="_AddSessionPage">
+
+    <Grid>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Height="20" Margin="0 0 0 10">
+                <TextBlock Width="200" Text="Зал:" VerticalAlignment="Center"></TextBlock>
+                <ComboBox x:Name="HallsComboBox" Width="100"></ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="20" Margin="0 0 0 10">
+                <TextBlock Width="200" Text="Формат:" VerticalAlignment="Center"></TextBlock>
+                <ComboBox x:Name="FormatsComboBox" Width="80"></ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="20" Margin="0 0 0 10">
+                <TextBlock Width="200" Text="Дата:" VerticalAlignment="Center"></TextBlock>
+                <DatePicker Name="DateSessionDatePicker"></DatePicker>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="20" Margin="0 0 0 10">
+                <TextBlock Width="200" Text="Начало сеанса:" VerticalAlignment="Center"></TextBlock>
+                <TextBox x:Name="StartTimeTextBox" Width="80"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="20" Margin="0 0 0 10">
+                <TextBlock Width="200" Text="Стоимость:" VerticalAlignment="Center"></TextBlock>
+                <TextBox x:Name="CostTextBox" Width="80"></TextBox>
+                <TextBlock Text=" ₽"></TextBlock>
+            </StackPanel>
+            <Button x:Name="AddSessionButton" HorizontalAlignment="Center" Width="160" Height="30" Click="AddSessionButtonClick">Добавить сеанс</Button>
+           
+        </StackPanel>
+    </Grid>
+</Page>
