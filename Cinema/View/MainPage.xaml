@@ -56,7 +56,7 @@
                     <ListView x:Name="FilmsListView" HorizontalContentAlignment="Left" Grid.RowSpan="2" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="#543964" BorderBrush="Transparent">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Grid>
+                                <Grid  >
                                     <Grid Margin="0 10 0 20">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="155"/>

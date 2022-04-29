@@ -27,6 +27,8 @@ namespace Cinema.View
         List<Genres> arrayGenres;
         List<FilmsGenres> arrayFilmsGenres;
         List<string> arrayAllGenres = new List<string>();
+        FilmsPhotos annVlad;
+        List<string> arrGenres;
         public MainPage()
         {
             InitializeComponent();
@@ -92,8 +94,8 @@ namespace Cinema.View
                 {
                     Content = item.NameGenre
                 };
-                newCheck.Checked += NewCheck_Checked;
-                newCheck.Unchecked += NewCheck_Unchecked;
+                newCheck.Checked += NewCheckChecked;
+                newCheck.Unchecked += NewCheckUnchecked;
                 GenresStackPanelComboBox.Children.Add(newCheck);
 
             }
@@ -112,7 +114,7 @@ namespace Cinema.View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void NewCheck_Unchecked(object sender, RoutedEventArgs e)
+        private void NewCheckUnchecked(object sender, RoutedEventArgs e)
         {
             DisplayInfo();
         }
@@ -122,9 +124,11 @@ namespace Cinema.View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void NewCheck_Checked(object sender, RoutedEventArgs e)
+        private void NewCheckChecked(object sender, RoutedEventArgs e)
         {
-           
+            CheckBox activeCheck = sender as CheckBox;
+            arrGenres.Add(activeCheck.Content.ToString());
+
         }
 
         private void EditButtonClick(object sender, RoutedEventArgs e)
@@ -151,19 +155,26 @@ namespace Cinema.View
         private void NameFilmTextBlockMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             TextBlock activeElement = sender as TextBlock;
+          
             FilmsPhotos activeFilmsPhotos = activeElement.DataContext as FilmsPhotos;
+            
             int idFilm = activeFilmsPhotos.IdFilm;
             if (DeleteModeTextBlock.Visibility == Visibility.Visible)
             {
                 Films objFilms = activeElement.DataContext as Films;
-                
+               
+               // FilmsPhotos objFilmsPhotos = activeElement.DataContext as FilmsPhotos;
+                //Films activeFilm = db.context.Films.Where(x => x.IdFilm == idFilm) as Films;
                 MessageBoxResult rez = MessageBox.Show($"Удалить \"{activeElement.Text}\"?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (rez == MessageBoxResult.Yes)
                 {
+                   
+                   // db.context.Films.Remove(activeFilm);
                     db.context.Films.Remove(objFilms);
                    
                     db.context.SaveChanges();
-                    MessageBox.Show("Данные успешно удалены.", "Удаление", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Данные успешно удалены.\nВозвращение на главную страницу", "Удаление", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.NavigationService.Navigate(new MainPage());
                 }
                 FilmsListView.ItemsSource = arrayFilms;
                 DeleteModeTextBlock.Visibility = Visibility.Collapsed;
@@ -191,9 +202,17 @@ namespace Cinema.View
 
         private void ReturnButtonClick(object sender, RoutedEventArgs e)
         {
+            Console.WriteLine(annVlad.IdFilm);
             DeleteModeTextBlock.Visibility = Visibility.Collapsed;
             ReturnButton.Visibility = Visibility.Collapsed;
             DeleteButton.Visibility = Visibility.Visible;
         }
+
+        //private void FilmsListView_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        //{
+            
+        //     annVlad = FilmsListView.SelectedItem as FilmsPhotos;
+        //    Console.WriteLine(annVlad.IdFilm);
+        //}
     }
 }

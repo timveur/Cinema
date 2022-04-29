@@ -264,6 +264,7 @@
     <Resource Include="Assets\Images\Films\finnik.jpg" />
     <Resource Include="Assets\Images\Films\thesurvivor.jpg" />
     <Resource Include="Assets\Images\Films\_nonephoto.jpg" />
+    <Resource Include="Assets\Images\Films\anypics58435.jpg" />
     <Content Include="Model\ModelCinema.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelCinema.edmx</DependentUpon>

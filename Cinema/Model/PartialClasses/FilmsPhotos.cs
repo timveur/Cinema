@@ -8,6 +8,6 @@ namespace Cinema.Model
 {
     public partial class FilmsPhotos
     {
-        public string FullPhotoPath => "../Assets/Images/Films/" + PhotoPath;
+        public string FullPhotoPath => "/Assets/Images/Films/" + PhotoPath;
     }
 }

@@ -84,12 +84,20 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock FontSize="20" FontFamily="{StaticResource Inter-SemiBold}">Расписание</TextBlock>
-                        <Button x:Name="AddSessionButton" HorizontalAlignment="Right" Height="50" Width="130" Grid.RowSpan="2" VerticalAlignment="Top" Click="AddSessionButtonClick">
-                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" FontSize="16">
-                                Добавить<LineBreak/>сеанс
-                            </TextBlock>
-                        </Button>
-                        <Grid Grid.Row="1" Height="55"  Margin="0 0 0 15">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Grid.RowSpan="2" VerticalAlignment="Top">
+                            <Button x:Name="DeleteSessionButton" Margin="0 0 10 0" Width="120" Click="DeleteSessionButtonClick">
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" FontSize="16">
+                                    Удаление<LineBreak/>сеансов
+                                </TextBlock>
+                            </Button>
+                            <Button x:Name="AddSessionButton" Click="AddSessionButtonClick"  Width="120">
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" FontSize="16">
+                                    Добавить<LineBreak/>сеанс
+                                </TextBlock>
+                            </Button>
+                        </StackPanel>
+                        
+                        <Grid Grid.Row="1" Height="55" Margin="0 30 0 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="auto"/>
@@ -132,7 +140,7 @@
                         <ListView Grid.Row="2" x:Name="SessionsListView" Background="#543964" BorderBrush="Transparent">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Button Padding="5">
+                                    <Button Padding="5" x:Name="SessionButton" Click="SessionButtonClick">
                                         <StackPanel x:Name="SessionsStackPanel" Width="120" Orientation="Vertical" HorizontalAlignment="Left">
                                             <TextBlock x:Name="FormatTextBlock" Style="{StaticResource CaptionTextBlock}" Text="{Binding Formats.Format}"/>
                                             <TextBlock x:Name="HallTextBlock" Style="{StaticResource CaptionTextBlock}" Text="{Binding Halls.NameHall, StringFormat={}Зал {0:F0}}"/>

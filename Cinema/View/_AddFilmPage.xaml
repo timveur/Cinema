@@ -63,7 +63,10 @@
                 <TextBlock Width="200" Text="Режиссер(-ы):" VerticalAlignment="Center"></TextBlock>
                 <TextBox x:Name="FilmsDirectorsTextBox" Width="400"></TextBox>
             </StackPanel>
-            
+            <StackPanel Orientation="Horizontal" Height="20" Margin="0 0 0 10">
+                <Button x:Name="SelectPhoto" Width="200" Content="Выбрать фото..." VerticalAlignment="Center" Click="SelectPhotoClick"></Button>
+                <TextBox x:Name="PhotoPathTextBox" Width="400"></TextBox>
+            </StackPanel>
             
         </StackPanel>
         

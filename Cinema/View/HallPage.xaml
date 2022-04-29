@@ -42,16 +42,13 @@
                 <TextBlock x:Name="HallTextBlock" FontSize="20" Text="Зал №1"/>
             </StackPanel>
         </Grid>
-        <ListView Grid.Row="1" Background="#12122b">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <TextBlock x:Name="RowTextBox"></TextBlock>
-                        <CheckBox x:Name="SeatCheckBox"></CheckBox>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <Grid Grid.Row="1" Background="#12122b">
+            <Grid>
+                <TextBlock x:Name="RowTextBox"></TextBlock>
+                <CheckBox x:Name="SeatCheckBox"></CheckBox>
+            </Grid>
+
+        </Grid>
         <Button Style="{StaticResource ActionButton}" Grid.Row="2" Width="150" HorizontalAlignment="Right" Content="Купить"/>
     </Grid>
 </Page>

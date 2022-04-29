@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cinema.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,13 @@ namespace Cinema.View
     /// </summary>
     public partial class HallPage : Page
     {
-        public HallPage()
+        Core db = new Core();
+        List<Halls> arrayHalls;
+        public HallPage(int idHall)
         {
             InitializeComponent();
+            arrayHalls = db.context.Halls.Where(x => x.IdHall == idHall).ToList();
+
         }
     }
 }

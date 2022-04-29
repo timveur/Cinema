@@ -28,7 +28,7 @@ namespace Cinema.View
         List<FilmsCountries> arrayFilmsCountries;
         List<string> arrayAllGenres = new List<string>();
         List<string> arrayAllCountries = new List<string>();
-        DateTime selectDate = new DateTime();
+        DateTime selectDate = new DateTime(1, 1, 1);
         int selectedIdFilm;
         //string selectDate;
         public FilmPage(int idFilm)
@@ -47,7 +47,7 @@ namespace Cinema.View
             dayFourLower[0] = char.ToUpper(dayFourLower[0]);
             string dayFour = dayFourLower.ToString();
 
-          
+            
 
             TodayTextBlock.Text = "Сегодня";
             TodayDateTextBlock.Text = today.ToString("d MMMM");
@@ -62,7 +62,7 @@ namespace Cinema.View
             DayFourDateTextBlock.Text = today.AddDays(3).ToString("d MMMM");
 
 
-            arraySessions = db.context.Sessions.Where(x => x.IdFilm == idFilm).ToList();
+            arraySessions = db.context.Sessions.Where(x => x.IdFilm == idFilm).Where(y=>y.DateSession == today).ToList();
             SessionsListView.ItemsSource = arraySessions;
 
 
@@ -110,13 +110,31 @@ namespace Cinema.View
 
         private void TodayButtonClick(object sender, RoutedEventArgs e)
         {
-            DateTextBlock.Text = TodayTextBlock.Text;
+            DateTextBlock.Text = TodayDateTextBlock.Text;
         }
 
 
         private void AddSessionButtonClick(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new _AddSessionPage(selectedIdFilm));
+        }
+
+      
+        private void DeleteSessionButtonClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+       
+
+        private void SessionButtonClick(object sender, RoutedEventArgs e)
+        {
+            Button activeElement = sender as Button;
+
+            Sessions activeSession = activeElement.DataContext as Sessions;
+
+            int idHall = activeSession.IdHall;
+            this.NavigationService.Navigate(new HallPage(idHall));
         }
     }
 }
