@@ -22,12 +22,28 @@ namespace Cinema.View
     public partial class HallPage : Page
     {
         Core db = new Core();
-        List<Halls> arrayHalls;
-        public HallPage(int idHall)
+        List<Sessions> arraySessions;
+        List<HallsSeats> arrayHallsSeats;
+        int idHall;
+        public HallPage(int idSession)
         {
             InitializeComponent();
-            arrayHalls = db.context.Halls.Where(x => x.IdHall == idHall).ToList();
+            arraySessions = db.context.Sessions.Where(x => x.IdSession == idSession).ToList();
+            this.DataContext = arraySessions;
+            string dateSession = "";
+            string timeSession = "";
+            
+            foreach (var item in arraySessions)
+            {
+                dateSession = Convert.ToString((item.DateSession).ToString("d MMMM"));
+                timeSession = Convert.ToString((item.StartTime).ToString(@"hh\:mm"));
+                idHall = item.IdHall;
+            }
+            DateTimeTextBlock.Text = dateSession + " в " + timeSession;
 
+            arrayHallsSeats = db.context.HallsSeats.Where(x => x.IdHall == idHall).ToList();
+            SessionsListBox.ItemsSource = arrayHallsSeats;
+            
         }
     }
 }

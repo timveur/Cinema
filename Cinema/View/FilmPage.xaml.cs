@@ -133,8 +133,8 @@ namespace Cinema.View
 
             Sessions activeSession = activeElement.DataContext as Sessions;
 
-            int idHall = activeSession.IdHall;
-            this.NavigationService.Navigate(new HallPage(idHall));
+            int idSession = activeSession.IdSession;
+            this.NavigationService.Navigate(new HallPage(idSession));
         }
     }
 }

@@ -32,21 +32,34 @@
             </Grid.RowDefinitions>
             <Image Grid.RowSpan="2"/>
             <StackPanel Grid.Column="1" Orientation="Horizontal" Height="30" VerticalAlignment="Bottom">
-                <TextBlock x:Name="NameFilmTextBlock" Foreground="White" FontSize="26" FontWeight="Bold" Text="Название"/>
+                <TextBlock x:Name="NameFilmTextBlock" Foreground="White" FontSize="26" FontWeight="Bold" Text="{Binding Films.NameFilm}"/>
                 <TextBlock Text="•" FontSize="26" Margin="5 0 5 0"/>
-                <TextBlock x:Name="AgeTextBlock" FontSize="26" FontWeight="Bold" Text="12+"/>
+                <TextBlock x:Name="AgeTextBlock" FontSize="26" FontWeight="Bold" Text="{Binding Films.AgeLimits.Limit}"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top">
-                <TextBlock x:Name="DateTimeTextBlock" FontSize="20" Text="21 марта в 16:00"/>
+                <TextBlock x:Name="DateTimeTextBlock" FontSize="20" />
                 <TextBlock Text="•" FontSize="20" Margin="5 0 5 0"/>
-                <TextBlock x:Name="HallTextBlock" FontSize="20" Text="Зал №1"/>
+                <TextBlock x:Name="HallTextBlock" FontSize="20" Text="{Binding Halls.NameHall, StringFormat={}Зал {0:F0}}"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1" Background="#12122b">
-            <Grid>
-                <TextBlock x:Name="RowTextBox"></TextBlock>
-                <CheckBox x:Name="SeatCheckBox"></CheckBox>
-            </Grid>
+            <ListBox x:Name="SessionsListBox" Background="#12122b">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock x:Name="RowTextBox" Width="200" Text="{Binding Row}"></TextBlock>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox x:Name="SeatCheckBox" Content="{Binding NumberSeat}"></CheckBox>
+                                </StackPanel>
+                            </StackPanel>
+                            
+                            
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                
+            </ListBox>
 
         </Grid>
         <Button Style="{StaticResource ActionButton}" Grid.Row="2" Width="150" HorizontalAlignment="Right" Content="Купить"/>
