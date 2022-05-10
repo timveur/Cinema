@@ -12,15 +12,15 @@
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal" Height="20" Margin="0 0 0 10">
                 <TextBlock Width="200" Text="Зал:" VerticalAlignment="Center"></TextBlock>
-                <ComboBox x:Name="HallsComboBox" Width="100"></ComboBox>
+                <ComboBox x:Name="HallsComboBox" Width="100" Style="{DynamicResource ComboBoxStyle}"></ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="20" Margin="0 0 0 10">
                 <TextBlock Width="200" Text="Формат:" VerticalAlignment="Center"></TextBlock>
-                <ComboBox x:Name="FormatsComboBox" Width="80"></ComboBox>
+                <ComboBox x:Name="FormatsComboBox" Width="80" Style="{DynamicResource ComboBoxStyle}"></ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="20" Margin="0 0 0 10">
                 <TextBlock Width="200" Text="Дата:" VerticalAlignment="Center"></TextBlock>
-                <DatePicker Name="DateSessionDatePicker"></DatePicker>
+                <DatePicker Name="DateSessionDatePicker" CalendarStyle="{DynamicResource DatePickerCalendarStyle}"></DatePicker>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="20" Margin="0 0 0 10">
                 <TextBlock Width="200" Text="Начало сеанса:" VerticalAlignment="Center"></TextBlock>

@@ -30,7 +30,12 @@ namespace Cinema.View
         List<string> arrayAllCountries = new List<string>();
         DateTime selectDate = new DateTime(1, 1, 1);
         int selectedIdFilm;
-        //string selectDate;
+        DateTime today = new DateTime();
+        DateTime tomorrow = new DateTime();
+        DateTime dayThreeDate = new DateTime();
+        DateTime dayFourDate = new DateTime();
+        BrushConverter bc = new BrushConverter();
+        DateTime selectedDate = new DateTime();
         public FilmPage(int idFilm)
         {
             InitializeComponent();
@@ -38,12 +43,14 @@ namespace Cinema.View
             arrayFilmsPhotos = db.context.FilmsPhotos.Where(x => x.IdFilm == idFilm).ToList();
             this.DataContext = arrayFilmsPhotos;
 
-            DateTime today = DateTime.Today;
-            DateTime tomorrow = today.AddDays(1);
-            var dayThreeLower = new StringBuilder(today.AddDays(2).ToString("dddd"));
+            today = DateTime.Today;
+            tomorrow = today.AddDays(1);
+            dayThreeDate = today.AddDays(2);
+            dayFourDate = today.AddDays(3);
+            var dayThreeLower = new StringBuilder(dayThreeDate.ToString("dddd"));
             dayThreeLower[0] = char.ToUpper(dayThreeLower[0]);
             string dayThree = dayThreeLower.ToString();
-            var dayFourLower = new StringBuilder(today.AddDays(3).ToString("dddd"));
+            var dayFourLower = new StringBuilder(dayFourDate.ToString("dddd"));
             dayFourLower[0] = char.ToUpper(dayFourLower[0]);
             string dayFour = dayFourLower.ToString();
 
@@ -62,7 +69,7 @@ namespace Cinema.View
             DayFourDateTextBlock.Text = today.AddDays(3).ToString("d MMMM");
 
 
-            arraySessions = db.context.Sessions.Where(x => x.IdFilm == idFilm).Where(y=>y.DateSession == today).ToList();
+            arraySessions = db.context.Sessions.Where(x => x.IdFilm == idFilm).Where(y=>y.DateSession == today).OrderBy(ob => ob.StartTime).ToList();
             SessionsListView.ItemsSource = arraySessions;
 
 
@@ -96,10 +103,7 @@ namespace Cinema.View
             MessageBox.Show("Страница в разработке.");
         }
 
-        private void DateButtonClick(object sender, RoutedEventArgs e)
-        {
-
-        }
+      
 
         private void ScrollViewerMouseWheel(object sender, MouseWheelEventArgs e)
         {
@@ -108,10 +112,7 @@ namespace Cinema.View
 
   
 
-        private void TodayButtonClick(object sender, RoutedEventArgs e)
-        {
-            DateTextBlock.Text = TodayDateTextBlock.Text;
-        }
+       
 
 
         private void AddSessionButtonClick(object sender, RoutedEventArgs e)
@@ -136,5 +137,85 @@ namespace Cinema.View
             int idSession = activeSession.IdSession;
             this.NavigationService.Navigate(new HallPage(idSession));
         }
+
+
+        private void TodayButtonClick(object sender, RoutedEventArgs e)
+        {
+            TodayButton.Background = (Brush)bc.ConvertFrom("#8768A8");
+            TomorrowButton.Background = Brushes.Transparent;
+            DayThreeButton.Background = Brushes.Transparent;
+            DayFourButton.Background = Brushes.Transparent;
+            DateButton.Background = Brushes.Transparent;
+            arraySessions = db.context.Sessions.Where(x => x.IdFilm == selectedIdFilm).Where(y => y.DateSession == today).OrderBy(ob => ob.StartTime).ToList();
+            SessionsListView.ItemsSource = arraySessions;
+        }
+
+        private void TomorrowButtonClick(object sender, RoutedEventArgs e)
+        {
+            TomorrowButton.Background = (Brush)bc.ConvertFrom("#8768A8");
+            TodayButton.Background = Brushes.Transparent;
+            DayThreeButton.Background = Brushes.Transparent;
+            DayFourButton.Background = Brushes.Transparent;
+            DateButton.Background = Brushes.Transparent;
+            arraySessions = db.context.Sessions.Where(x => x.IdFilm == selectedIdFilm).Where(y => y.DateSession == tomorrow).OrderBy(ob => ob.StartTime).ToList();
+            SessionsListView.ItemsSource = arraySessions;
+        }
+
+
+        private void DayThreeButtonClick(object sender, RoutedEventArgs e)
+        {
+            DayThreeButton.Background = (Brush)bc.ConvertFrom("#8768A8");
+            TodayButton.Background = Brushes.Transparent;
+            TomorrowButton.Background = Brushes.Transparent;
+            DayFourButton.Background = Brushes.Transparent;
+            DateButton.Background = Brushes.Transparent;
+            arraySessions = db.context.Sessions.Where(x => x.IdFilm == selectedIdFilm).Where(y => y.DateSession == dayThreeDate).OrderBy(ob => ob.StartTime).ToList();
+            SessionsListView.ItemsSource = arraySessions;
+        }
+
+        private void DayFourButtonClick(object sender, RoutedEventArgs e)
+        {
+            DayFourButton.Background = (Brush)bc.ConvertFrom("#8768A8");
+            TodayButton.Background = Brushes.Transparent;
+            TomorrowButton.Background = Brushes.Transparent;
+            DayThreeButton.Background = Brushes.Transparent;
+            DateButton.Background = Brushes.Transparent;
+            arraySessions = db.context.Sessions.Where(x => x.IdFilm == selectedIdFilm).Where(y => y.DateSession == dayFourDate).OrderBy(ob=>ob.StartTime).ToList();
+            SessionsListView.ItemsSource = arraySessions;
+
+        }
+
+
+        private void PickDatePickerSelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DateButton.Background = (Brush)bc.ConvertFrom("#8768A8");
+            TodayButton.Background = Brushes.Transparent;
+            TomorrowButton.Background = Brushes.Transparent;
+            DayThreeButton.Background = Brushes.Transparent;
+            DayFourButton.Background = Brushes.Transparent;
+            DateTextBlock.Text = PickDatePicker.SelectedDate.Value.ToString("dd MMMM");
+            selectDate = PickDatePicker.SelectedDate.Value;
+            arraySessions = db.context.Sessions.Where(x => x.IdFilm == selectedIdFilm).Where(y => y.DateSession == selectDate).OrderBy(ob => ob.StartTime).ToList();
+            SessionsListView.ItemsSource = arraySessions;
+
+        }
+
+        private void DateButtonClick(object sender, RoutedEventArgs e)
+        {
+  
+                DateButton.Background = (Brush)bc.ConvertFrom("#8768A8");
+                TodayButton.Background = Brushes.Transparent;
+                TomorrowButton.Background = Brushes.Transparent;
+                DayThreeButton.Background = Brushes.Transparent;
+                DayFourButton.Background = Brushes.Transparent;
+                DateTextBlock.Text = PickDatePicker.SelectedDate.Value.ToString("dd MMMM");
+                selectDate = PickDatePicker.SelectedDate.Value;
+                arraySessions = db.context.Sessions.Where(x => x.IdFilm == selectedIdFilm).Where(y => y.DateSession == selectDate).OrderBy(ob => ob.StartTime).ToList();
+                SessionsListView.ItemsSource = arraySessions;
+       
+        }
+
+
+ 
     }
 }

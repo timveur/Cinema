@@ -99,6 +99,7 @@ namespace Cinema.View
                 GenresStackPanelComboBox.Children.Add(newCheck);
 
             }
+            
 
 
         }

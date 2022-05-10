@@ -42,26 +42,40 @@
                 <TextBlock x:Name="HallTextBlock" FontSize="20" Text="{Binding Halls.NameHall, StringFormat={}Зал {0:F0}}"/>
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="1" Background="#12122b">
-            <ListBox x:Name="SessionsListBox" Background="#12122b">
-                <ListBox.ItemTemplate>
+        
+        <StackPanel Grid.Row="1" Background="#12122b" Orientation="Horizontal">
+            <ListView x:Name="SessionsListView" Background="#12122b" >
+                <!--<ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Vertical">
+                        --><!--<StackPanel Orientation="Vertical">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock x:Name="RowTextBox" Width="200" Text="{Binding Row}"></TextBlock>
-                                <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" >
                                     <CheckBox x:Name="SeatCheckBox" Content="{Binding NumberSeat}"></CheckBox>
                                 </StackPanel>
                             </StackPanel>
-                            
-                            
-                        </StackPanel>
+                        </StackPanel>--><!--
                     </DataTemplate>
-                </ListBox.ItemTemplate>
+                </ListView.ItemTemplate>-->
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical" Width="760" HorizontalAlignment="Center">
+                            
+                        </StackPanel> 
+                    </ItemsPanelTemplate>
+                    
+                </ListView.ItemsPanel>
+                <ListViewItem>
+                    <StackPanel Orientation="Vertical">
+                        
+                       
+                    </StackPanel>
+                </ListViewItem>
                 
-            </ListBox>
+            </ListView>
+            
 
-        </Grid>
+        </StackPanel>
         <Button Style="{StaticResource ActionButton}" Grid.Row="2" Width="150" HorizontalAlignment="Right" Content="Купить"/>
     </Grid>
 </Page>
