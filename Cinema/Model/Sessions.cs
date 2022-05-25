@@ -22,7 +22,6 @@ namespace Cinema.Model
     
         public int IdSession { get; set; }
         public int IdFilm { get; set; }
-        public int IdHall { get; set; }
         public int IdFormat { get; set; }
         public System.DateTime DateSession { get; set; }
         public System.TimeSpan StartTime { get; set; }
@@ -31,7 +30,6 @@ namespace Cinema.Model
     
         public virtual Films Films { get; set; }
         public virtual Formats Formats { get; set; }
-        public virtual Halls Halls { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tickets> Tickets { get; set; }
     }

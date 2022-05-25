@@ -24,7 +24,7 @@ namespace Cinema.View
     {
         Core db = new Core();
 
-        List<Halls> arrayHalls;
+ 
         List<Formats> arrayFormats;
         List<Films> arrayFilms;
         TimeSpan duration;
@@ -33,10 +33,6 @@ namespace Cinema.View
         {
             InitializeComponent();
 
-            arrayHalls = db.context.Halls.ToList();
-            HallsComboBox.ItemsSource = arrayHalls;
-            HallsComboBox.DisplayMemberPath = "NameHall";
-            HallsComboBox.SelectedValuePath = "IdHall";
 
             arrayFormats = db.context.Formats.ToList();
             FormatsComboBox.ItemsSource = arrayFormats;
@@ -57,18 +53,16 @@ namespace Cinema.View
             try
             {
 
-                int selectedHall = Convert.ToInt32(HallsComboBox.SelectedValue);
                 int selectedFormat = Convert.ToInt32(FormatsComboBox.SelectedValue);
                 TimeSpan startTime = TimeSpan.Parse(StartTimeTextBox.Text);
                 TimeSpan endTime = startTime + duration;
                 SessionsViewModel newObject = new SessionsViewModel();
-                bool result = newObject.AddSession(selectedHall, selectedFormat, DateSessionDatePicker.Text, StartTimeTextBox.Text, CostTextBox.Text);
+                bool result = newObject.AddSession(selectedFormat, DateSessionDatePicker.Text, StartTimeTextBox.Text, CostTextBox.Text);
                 if (result)
                 {
                     Sessions newSession = new Sessions()
                     {
                         IdFilm = selectedIdFilm,
-                        IdHall = selectedHall,
                         IdFormat = selectedFormat,
                         DateSession = Convert.ToDateTime(DateSessionDatePicker.Text),
                         StartTime = startTime,

@@ -143,7 +143,6 @@
                                     <Button Padding="5" x:Name="SessionButton" Click="SessionButtonClick">
                                         <StackPanel x:Name="SessionsStackPanel" Width="120" Orientation="Vertical" HorizontalAlignment="Left">
                                             <TextBlock x:Name="FormatTextBlock" Style="{StaticResource CaptionTextBlock}" Text="{Binding Formats.Format}"/>
-                                            <TextBlock x:Name="HallTextBlock" Style="{StaticResource CaptionTextBlock}" Text="{Binding Halls.NameHall, StringFormat={}Зал {0:F0}}"/>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock x:Name="TimeTextBlock" Style="{StaticResource ImportantTextBlock}" FontSize="18" Text="{Binding StartTime, StringFormat={}{0:hh}:{0:mm}}"/>
                                                 <TextBlock x:Name="CostTextBlock" Style="{StaticResource CaptionImportantTextBlock}" Padding="2 0 0 0" Text="{Binding CostTicket, StringFormat={}{0:F0} ₽}"/>

@@ -13,8 +13,6 @@
         <EntityTypeShape EntityType="CinemaModel.FilmsPhotos" Width="1.5" PointX="5.25" PointY="15.75" />
         <EntityTypeShape EntityType="CinemaModel.Formats" Width="1.5" PointX="6" PointY="8.75" />
         <EntityTypeShape EntityType="CinemaModel.Genres" Width="1.5" PointX="3" PointY="10.125" />
-        <EntityTypeShape EntityType="CinemaModel.Halls" Width="1.5" PointX="6" PointY="11.125" />
-        <EntityTypeShape EntityType="CinemaModel.HallsSeats" Width="1.5" PointX="8.25" PointY="2" />
         <EntityTypeShape EntityType="CinemaModel.RoleUsers" Width="1.5" PointX="8.75" PointY="10.625" />
         <EntityTypeShape EntityType="CinemaModel.Sessions" Width="1.5" PointX="8.25" PointY="5.375" />
         <EntityTypeShape EntityType="CinemaModel.sysdiagrams" Width="1.5" PointX="10.75" PointY="0.75" />
@@ -28,11 +26,10 @@
         <AssociationConnector Association="CinemaModel.FK_Sessions_Films" />
         <AssociationConnector Association="CinemaModel.FK_FilmsGenres_Genres" />
         <AssociationConnector Association="CinemaModel.FK_Sessions_Formats" />
-        <AssociationConnector Association="CinemaModel.FK_HallsSeats_Halls" />
-        <AssociationConnector Association="CinemaModel.FK_Sessions_Halls" />
-        <AssociationConnector Association="CinemaModel.FK_Tickets_HallsSeats" />
         <AssociationConnector Association="CinemaModel.FK_Users_RoleUsers" />
         <AssociationConnector Association="CinemaModel.FK_Tickets_Sessions" />
+        <EntityTypeShape EntityType="CinemaModel.Seats" Width="1.5" PointX="0.75" PointY="12.875" />
+        <AssociationConnector Association="CinemaModel.FK_Tickets_HallsSeats1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

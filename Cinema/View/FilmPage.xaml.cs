@@ -208,8 +208,6 @@ namespace Cinema.View
                 TomorrowButton.Background = Brushes.Transparent;
                 DayThreeButton.Background = Brushes.Transparent;
                 DayFourButton.Background = Brushes.Transparent;
-                DateTextBlock.Text = PickDatePicker.SelectedDate.Value.ToString("dd MMMM");
-                selectDate = PickDatePicker.SelectedDate.Value;
                 arraySessions = db.context.Sessions.Where(x => x.IdFilm == selectedIdFilm).Where(y => y.DateSession == selectDate).OrderBy(ob => ob.StartTime).ToList();
                 SessionsListView.ItemsSource = arraySessions;
        

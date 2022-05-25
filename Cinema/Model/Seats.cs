@@ -12,20 +12,19 @@ namespace Cinema.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class HallsSeats
+    public partial class Seats
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public HallsSeats()
+        public Seats()
         {
             this.Tickets = new HashSet<Tickets>();
         }
     
         public int IdSeat { get; set; }
-        public int IdHall { get; set; }
-        public int Row { get; set; }
-        public int NumberSeat { get; set; }
+        public Nullable<int> ParentId { get; set; }
+        public int Number { get; set; }
+        public string Decription { get; set; }
     
-        public virtual Halls Halls { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tickets> Tickets { get; set; }
     }

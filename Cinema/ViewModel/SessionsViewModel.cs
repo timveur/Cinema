@@ -11,14 +11,9 @@ namespace Cinema.ViewModel
     {
 
         private static Core db = new Core();
-        public bool AddSession(int idHall, int idFormat, string dateSession, string startTime, string costSession)
+        public bool AddSession(int idFormat, string dateSession, string startTime, string costSession)
         {
-            List<Halls> arrayHalls = db.context.Halls.ToList();
-            int checkHall = arrayHalls.Where(x => x.IdHall == idHall).Count();
-            if (checkHall == 0)
-            {
-                throw new Exception("Вы не выбрали зал.");
-            }
+           
             List<Formats> arrayFormats = db.context.Formats.ToList();
             int checkFormat = arrayFormats.Where(x => x.IdFormat == idFormat).Count();
             if (checkFormat == 0)
