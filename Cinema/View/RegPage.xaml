@@ -10,7 +10,7 @@
 
     <Grid>
         
-        <StackPanel Width="200">
+        <StackPanel Width="200" VerticalAlignment="Center">
             <TextBlock HorizontalAlignment="Center" FontSize="20">Регистрация</TextBlock>
             <TextBlock>Фамилия:</TextBlock>
             <TextBox x:Name="LastNameTextBox"></TextBox>

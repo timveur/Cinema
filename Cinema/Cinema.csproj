@@ -139,6 +139,7 @@
     <Compile Include="ViewModel\CheckClass.cs" />
     <Compile Include="ViewModel\FilmsViewModel.cs" />
     <Compile Include="ViewModel\HallBoxSource.cs" />
+    <Compile Include="ViewModel\RegViewModel.cs" />
     <Compile Include="ViewModel\SessionsViewModel.cs" />
     <Compile Include="View\AuthPage.xaml.cs">
       <DependentUpon>AuthPage.xaml</DependentUpon>

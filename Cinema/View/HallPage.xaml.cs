@@ -26,6 +26,7 @@ namespace Cinema.View
         List<Sessions> arraySessions;
         List<Seats> arraySeats;
         List<Seats> arrayRowSeats;
+        List<Tickets> arrayTickets;
         List<int> rows = new List<int>();
         List<int> arrayIdSeatsSelected = new List<int>();
         List<string> arrayInfoSeatsSelected = new List<string>();
@@ -48,7 +49,7 @@ namespace Cinema.View
             }
             DateTimeTextBlock.Text = dateSession + " в " + timeSession;
 
-           // arraySeats = db.context.Seats.Where(x => x.ParentId !=0).ToList();
+            arrayTickets = db.context.Tickets.Where(x => x.IdSession == idSession).ToList();
             arrayRowSeats = db.context.Seats.Where(x => x.ParentId == 0).ToList();
             RowListView.ItemsSource = arrayRowSeats;
 
@@ -82,6 +83,16 @@ namespace Cinema.View
                 newCheckBox.Margin = new Thickness(5, 0, 5, 0);
                 newCheckBox.Checked += NewCheckChecked;
                 newCheckBox.Unchecked += NewCheckUnchecked;
+                newCheckBox.Background = Brushes.Yellow;
+                foreach (var itemTicket in arrayTickets)
+                {
+                    if (itemTicket.IdSeat==Convert.ToInt32(newCheckBox.DataContext))
+                    {
+                        
+                        newCheckBox.IsEnabled = false ;
+                        
+                    }
+                }
                 OneRowStackPanel.Children.Add(newCheckBox);
 
             }
@@ -99,6 +110,16 @@ namespace Cinema.View
                 newCheckBox.Margin = new Thickness(5, 0, 5, 0);
                 newCheckBox.Checked += NewCheckChecked;
                 newCheckBox.Unchecked += NewCheckUnchecked;
+                newCheckBox.Background = Brushes.Yellow;
+                foreach (var itemTicket in arrayTickets)
+                {
+                    if (itemTicket.IdSeat == Convert.ToInt32(newCheckBox.DataContext))
+                    {
+
+                        newCheckBox.IsEnabled = false;
+
+                    }
+                }
                 TwoRowStackPanel.Children.Add(newCheckBox);
 
             }
@@ -116,6 +137,16 @@ namespace Cinema.View
                 newCheckBox.Margin = new Thickness(5, 0, 5, 0);
                 newCheckBox.Checked += NewCheckChecked;
                 newCheckBox.Unchecked += NewCheckUnchecked;
+                newCheckBox.Background = Brushes.Yellow;
+                foreach (var itemTicket in arrayTickets)
+                {
+                    if (itemTicket.IdSeat == Convert.ToInt32(newCheckBox.DataContext))
+                    {
+
+                        newCheckBox.IsEnabled = false;
+
+                    }
+                }
                 ThreeRowStackPanel.Children.Add(newCheckBox);
 
             }
@@ -133,6 +164,16 @@ namespace Cinema.View
                 newCheckBox.Margin = new Thickness(5, 0, 5, 0);
                 newCheckBox.Checked += NewCheckChecked;
                 newCheckBox.Unchecked += NewCheckUnchecked;
+                newCheckBox.Background = Brushes.Yellow;
+                foreach (var itemTicket in arrayTickets)
+                {
+                    if (itemTicket.IdSeat == Convert.ToInt32(newCheckBox.DataContext))
+                    {
+
+                        newCheckBox.IsEnabled = false;
+
+                    }
+                }
                 FourRowStackPanel.Children.Add(newCheckBox);
 
             }
@@ -151,6 +192,16 @@ namespace Cinema.View
                 newCheckBox.Margin = new Thickness(5, 0, 5, 0);
                 newCheckBox.Checked += NewCheckChecked;
                 newCheckBox.Unchecked += NewCheckUnchecked;
+                newCheckBox.Background = Brushes.Yellow;
+                foreach (var itemTicket in arrayTickets)
+                {
+                    if (itemTicket.IdSeat == Convert.ToInt32(newCheckBox.DataContext))
+                    {
+
+                        newCheckBox.IsEnabled = false;
+
+                    }
+                }
                 FiveRowStackPanel.Children.Add(newCheckBox);
 
             }
@@ -169,6 +220,16 @@ namespace Cinema.View
                 newCheckBox.Margin = new Thickness(5, 0, 5, 0);
                 newCheckBox.Checked += NewCheckChecked;
                 newCheckBox.Unchecked += NewCheckUnchecked;
+                newCheckBox.Background = Brushes.Yellow;
+                foreach (var itemTicket in arrayTickets)
+                {
+                    if (itemTicket.IdSeat == Convert.ToInt32(newCheckBox.DataContext))
+                    {
+
+                        newCheckBox.IsEnabled = false;
+
+                    }
+                }
                 SixRowStackPanel.Children.Add(newCheckBox);
 
             }
@@ -187,6 +248,16 @@ namespace Cinema.View
                 newCheckBox.Margin = new Thickness(5, 0, 5, 0);
                 newCheckBox.Checked += NewCheckChecked;
                 newCheckBox.Unchecked += NewCheckUnchecked;
+                newCheckBox.Background = Brushes.Yellow;
+                foreach (var itemTicket in arrayTickets)
+                {
+                    if (itemTicket.IdSeat == Convert.ToInt32(newCheckBox.DataContext))
+                    {
+
+                        newCheckBox.IsEnabled = false;
+
+                    }
+                }
                 SevenRowStackPanel.Children.Add(newCheckBox);
 
             }
@@ -205,6 +276,16 @@ namespace Cinema.View
                 newCheckBox.Margin = new Thickness(5, 0, 5, 0);
                 newCheckBox.Checked += NewCheckChecked;
                 newCheckBox.Unchecked += NewCheckUnchecked;
+                newCheckBox.Background = Brushes.Yellow;
+                foreach (var itemTicket in arrayTickets)
+                {
+                    if (itemTicket.IdSeat == Convert.ToInt32(newCheckBox.DataContext))
+                    {
+
+                        newCheckBox.IsEnabled = false;
+
+                    }
+                }
                 EightRowStackPanel.Children.Add(newCheckBox);
 
             }
@@ -222,6 +303,16 @@ namespace Cinema.View
                 newCheckBox.Margin = new Thickness(5, 0, 5, 0);
                 newCheckBox.Checked += NewCheckChecked;
                 newCheckBox.Unchecked += NewCheckUnchecked;
+                newCheckBox.Background = Brushes.Yellow;
+                foreach (var itemTicket in arrayTickets)
+                {
+                    if (itemTicket.IdSeat == Convert.ToInt32(newCheckBox.DataContext))
+                    {
+
+                        newCheckBox.IsEnabled = false;
+
+                    }
+                }
                 NineRowStackPanel.Children.Add(newCheckBox);
 
             }
@@ -239,6 +330,16 @@ namespace Cinema.View
                 newCheckBox.Margin = new Thickness(5, 0, 5, 0);
                 newCheckBox.Checked += NewCheckChecked;
                 newCheckBox.Unchecked += NewCheckUnchecked;
+                newCheckBox.Background = Brushes.Yellow;
+                foreach (var itemTicket in arrayTickets)
+                {
+                    if (itemTicket.IdSeat == Convert.ToInt32(newCheckBox.DataContext))
+                    {
+
+                        newCheckBox.IsEnabled = false;
+
+                    }
+                }
                 TenRowStackPanel.Children.Add(newCheckBox);
 
             }
@@ -256,6 +357,16 @@ namespace Cinema.View
                 newCheckBox.Margin = new Thickness(5, 0, 5, 0);
                 newCheckBox.Checked += NewCheckChecked;
                 newCheckBox.Unchecked += NewCheckUnchecked;
+                newCheckBox.Background = Brushes.Yellow;
+                foreach (var itemTicket in arrayTickets)
+                {
+                    if (itemTicket.IdSeat == Convert.ToInt32(newCheckBox.DataContext))
+                    {
+
+                        newCheckBox.IsEnabled = false;
+
+                    }
+                }
                 ElevenRowStackPanel.Children.Add(newCheckBox);
 
             }
@@ -273,7 +384,16 @@ namespace Cinema.View
                 newCheckBox.Margin = new Thickness(5, 0, 5, 0);
                 newCheckBox.Checked += NewCheckChecked;
                 newCheckBox.Unchecked += NewCheckUnchecked;
-                //newCheckBox.Background = Brushes.Black;
+                newCheckBox.Background = Brushes.Yellow;
+                foreach (var itemTicket in arrayTickets)
+                {
+                    if (itemTicket.IdSeat == Convert.ToInt32(newCheckBox.DataContext))
+                    {
+
+                        newCheckBox.IsEnabled = false;
+
+                    }
+                }
                 TwelveRowStackPanel.Children.Add(newCheckBox);
 
             }
@@ -326,6 +446,11 @@ namespace Cinema.View
             selectedSeatRow = numberRow + " " + numberSeat;
             arrayInfoSeatsSelected.Remove(selectedSeatRow);
             SelectedSeatsTextBlock.Text = String.Join(", ", arrayInfoSeatsSelected);
+            if (arrayInfoSeatsSelected.Count() == 0)
+            {
+                SelectedTextBlock.Visibility = Visibility.Collapsed;
+                SelectedSeatsTextBlock.Visibility = Visibility.Collapsed;
+            }
 
         }
 

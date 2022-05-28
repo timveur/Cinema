@@ -83,10 +83,7 @@ namespace Cinema.View
 
             
 
-            foreach (MainPage obj in FilmsListView.Items.OfType<MainPage>())
-            {
-                
-            }
+     
 
             foreach (var item in arrayGenres)
             {

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Cinema.Model;
+using Cinema.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +22,9 @@ namespace Cinema.View
     /// </summary>
     public partial class RegPage : Page
     {
+
+        Core db = new Core();
+        List<Users> arrayUsers;
         public RegPage()
         {
             InitializeComponent();
@@ -27,7 +32,32 @@ namespace Cinema.View
 
         private void RegButtonClick(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                string firstName = FirstNameTextBox.Text;
+                string lastName = LastNameTextBox.Text;
+                string patronymic = PatronymicTextBox.Text;
+                string login = LoginTextBox.Text;
+                string email = EmailTextBox.Text;
+                string password = PassPasswordBox.Password;
+                string repeatPassword = RepeatPasswordBox.Password;
+                string phone = PhoneTextBox.Text;
 
+                
+                RegViewModel newObject = new RegViewModel();
+                bool result = newObject.CheckRegUser(lastName, firstName, patronymic, login, email, password, repeatPassword);
+                if (result)
+                {
+                    newObject.AddUser(lastName, firstName, patronymic, login, email, password, phone);
+                    MessageBox.Show("Вы успешно зарегистрировлаись. Возвращение на страницу авторизации.");
+                    this.NavigationService.Navigate(new AuthPage());
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
