@@ -14,16 +14,13 @@
         </Grid.RowDefinitions>
         <Grid Margin="10 0 10 0">
             <Image Source="Resources/cinema.png" HorizontalAlignment="Left"/>
-            <Label Style="{StaticResource HeaderLabel}" HorizontalAlignment="Center" VerticalAlignment="Center">Кинотеатр «Friends»</Label>
+            <Button x:Name="MainPageButton" Style="{StaticResource ActionButton}" HorizontalAlignment="Left" Width="150" Margin="100 0 0 0" Click="MainPageButtonClick">Главная страница</Button>
+            <TextBlock Style="{StaticResource HeaderTextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center">Кинотеатр «Friends»</TextBlock>
             <StackPanel x:Name="ButtonsStackPanel" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Style="{StaticResource ActionButton}" x:Name="BackButton" HorizontalAlignment="Right" Width="80" Click="BackButtonClick" Margin="0 0 10 0">Назад</Button>
-            <Button Style="{StaticResource ActionButton}" x:Name="AuthButton" HorizontalAlignment="Right" Width="80" Click="AuthButtonClick">Войти</Button>
+                <Button Style="{StaticResource ActionButton}" x:Name="AuthButton" HorizontalAlignment="Right" Width="80" Click="AuthButtonClick">Войти</Button>
             </StackPanel>
-
             <Button Style="{StaticResource ActionButton}" x:Name="ExitButton" HorizontalAlignment="Right" Width="80" Click="ExitButtonClick">Выйти</Button>
-                
-            
-            
         </Grid>
         <Frame Grid.Row="1" x:Name="MainFrame" NavigationUIVisibility="Hidden" ContentRendered="MainFrameContentRendered" Navigated="MainFrameNavigated"/>
     </Grid>

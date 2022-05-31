@@ -85,8 +85,7 @@ namespace Cinema
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
             if (MainFrame.CanGoBack)
-            {
-                
+            {                
                 MainFrame.GoBack();
             }
         }
@@ -108,6 +107,12 @@ namespace Cinema
                 MessageBox.Show("Возникла ошибка", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
+        }
+
+
+        private void MainPageButtonClick(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new MainPage());
         }
     }
 }

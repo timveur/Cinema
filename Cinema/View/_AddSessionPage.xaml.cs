@@ -22,9 +22,7 @@ namespace Cinema.View
     /// </summary>
     public partial class _AddSessionPage : Page
     {
-        Core db = new Core();
-
- 
+        Core db = new Core(); 
         List<Formats> arrayFormats;
         List<Films> arrayFilms;
         TimeSpan duration;
@@ -32,13 +30,10 @@ namespace Cinema.View
         public _AddSessionPage(int idFilm)
         {
             InitializeComponent();
-
-
             arrayFormats = db.context.Formats.ToList();
             FormatsComboBox.ItemsSource = arrayFormats;
             FormatsComboBox.DisplayMemberPath = "Format";
             FormatsComboBox.SelectedValuePath = "IdFormat";
-
             arrayFilms = db.context.Films.Where(x=>x.IdFilm==idFilm).ToList();
             foreach (var item in arrayFilms)
             {
@@ -52,7 +47,6 @@ namespace Cinema.View
         {
             try
             {
-
                 int selectedFormat = Convert.ToInt32(FormatsComboBox.SelectedValue);
                 TimeSpan startTime = TimeSpan.Parse(StartTimeTextBox.Text);
                 TimeSpan endTime = startTime + duration;
@@ -65,8 +59,7 @@ namespace Cinema.View
                     newObject.AddSession(selectedIdFilm, selectedIdFilm, dateSession, startTime, endTime, costTicket);
                     MessageBox.Show("Вы успешно добавили сеанс. Возвращение к странице фильма.");
                     this.NavigationService.Navigate(new FilmPage(selectedIdFilm));
-                }
-                
+                }                
             }
             catch (Exception ex)
             {

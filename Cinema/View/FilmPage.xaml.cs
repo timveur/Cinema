@@ -42,7 +42,6 @@ namespace Cinema.View
             selectedIdFilm = idFilm;
             arrayFilms = db.context.Films.Where(x => x.IdFilm == idFilm).ToList();
             this.DataContext = arrayFilms;
-
             today = DateTime.Today;
             tomorrow = today.AddDays(1);
             dayThreeDate = today.AddDays(2);
@@ -52,28 +51,17 @@ namespace Cinema.View
             string dayThree = dayThreeLower.ToString();
             var dayFourLower = new StringBuilder(dayFourDate.ToString("dddd"));
             dayFourLower[0] = char.ToUpper(dayFourLower[0]);
-            string dayFour = dayFourLower.ToString();
-
-            
-
+            string dayFour = dayFourLower.ToString();           
             TodayTextBlock.Text = "Сегодня";
             TodayDateTextBlock.Text = today.ToString("d MMMM");
-
             TomorrowTextBlock.Text = "Завтра";
             TomorrowDateTextBlock.Text = tomorrow.ToString("d MMMM");
-
             DayThreeTextBlock.Text = dayThree;
             DayThreeDateTextBlock.Text = today.AddDays(2).ToString("d MMMM");
-
             DayFourTextBlock.Text = dayFour;
             DayFourDateTextBlock.Text = today.AddDays(3).ToString("d MMMM");
-
-
             arraySessions = db.context.Sessions.Where(x => x.IdFilm == idFilm).Where(y=>y.DateSession == today).OrderBy(ob => ob.StartTime).ToList();
             SessionsListView.ItemsSource = arraySessions;
-
-
-
             arrayFilmsGenres = db.context.FilmsGenres.Where(x => x.IdFilm == idFilm).ToList();
             foreach (var item in arrayFilmsGenres)
             {
@@ -81,21 +69,14 @@ namespace Cinema.View
             }
             string allGenres = String.Join(", ", arrayAllGenres);
             GenresTextBlock.Text = allGenres;
-
-
-
-
             arrayFilmsCountries = db.context.FilmsCountries.Where(x => x.IdFilm == idFilm).ToList();
             foreach (var item in arrayFilmsCountries)
             {
                 Console.WriteLine(item.Countries.NameCountry);
-                arrayAllCountries.Add(item.Countries.NameCountry);
-                
+                arrayAllCountries.Add(item.Countries.NameCountry);                
             }
             string allCountries = String.Join(", ", arrayAllCountries);
             CountriesTextBlock.Text = allCountries;
-
-
         }
 
         private void EditButtonClick(object sender, RoutedEventArgs e)
@@ -112,7 +93,7 @@ namespace Cinema.View
       
         private void DeleteSessionButtonClick(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("Функция в разработке");
         }
 
        
@@ -120,9 +101,7 @@ namespace Cinema.View
         private void SessionButtonClick(object sender, RoutedEventArgs e)
         {
             Button activeElement = sender as Button;
-
             Sessions activeSession = activeElement.DataContext as Sessions;
-
             int idSession = activeSession.IdSession;
             this.NavigationService.Navigate(new HallPage(idSession));
         }
@@ -171,7 +150,6 @@ namespace Cinema.View
             DateButton.Background = Brushes.Transparent;
             arraySessions = db.context.Sessions.Where(x => x.IdFilm == selectedIdFilm).Where(y => y.DateSession == dayFourDate).OrderBy(ob=>ob.StartTime).ToList();
             SessionsListView.ItemsSource = arraySessions;
-
         }
 
 
@@ -186,23 +164,30 @@ namespace Cinema.View
             selectDate = PickDatePicker.SelectedDate.Value;
             arraySessions = db.context.Sessions.Where(x => x.IdFilm == selectedIdFilm).Where(y => y.DateSession == selectDate).OrderBy(ob => ob.StartTime).ToList();
             SessionsListView.ItemsSource = arraySessions;
-
         }
 
         private void DateButtonClick(object sender, RoutedEventArgs e)
-        {
-  
-                DateButton.Background = (Brush)bc.ConvertFrom("#8768A8");
-                TodayButton.Background = Brushes.Transparent;
-                TomorrowButton.Background = Brushes.Transparent;
-                DayThreeButton.Background = Brushes.Transparent;
-                DayFourButton.Background = Brushes.Transparent;
-                arraySessions = db.context.Sessions.Where(x => x.IdFilm == selectedIdFilm).Where(y => y.DateSession == selectDate).OrderBy(ob => ob.StartTime).ToList();
-                SessionsListView.ItemsSource = arraySessions;
-       
+        {  
+            DateButton.Background = (Brush)bc.ConvertFrom("#8768A8");
+            TodayButton.Background = Brushes.Transparent;
+            TomorrowButton.Background = Brushes.Transparent;
+            DayThreeButton.Background = Brushes.Transparent;
+            DayFourButton.Background = Brushes.Transparent;
+            arraySessions = db.context.Sessions.Where(x => x.IdFilm == selectedIdFilm).Where(y => y.DateSession == selectDate).OrderBy(ob => ob.StartTime).ToList();
+            SessionsListView.ItemsSource = arraySessions;       
         }
 
-
- 
+        private void PrintButtonClick(object sender, RoutedEventArgs e)
+        {
+            PrintDialog printObj = new PrintDialog();
+            if (printObj.ShowDialog() == true)
+            {
+                printObj.PrintVisual(SessionsListView, "");
+            }
+            else
+            {
+                MessageBox.Show("Пользователь прервал печать", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

@@ -17,8 +17,6 @@ namespace Cinema.ViewModel
                 throw new Exception("Вы не ввели название фильма.");
             }
             
-            //List<Countries> arrayCountries = db.context.Countries.ToList();
-            //int checkCountry = arrayCountries.Where(x => x.IdCountry == idCountry).Count();
             if (idCountry == 0)
             {
                 throw new Exception("Вы не выбрали страну.");
@@ -27,8 +25,6 @@ namespace Cinema.ViewModel
             {
                 throw new Exception("Вы выбрали две одинаковых страны.");
             }
-            //List<Genres> arrayGenres = db.context.Genres.ToList();
-            //int checkGenre= arrayGenres.Where(x => x.IdGenre == idGenre).Count();
             if (idGenre == 0)
             {
                 throw new Exception("Вы не выбрали жанр.");
@@ -37,15 +33,9 @@ namespace Cinema.ViewModel
             {
                 throw new Exception("Вы выбрали два одинаковых жанра.");
             }
-            //List<AgeLimits> arrayAgeLimit = db.context.AgeLimits.ToList();
-            //int checkAgeLimit = arrayAgeLimit.Where(x => x.IdAgeLimit == ageLimit).Count();
             if (ageLimit == 0)
             {
                 throw new Exception("Вы не выбрали возрастное ограничение.");
-            }
-            if (String.IsNullOrEmpty(actors))
-            {
-                throw new Exception("Вы не ввели актеров фильма.");
             }
             if (String.IsNullOrEmpty(hoursDuration) || String.IsNullOrEmpty(minuteDuration))
             {
@@ -64,7 +54,10 @@ namespace Cinema.ViewModel
             {
                 throw new Exception("Некорректная длительность фильма.");
             }
-            
+            if (String.IsNullOrEmpty(actors))
+            {
+                throw new Exception("Вы не ввели актеров фильма.");
+            }
             else
             {
                 return true;

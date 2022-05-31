@@ -22,30 +22,27 @@
                 <TextBlock Width="200" Text="Описание фильма:" VerticalAlignment="Center"></TextBlock>
                 <TextBox x:Name="DescriptionFilmTextBox" Width="400"></TextBox>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="20" Margin="0 0 0 10">
-                <TextBlock Width="200" Text="Страна(-ы) производства:" VerticalAlignment="Center"></TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <TextBlock Width="200" Text="Страна(-ы) производства:" VerticalAlignment="Center" Height="20"></TextBlock>
                 <StackPanel Orientation="Horizontal">
-                    <ComboBox x:Name="CountriesComboBox" Width="100" HorizontalAlignment="Right"></ComboBox>
+                    <ComboBox x:Name="CountriesComboBox" Width="100" HorizontalAlignment="Right" ScrollViewer.VerticalScrollBarVisibility="Visible" Style="{DynamicResource ComboBoxStyle}"></ComboBox>
                     <Button x:Name="AddCountryButton" Click="AddCountryButtonClick">+</Button>
-                    <ComboBox x:Name="CountriesTwoComboBox" Width="100" Visibility="Collapsed"></ComboBox>
+                    <ComboBox x:Name="CountriesTwoComboBox" Width="100" Visibility="Collapsed" Style="{DynamicResource ComboBoxStyle}"></ComboBox>
                     <Button x:Name="DelCountryButton" Click="DelCountryButtonClick" Visibility="Collapsed">-</Button>
                 </StackPanel>
-                
             </StackPanel>
             <StackPanel Orientation="Horizontal"  Margin="0 0 0 10">
                 <TextBlock Width="200" Text="Жанр(-ы):" VerticalAlignment="Center" Height="20"></TextBlock>
                 <StackPanel Orientation="Horizontal">
-                    <ComboBox x:Name="GenresComboBox" Width="100" HorizontalAlignment="Right"></ComboBox>
+                    <ComboBox x:Name="GenresComboBox" Width="100" HorizontalAlignment="Right" Style="{DynamicResource ComboBoxStyle}"></ComboBox>
                     <Button x:Name="AddGenreButton" Click="AddGenreButtonClick">+</Button>
-                    <ComboBox x:Name="GenresTwoComboBox" Width="100" Visibility="Collapsed"></ComboBox>
+                    <ComboBox x:Name="GenresTwoComboBox" Width="100" Visibility="Collapsed" Style="{DynamicResource ComboBoxStyle}"></ComboBox>
                     <Button x:Name="DelGenresButton" Click="DelGenresButtonClick" Visibility="Collapsed">-</Button>
                 </StackPanel>
-                
-                
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="20" Margin="0 0 0 10">
-                <TextBlock Width="200" Text="Возрастное ограничение:" VerticalAlignment="Center"></TextBlock>
-                <ComboBox x:Name="AgeLimitComboBox" Width="80"></ComboBox>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <TextBlock Width="200" Text="Возрастное ограничение:" VerticalAlignment="Center" Height="20"></TextBlock>
+                <ComboBox x:Name="AgeLimitComboBox" Width="80" Style="{DynamicResource ComboBoxStyle}"></ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="20" Margin="0 0 0 10">
                 <TextBlock Width="200" Text="Длительность:" VerticalAlignment="Center"></TextBlock>

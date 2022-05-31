@@ -100,30 +100,11 @@
 
             </StackPanel>
 
-            <!--<ListView x:Name="SeatsListView" Background="#12122b" Grid.Column="1" ScrollViewer.VerticalScrollBarVisibility="Disabled" BorderBrush="#12122b">
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                        
-                        </StackPanel>
-                    </ItemsPanelTemplate>
-
-                </ListView.ItemsPanel>
-                <ListViewItem>
-                    <StackPanel Orientation="Vertical">
-
-                    </StackPanel>
-                </ListViewItem>
-            </ListView>-->
-            <!--<TextBlock x:Name="RowTextBox" Width="200"></TextBlock>
-                    <StackPanel x:Name="SeatsStackPanel" Orientation="Horizontal" Grid.Column="1">
-                       
-                    </StackPanel>-->
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -133,9 +114,13 @@
                 <TextBlock x:Name="SelectedTextBlock"></TextBlock>
                 <TextBlock x:Name="SelectedSeatsTextBlock" TextWrapping="Wrap" Grid.Column="1"></TextBlock>
             </Grid>
-                
+            <Border Grid.Column="1"  HorizontalAlignment="Left" Width="140" BorderThickness="1" BorderBrush="#BEBEBE">
+                <StackPanel Orientation="Vertical" Margin="2" HorizontalAlignment="Center">
+                    <TextBlock Style="{StaticResource CaptionImportantTextBlock}">Общая стоимость:</TextBlock>
+                    <TextBlock Style="{StaticResource ImportantTextBlock}" x:Name="CostTextBlock"></TextBlock>
+                </StackPanel>
+            </Border>
             
-           
             <Button Style="{StaticResource ActionButton}" Grid.Column="1" Width="150" HorizontalAlignment="Right" Content="Купить"/>
         </Grid>            
         
