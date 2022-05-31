@@ -39,6 +39,15 @@ namespace Cinema.ViewModel
             }
         }
 
+        /// <summary>
+        /// Добавление сеанса
+        /// </summary>
+        /// <param name="idFilm">Идентификатор фильма</param>
+        /// <param name="IdFormat">Идентификатор формата фильма</param>
+        /// <param name="dateSession">Дата сеанса</param>
+        /// <param name="startTime">Начало сеанса</param>
+        /// <param name="endTime">Конец сеанса</param>
+        /// <param name="costTicket">Стоимость билета</param>
         public void AddSession(int idFilm, int IdFormat, DateTime dateSession, TimeSpan startTime, TimeSpan endTime, Decimal costTicket)
         {
             Sessions newSession = new Sessions()

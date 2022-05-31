@@ -9,7 +9,7 @@
       Title="_AddSessionPage">
 
     <Grid>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal" Height="20" Margin="0 0 0 10">
                 <TextBlock Width="200" Text="Формат:" VerticalAlignment="Center"></TextBlock>
                 <ComboBox x:Name="FormatsComboBox" Width="80" Style="{DynamicResource ComboBoxStyle}"></ComboBox>

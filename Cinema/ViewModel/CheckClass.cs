@@ -10,6 +10,13 @@ namespace Cinema.ViewModel
     class CheckClass
     {
         private static Core db = new Core();
+        /// <summary>
+        /// Проверка корректности заполнения полей при регистрации
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public bool CheckAuth(string login, string password)
         {
             if (String.IsNullOrEmpty(login))

@@ -64,7 +64,21 @@ namespace Cinema.ViewModel
             }
         }
 
-
+        /// <summary>
+        /// Добавление фильма
+        /// </summary>
+        /// <param name="nameFilm">Название фильма</param>
+        /// <param name="description">Описание</param>
+        /// <param name="idAgeLimit">Идентификатор возрастного ограничения</param>
+        /// <param name="selectedDuration">Длительность фильма</param>
+        /// <param name="actors">Актеры</param>
+        /// <param name="filmsCompany">Кинокомпания</param>
+        /// <param name="filmsDirector">Продюссер(-ы)</param>
+        /// <param name="photoPath">Название файла с фото</param>
+        /// <param name="idCountry">Идентификатор первой страны</param>
+        /// <param name="idTwoCountry">Идентификатор второй страны</param>
+        /// <param name="idGenre">Идентификатор первого жанра</param>
+        /// <param name="idTwoGenre">Идентификатор второго жанра</param>
         public void AddFilm(string nameFilm, string description, int idAgeLimit, TimeSpan selectedDuration, string actors, string filmsCompany, string filmsDirector, string photoPath, int idCountry, int idTwoCountry, int idGenre, int idTwoGenre)
         {
             Films newFilm = new Films()
@@ -122,6 +136,22 @@ namespace Cinema.ViewModel
             db.context.SaveChanges();
         }
 
+        /// <summary>
+        /// Редактирование фильма
+        /// </summary>
+        /// <param name="idFilm">Идентификатор фильма</param>
+        /// <param name="nameFilm">Название фильма</param>
+        /// <param name="description">Описание</param>
+        /// <param name="idAgeLimit">Идентификатор возрастного ограничения</param>
+        /// <param name="selectedDuration">Длительность фильма</param>
+        /// <param name="actors">Актеры</param>
+        /// <param name="filmsCompany">Кинокомпания</param>
+        /// <param name="filmsDirector">Продюссер(-ы)</param>
+        /// <param name="photoPath">Название файла с фото</param>
+        /// <param name="idCountry">Идентификатор первой страны</param>
+        /// <param name="idTwoCountry">Идентификатор второй страны</param>
+        /// <param name="idGenre">Идентификатор первого жанра</param>
+        /// <param name="idTwoGenre">Идентификатор второго жанра</param>
         public void EditFilm(int idFilm, string nameFilm, string description, int idAgeLimit, TimeSpan selectedDuration, string actors, string filmsCompany, string filmsDirector, string photoPath, int idCountry, int idTwoCountry, int idGenre, int idTwoGenre)
         {
             var uFilms = db.context.Films.Where(x => x.IdFilm == idFilm).FirstOrDefault();

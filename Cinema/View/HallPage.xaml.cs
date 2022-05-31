@@ -36,7 +36,7 @@ namespace Cinema.View
         Decimal costOneTicket = 0;
         Decimal costAllTickets = 0;
         int idSelectedSession;
-        string costTickets = "";
+        string costTickets = "0 руб.";
         public HallPage(int idSession)
         {
             InitializeComponent();
@@ -427,13 +427,6 @@ namespace Cinema.View
             CostTextBlock.Text = costTickets;
         }
 
-        private void CostTicketsTextBlock()
-        {
-            //int countSeats = arrayInfoSeatsSelected.Count;
-            //costAllTickets = costOneTicket * countSeats;
-            
-        }
-
 
         private void SelectedTextBlockUpdate()
         {
@@ -456,6 +449,21 @@ namespace Cinema.View
                 SelectedTextBlock.Text = "Выбранные места: ";
 
             }
-        }        
+        }
+
+
+        private void CheckBoxClick(object sender, RoutedEventArgs e)
+        {
+            if ((sender as CheckBox).IsChecked == true)
+            {
+                (sender as CheckBox).IsChecked = false;
+            }
+        }
+
+
+        private void BuyTicketsButtonClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Функция в разработке");
+        }
     }
 }

@@ -31,6 +31,16 @@ namespace Cinema.ViewModel
             }
         }
 
+        /// <summary>
+        /// Добавление пользователя
+        /// </summary>
+        /// <param name="lastName">Фамилия</param>
+        /// <param name="firstName">Имя</param>
+        /// <param name="patronymic">Отчество</param>
+        /// <param name="login">Логин</param>
+        /// <param name="email">Электронная почта</param>
+        /// <param name="password">Пароль</param>
+        /// <param name="phone">Номер телефона</param>
         public void AddUser(string lastName, string firstName, string patronymic, string login, string email, string password, string phone)
         {
             Users newUser = new Users()
