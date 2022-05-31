@@ -24,13 +24,21 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="20" Margin="0 0 0 10">
                 <TextBlock Width="200" Text="Страна(-ы) производства:" VerticalAlignment="Center"></TextBlock>
-                <ComboBox x:Name="CountriesComboBox" Width="80" HorizontalAlignment="Right" ScrollViewer.VerticalScrollBarVisibility="Visible">
-                </ComboBox>
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox x:Name="CountriesComboBox" Width="100" HorizontalAlignment="Right" ScrollViewer.VerticalScrollBarVisibility="Visible"></ComboBox>
+                    <Button x:Name="AddCountryButton" Click="AddCountryButtonClick">+</Button>
+                    <ComboBox x:Name="CountriesTwoComboBox" Width="100" Visibility="Collapsed"></ComboBox>
+                    <Button x:Name="DelCountryButton" Click="DelCountryButtonClick" Visibility="Collapsed">-</Button>
+                </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal"  Margin="0 0 0 10">
                 <TextBlock Width="200" Text="Жанр(-ы):" VerticalAlignment="Center" Height="20"></TextBlock>
-                <ComboBox x:Name="GenresComboBox" Width="80" HorizontalAlignment="Right">
-                </ComboBox>
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox x:Name="GenresComboBox" Width="100" HorizontalAlignment="Right"></ComboBox>
+                    <Button x:Name="AddGenreButton" Click="AddGenreButtonClick">+</Button>
+                    <ComboBox x:Name="GenresTwoComboBox" Width="100" Visibility="Collapsed"></ComboBox>
+                    <Button x:Name="DelGenresButton" Click="DelGenresButtonClick" Visibility="Collapsed">-</Button>
+                </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="20" Margin="0 0 0 10">
                 <TextBlock Width="200" Text="Возрастное ограничение:" VerticalAlignment="Center"></TextBlock>

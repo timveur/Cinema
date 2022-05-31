@@ -195,21 +195,14 @@ namespace Cinema.View
             { 
                 int selectedAgeLimit = Convert.ToInt32(AgeLimitComboBox.SelectedValue);
                 int selectedCountry = Convert.ToInt32(CountriesComboBox.SelectedValue);
-                
-                    selectedTwoCountry = Convert.ToInt32(CountriesTwoComboBox.SelectedValue);
-                
+                selectedTwoCountry = Convert.ToInt32(CountriesTwoComboBox.SelectedValue);
                 int selectedGenre = Convert.ToInt32(GenresComboBox.SelectedValue);
-                
-                    selectedTwoGenre = Convert.ToInt32(GenresTwoComboBox.SelectedValue);
-                
+                selectedTwoGenre = Convert.ToInt32(GenresTwoComboBox.SelectedValue);
                 string nameFilm = NameFilmTextBox.Text;
                 string actors = ActorsTextBox.Text;
-
                 TimeSpan selectedDuration = new TimeSpan();
                 FilmsViewModel newObject = new FilmsViewModel();
                 bool result = newObject.CheckAddFilm(nameFilm, selectedAgeLimit, actors, DurationHoursFilmTextBox.Text, DurationMinutesFilmTextBox.Text, selectedCountry, selectedTwoCountry, selectedGenre, selectedTwoGenre);
-
-
                 if (result)
                 {
                     string description = DescriptionFilmTextBox.Text;

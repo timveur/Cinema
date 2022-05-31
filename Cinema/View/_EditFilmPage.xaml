@@ -25,9 +25,9 @@
             <StackPanel Orientation="Horizontal" Height="20" Margin="0 0 0 10">
                 <TextBlock Width="200" Text="Страна(-ы) производства:" VerticalAlignment="Center"></TextBlock>
                 <StackPanel Orientation="Horizontal">
-                    <ComboBox x:Name="CountriesComboBox" Width="80" HorizontalAlignment="Right"></ComboBox>
+                    <ComboBox x:Name="CountriesComboBox" Width="100" HorizontalAlignment="Right"></ComboBox>
                     <Button x:Name="AddCountryButton" Click="AddCountryButtonClick">+</Button>
-                    <ComboBox x:Name="CountriesTwoComboBox" Width="80" Visibility="Collapsed"></ComboBox>
+                    <ComboBox x:Name="CountriesTwoComboBox" Width="100" Visibility="Collapsed"></ComboBox>
                     <Button x:Name="DelCountryButton" Click="DelCountryButtonClick" Visibility="Collapsed">-</Button>
                 </StackPanel>
                 

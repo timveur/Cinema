@@ -51,13 +51,53 @@ namespace Cinema.View
             GenresComboBox.DisplayMemberPath = "NameGenre";
             GenresComboBox.SelectedValuePath = "IdGenre";
 
+            GenresTwoComboBox.ItemsSource = arrayGenres;
+            GenresTwoComboBox.DisplayMemberPath = "NameGenre";
+            GenresTwoComboBox.SelectedValuePath = "IdGenre";
+
             arrayCountries = db.context.Countries.ToList();
             CountriesComboBox.ItemsSource = arrayCountries;
             CountriesComboBox.DisplayMemberPath = "NameCountry";
             CountriesComboBox.SelectedValuePath = "IdCountry";
 
+            CountriesTwoComboBox.ItemsSource = arrayCountries;
+            CountriesTwoComboBox.DisplayMemberPath = "NameCountry";
+            CountriesTwoComboBox.SelectedValuePath = "IdCountry";
 
             activeImage = PhotoPathTextBox.Text;
+        }
+
+
+        private void AddCountryButtonClick(object sender, RoutedEventArgs e)
+        {
+            CountriesTwoComboBox.Visibility = Visibility.Visible;
+            AddCountryButton.Visibility = Visibility.Collapsed;
+            DelCountryButton.Visibility = Visibility.Visible;
+        }
+
+
+        private void DelCountryButtonClick(object sender, RoutedEventArgs e)
+        {
+            CountriesTwoComboBox.Visibility = Visibility.Collapsed;
+            CountriesTwoComboBox.SelectedValue = null;
+            AddCountryButton.Visibility = Visibility.Visible;
+            DelCountryButton.Visibility = Visibility.Collapsed;
+        }
+
+
+        private void AddGenreButtonClick(object sender, RoutedEventArgs e)
+        {
+            GenresTwoComboBox.Visibility = Visibility.Visible;
+            AddGenreButton.Visibility = Visibility.Collapsed;
+            DelGenresButton.Visibility = Visibility.Visible;
+        }
+
+        private void DelGenresButtonClick(object sender, RoutedEventArgs e)
+        {
+            GenresTwoComboBox.Visibility = Visibility.Collapsed;
+            GenresTwoComboBox.SelectedValue = null;
+            AddGenreButton.Visibility = Visibility.Visible;
+            DelGenresButton.Visibility = Visibility.Collapsed;
         }
 
         private void SelectPhotoClick(object sender, RoutedEventArgs e)
@@ -90,7 +130,9 @@ namespace Cinema.View
             {
                 int selectedAgeLimit = Convert.ToInt32(AgeLimitComboBox.SelectedValue);
                 int selectedCountry = Convert.ToInt32(CountriesComboBox.SelectedValue);
+                selectedTwoCountry = Convert.ToInt32(CountriesTwoComboBox.SelectedValue);
                 int selectedGenre = Convert.ToInt32(GenresComboBox.SelectedValue);
+                selectedTwoGenre = Convert.ToInt32(GenresTwoComboBox.SelectedValue);
                 string nameFilm = NameFilmTextBox.Text;
                 string actors = ActorsTextBox.Text;
 
@@ -107,7 +149,7 @@ namespace Cinema.View
                     string filmsCompany = FilmsCompanyTextBox.Text;
                     string filmsDirector = FilmsDirectorsTextBox.Text;
                     string photoPath = PhotoPathTextBox.Text;
-                    newObject.AddFilm(nameFilm, description, selectedAgeLimit, selectedDuration, actors, filmsCompany, filmsDirector, photoPath, selectedCountry, selectedGenre);
+                    newObject.AddFilm(nameFilm, description, selectedAgeLimit, selectedDuration, actors, filmsCompany, filmsDirector, photoPath, selectedCountry, selectedTwoCountry, selectedGenre, selectedTwoGenre);
                     MessageBox.Show("Вы успешно добавили фильм. Возвращение к списку фильмов.");
                     this.NavigationService.Navigate(new MainPage());
             

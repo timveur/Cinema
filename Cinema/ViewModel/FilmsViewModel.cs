@@ -72,7 +72,7 @@ namespace Cinema.ViewModel
         }
 
 
-        public void AddFilm(string nameFilm, string description, int idAgeLimit, TimeSpan selectedDuration, string actors, string filmsCompany, string filmsDirector, string photoPath, int idCountry, int idGenre)
+        public void AddFilm(string nameFilm, string description, int idAgeLimit, TimeSpan selectedDuration, string actors, string filmsCompany, string filmsDirector, string photoPath, int idCountry, int idTwoCountry, int idGenre, int idTwoGenre)
         {
             Films newFilm = new Films()
             {
@@ -102,12 +102,30 @@ namespace Cinema.ViewModel
                 IdFilm = idFilm
             };
             db.context.FilmsCountries.Add(newFilmsCountries);
+            if (idTwoCountry != 0)
+            {
+                FilmsCountries newTwoFilmsCountries = new FilmsCountries()
+                {
+                    IdCountry = idTwoCountry,
+                    IdFilm = idFilm
+                };
+                db.context.FilmsCountries.Add(newTwoFilmsCountries);
+            }
             FilmsGenres newFilmsGenres = new FilmsGenres()
             {
                 IdGenre = idGenre,
                 IdFilm = idFilm
             };
             db.context.FilmsGenres.Add(newFilmsGenres);
+            if (idTwoGenre != 0)
+            {
+                FilmsGenres newTwoFilmsGenres = new FilmsGenres()
+                {
+                    IdGenre = idTwoGenre,
+                    IdFilm = idFilm
+                };
+                db.context.FilmsGenres.Add(newTwoFilmsGenres);
+            }
             db.context.SaveChanges();
         }
 
