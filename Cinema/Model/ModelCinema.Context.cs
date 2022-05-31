@@ -32,7 +32,6 @@ namespace Cinema.Model
         public virtual DbSet<Films> Films { get; set; }
         public virtual DbSet<FilmsCountries> FilmsCountries { get; set; }
         public virtual DbSet<FilmsGenres> FilmsGenres { get; set; }
-        public virtual DbSet<FilmsPhotos> FilmsPhotos { get; set; }
         public virtual DbSet<Formats> Formats { get; set; }
         public virtual DbSet<Genres> Genres { get; set; }
         public virtual DbSet<RoleUsers> RoleUsers { get; set; }

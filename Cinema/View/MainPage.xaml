@@ -26,21 +26,15 @@
                      <Button x:Name="AddButton" FontSize="16" Width="120" Margin="0 0 10 0" Click="AddButtonClick">Добавить</Button>
                     <Button x:Name="DeleteButton" FontSize="16" Width="120" Margin="0 0 10 0" Click="DeleteButtonClick">Удалить</Button>
                     <Button x:Name="ReturnButton" FontSize="16" Width="120" Margin="0 0 10 0" Click="ReturnButtonClick" Visibility="Collapsed">Вернуться</Button>
-                    <ComboBox x:Name="FiltersComboBox" Style="{DynamicResource ComboBoxStyle}" Width="120" HorizontalAlignment="Right">
-                    
-                                <StackPanel x:Name="GenresStackPanelComboBox" >
-                                
-                                </StackPanel>
-                       
-                    </ComboBox>
+                   
                 </StackPanel>
                
             </Grid>
             
 
         </Grid>
-        <!--<StackPanel x:Name="MainStackPanel" Grid.Row="1"/>-->
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2" MouseWheel="ScrollViewerMouseWheel">
+        
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2" >
             <Border BorderBrush="#6A4C8A" CornerRadius="5" BorderThickness="0.5" Padding="5">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -68,7 +62,7 @@
                                         </Grid.RowDefinitions>
                                         <Image x:Name="FilmPreviewImage" Grid.RowSpan="2" Source="{Binding FullPhotoPath}" HorizontalAlignment="Left" Width="140" MouseLeftButtonDown="FilmPreviewImageMouseLeftButtonDown" Cursor="Hand"/>
                                         <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
-                                            <TextBlock x:Name="NameFilmTextBlock" Style="{StaticResource ImportantTextBlock}" Text="{Binding Films.NameFilm}" FontSize="20" FontWeight="SemiBold" TextWrapping="Wrap" MouseLeftButtonDown="NameFilmTextBlockMouseLeftButtonDown" Cursor="Hand"/>
+                                            <TextBlock x:Name="NameFilmTextBlock" Style="{StaticResource ImportantTextBlock}" Text="{Binding NameFilm}" FontSize="20" FontWeight="SemiBold" TextWrapping="Wrap" MouseLeftButtonDown="NameFilmTextBlockMouseLeftButtonDown" Cursor="Hand"/>
                                             <Grid Grid.Row="1" HorizontalAlignment="Left">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition/>
@@ -79,16 +73,16 @@
                                                     <RowDefinition/>
                                                 </Grid.RowDefinitions>
                                                 <Border Grid.RowSpan="2" HorizontalAlignment="Left" CornerRadius="50" BorderBrush="White" BorderThickness="1.5" Width="40" Height="40">
-                                                    <TextBlock x:Name="AgeTextBlock" Style="{StaticResource CaptionImportantTextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Films.AgeLimits.Limit}"/>
+                                                    <TextBlock x:Name="AgeTextBlock" Style="{StaticResource CaptionImportantTextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding AgeLimits.Limit}"/>
                                                 </Border>
                                                 <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5 0 0 0" x:Name="InfoFilmStackPanel">
                                                     <TextBlock x:Name="GenresTextBlock" Text="{}" />
-                                                    <TextBlock Grid.Row="1" x:Name="DurationTextBlock" Text="{Binding Films.Duration,StringFormat={}{0:hh} ч. {0:mm} мин.}"/>
+                                                    <TextBlock Grid.Row="1" x:Name="DurationTextBlock" Text="{Binding Duration,StringFormat={}{0:hh} ч. {0:mm} мин.}"/>
                                                 </StackPanel>
                                             </Grid>
                                             
                                         </StackPanel>
-                                        <Button x:Name="SessionsButton" Grid.Column="1" Grid.Row="1" Width="130" Height="45" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="20" FontFamily="{StaticResource Inter-SemiBold}">Сеансы</Button>
+                                        <Button x:Name="SessionsButton" Grid.Column="1" Grid.Row="1" Width="130" Height="45" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="20" FontFamily="{StaticResource Inter-SemiBold}" Click="SessionsButtonClick">Сеансы</Button>
                                     </Grid>
                                     <Separator VerticalAlignment="Bottom" Background="#8768A8" Width="880"/>
                                 </Grid>

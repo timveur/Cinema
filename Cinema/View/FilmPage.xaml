@@ -6,10 +6,10 @@
       xmlns:local="clr-namespace:Cinema.View"
       mc:Ignorable="d" 
       d:DesignHeight="650" d:DesignWidth="900"
-      Title="{Binding Films.NameFilm}">
+      Title="{Binding NameFilm}">
 
     <Grid Background="#543964">
-        <ScrollViewer VerticalScrollBarVisibility="Auto" MouseWheel="ScrollViewerMouseWheel">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
             <Grid x:Name="FilmStackPanel" Background="#543964">
                 <Grid Margin="20 0 20 0">
                     <Grid.RowDefinitions>
@@ -23,9 +23,9 @@
                             <ColumnDefinition Width="130"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock x:Name="NameFilmTextBlock" Text="{Binding Films.NameFilm}" Margin="0 0 20 0" VerticalAlignment="Center" FontSize="24" FontFamily="{StaticResource Inter-SemiBold}"></TextBlock>
+                            <TextBlock x:Name="NameFilmTextBlock" Text="{Binding NameFilm}" Margin="0 0 20 0" VerticalAlignment="Center" FontSize="24" FontFamily="{StaticResource Inter-SemiBold}"></TextBlock>
                             <Border VerticalAlignment="Center" CornerRadius="50" BorderBrush="White" BorderThickness="1.5" Width="40" Height="40">
-                                <TextBlock x:Name="AgeTextBlock" Style="{StaticResource CaptionImportantTextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Films.AgeLimits.Limit}"/>
+                                <TextBlock x:Name="AgeTextBlock" Style="{StaticResource CaptionImportantTextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding AgeLimits.Limit}"/>
                             </Border>
                         </StackPanel>
                         <Button Grid.Column="1" x:Name="EditButton" FontSize="16" Width="120" HorizontalAlignment="Right" Click="EditButtonClick">Изменить</Button>
@@ -47,16 +47,16 @@
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock HorizontalAlignment="Left" Width="210" Style="{StaticResource GrayTextBlock}">Режиссер:</TextBlock>
-                                <TextBlock HorizontalAlignment="Left" FontSize="20" Text="{Binding Films.FilmsDirectors}"></TextBlock>
+                                <TextBlock HorizontalAlignment="Left" FontSize="20" Text="{Binding FilmsDirectors}"></TextBlock>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock HorizontalAlignment="Left" Width="210" Style="{StaticResource GrayTextBlock}">Кинокомпания:</TextBlock>
-                                <TextBlock HorizontalAlignment="Left" FontSize="20" Text="{Binding Films.FilmsCompany}"></TextBlock>
+                                <TextBlock HorizontalAlignment="Left" FontSize="20" Text="{Binding FilmsCompany}"></TextBlock>
                             </StackPanel>
                             
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock HorizontalAlignment="Left" Width="210" Style="{StaticResource GrayTextBlock}">Продолжительность:</TextBlock>
-                                <TextBlock HorizontalAlignment="Left" FontSize="20" Text="{Binding Films.Duration,StringFormat={}{0:hh} ч. {0:mm} мин.}"></TextBlock>
+                                <TextBlock HorizontalAlignment="Left" FontSize="20" Text="{Binding Duration,StringFormat={}{0:hh} ч. {0:mm} мин.}"></TextBlock>
                             </StackPanel>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -65,12 +65,12 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBlock HorizontalAlignment="Left" Style="{StaticResource GrayTextBlock}">В ролях:</TextBlock>
                                 
-                                    <TextBlock Grid.Column="1" FontSize="20" Text="{Binding Films.Actors}" TextWrapping="Wrap"></TextBlock>
+                                    <TextBlock Grid.Column="1" FontSize="20" Text="{Binding Actors}" TextWrapping="Wrap"></TextBlock>
                                 
                                 
                             </Grid>
                             <Separator VerticalAlignment="Bottom" Background="#8768A8" Margin="0 10 0 10"/>
-                            <TextBlock x:Name="DescriptionTextBlock" Text="{Binding Films.DescriptionFilm}" TextWrapping="Wrap" FontSize="20"></TextBlock>
+                            <TextBlock x:Name="DescriptionTextBlock" Text="{Binding DescriptionFilm}" TextWrapping="Wrap" FontSize="20"></TextBlock>
                         </StackPanel>
 
                     </Grid>

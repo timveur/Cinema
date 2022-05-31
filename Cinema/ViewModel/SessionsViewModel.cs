@@ -11,7 +11,7 @@ namespace Cinema.ViewModel
     {
 
         private static Core db = new Core();
-        public bool AddSession(int idFormat, string dateSession, string startTime, string costSession)
+        public bool CheckAddSession(int idFormat, string dateSession, string startTime, string costSession)
         {
            
             List<Formats> arrayFormats = db.context.Formats.ToList();
@@ -37,6 +37,21 @@ namespace Cinema.ViewModel
             {
                 return true;
             }
+        }
+
+        public void AddSession(int idFilm, int IdFormat, DateTime dateSession, TimeSpan startTime, TimeSpan endTime, Decimal costTicket)
+        {
+            Sessions newSession = new Sessions()
+            {
+                IdFilm = idFilm,
+                IdFormat = IdFormat,
+                DateSession = dateSession,
+                StartTime = startTime,
+                EndTime = endTime,
+                CostTicket = costTicket
+            };
+            db.context.Sessions.Add(newSession);
+            db.context.SaveChanges();
         }
     }
 }

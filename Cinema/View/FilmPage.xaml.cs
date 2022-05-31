@@ -23,7 +23,7 @@ namespace Cinema.View
     {
         Core db = new Core();
         List<Sessions> arraySessions;
-        List<FilmsPhotos> arrayFilmsPhotos;
+        List<Films> arrayFilms;
         List<FilmsGenres> arrayFilmsGenres;
         List<FilmsCountries> arrayFilmsCountries;
         List<string> arrayAllGenres = new List<string>();
@@ -40,8 +40,8 @@ namespace Cinema.View
         {
             InitializeComponent();
             selectedIdFilm = idFilm;
-            arrayFilmsPhotos = db.context.FilmsPhotos.Where(x => x.IdFilm == idFilm).ToList();
-            this.DataContext = arrayFilmsPhotos;
+            arrayFilms = db.context.Films.Where(x => x.IdFilm == idFilm).ToList();
+            this.DataContext = arrayFilms;
 
             today = DateTime.Today;
             tomorrow = today.AddDays(1);
@@ -100,20 +100,9 @@ namespace Cinema.View
 
         private void EditButtonClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Страница в разработке.");
+            this.NavigationService.Navigate(new _EditFilmPage(selectedIdFilm));
         }
-
       
-
-        private void ScrollViewerMouseWheel(object sender, MouseWheelEventArgs e)
-        {
-
-        }
-
-  
-
-       
-
 
         private void AddSessionButtonClick(object sender, RoutedEventArgs e)
         {

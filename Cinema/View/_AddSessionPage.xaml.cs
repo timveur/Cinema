@@ -56,21 +56,13 @@ namespace Cinema.View
                 int selectedFormat = Convert.ToInt32(FormatsComboBox.SelectedValue);
                 TimeSpan startTime = TimeSpan.Parse(StartTimeTextBox.Text);
                 TimeSpan endTime = startTime + duration;
+                DateTime dateSession = Convert.ToDateTime(DateSessionDatePicker.Text);
+                Decimal costTicket = Decimal.Parse(CostTextBox.Text);
                 SessionsViewModel newObject = new SessionsViewModel();
-                bool result = newObject.AddSession(selectedFormat, DateSessionDatePicker.Text, StartTimeTextBox.Text, CostTextBox.Text);
+                bool result = newObject.CheckAddSession(selectedFormat, DateSessionDatePicker.Text, StartTimeTextBox.Text, CostTextBox.Text);
                 if (result)
                 {
-                    Sessions newSession = new Sessions()
-                    {
-                        IdFilm = selectedIdFilm,
-                        IdFormat = selectedFormat,
-                        DateSession = Convert.ToDateTime(DateSessionDatePicker.Text),
-                        StartTime = startTime,
-                        EndTime = endTime,
-                        CostTicket = Decimal.Parse(CostTextBox.Text)
-                    };
-                    db.context.Sessions.Add(newSession);
-                    db.context.SaveChanges();
+                    newObject.AddSession(selectedIdFilm, selectedIdFilm, dateSession, startTime, endTime, costTicket);
                     MessageBox.Show("Вы успешно добавили сеанс. Возвращение к странице фильма.");
                     this.NavigationService.Navigate(new FilmPage(selectedIdFilm));
                 }

@@ -10,7 +10,6 @@
         <EntityTypeShape EntityType="CinemaModel.Films" Width="1.5" PointX="3" PointY="5.25" />
         <EntityTypeShape EntityType="CinemaModel.FilmsCountries" Width="1.5" PointX="5.25" PointY="3.125" />
         <EntityTypeShape EntityType="CinemaModel.FilmsGenres" Width="1.5" PointX="5.25" PointY="6.125" />
-        <EntityTypeShape EntityType="CinemaModel.FilmsPhotos" Width="1.5" PointX="5.25" PointY="15.75" />
         <EntityTypeShape EntityType="CinemaModel.Formats" Width="1.5" PointX="6" PointY="8.75" />
         <EntityTypeShape EntityType="CinemaModel.Genres" Width="1.5" PointX="3" PointY="10.125" />
         <EntityTypeShape EntityType="CinemaModel.RoleUsers" Width="1.5" PointX="8.75" PointY="10.625" />
@@ -22,7 +21,6 @@
         <AssociationConnector Association="CinemaModel.FK_FilmsCountries_Countries" />
         <AssociationConnector Association="CinemaModel.FK_FilmsCountries_Films" />
         <AssociationConnector Association="CinemaModel.FK_FilmsGenres_Films" />
-        <AssociationConnector Association="CinemaModel.FK_FilmsPhotos_Films" />
         <AssociationConnector Association="CinemaModel.FK_Sessions_Films" />
         <AssociationConnector Association="CinemaModel.FK_FilmsGenres_Genres" />
         <AssociationConnector Association="CinemaModel.FK_Sessions_Formats" />

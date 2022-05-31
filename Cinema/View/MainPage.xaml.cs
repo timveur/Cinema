@@ -22,51 +22,17 @@ namespace Cinema.View
     public partial class MainPage : Page
     {
         Core db = new Core();
-        List<Sessions> arraySessions;
-        List<FilmsPhotos> arrayFilms;
+        List<Films> arrayFilms;
         List<Genres> arrayGenres;
         List<FilmsGenres> arrayFilmsGenres;
         List<string> arrayAllGenres = new List<string>();
-        FilmsPhotos annVlad;
-        List<string> arrGenres;
+
         public MainPage()
         {
             InitializeComponent();
-            //var result = from Genres in db.context.Genres
-            //             join FilmsGenres in db.context.FilmsGenres on Genres.IdGenre equals FilmsGenres.IdGenre
-
-            //             select new
-            //             {
-            //                 nameGenre = Genres.NameGenre,
-            //                 nameFilm = FilmsGenres.Films.NameFilm,
-
-
-
-            //             };
-            //foreach (var item in result)
-            //{
-            //    Console.WriteLine(item.nameGenre);
-            //}
-
-           
-
-
-            //arrayFilms = db.context.Films.ToList();
-            //foreach (var item in arrayFilms)
-            //{
-            //    TextBlock newImage = new TextBlock
-            //    {
-            //        Text= item.NameFilm
-            //    };
-            //    MainStackPanel.Children.Add(newImage);
-
-            //}
-
-            arrayFilms = db.context.FilmsPhotos.ToList();
+            arrayFilms = db.context.Films.ToList();
             FilmsListView.ItemsSource = arrayFilms;
-            arraySessions = db.context.Sessions.ToList();
-
-
+          
             int idFilm = 0;
             foreach (var item in arrayFilms)
             {
@@ -81,70 +47,16 @@ namespace Cinema.View
             }
             string allGenres = String.Join(", ", arrayAllGenres);
 
-            
-
-     
-
-            foreach (var item in arrayGenres)
-            {
-                CheckBox newCheck = new CheckBox
-                {
-                    Content = item.NameGenre
-                };
-                newCheck.Checked += NewCheckChecked;
-                newCheck.Unchecked += NewCheckUnchecked;
-                GenresStackPanelComboBox.Children.Add(newCheck);
-
-            }
-            
 
 
         }
 
-        
-        private void DisplayInfo()
-        {
-            
-        }
-
-        /// <summary>
-        /// Отключение выбора жанра
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void NewCheckUnchecked(object sender, RoutedEventArgs e)
-        {
-            DisplayInfo();
-        }
-
-        /// <summary>
-        /// Включение выбора жанра
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void NewCheckChecked(object sender, RoutedEventArgs e)
-        {
-            CheckBox activeCheck = sender as CheckBox;
-            arrGenres.Add(activeCheck.Content.ToString());
-
-        }
-
-        private void EditButtonClick(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Страница в разработке.");
-        }
-
-      
-        private void ScrollViewerMouseWheel(object sender, MouseWheelEventArgs e)
-        {
-
-        }
 
 
         private void FilmPreviewImageMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Image activeElement = sender as Image;
-            FilmsPhotos activeFilmsPhotos = activeElement.DataContext as FilmsPhotos;
+            Films activeFilmsPhotos = activeElement.DataContext as Films;
             int idFilm = activeFilmsPhotos.IdFilm;
             this.NavigationService.Navigate(new FilmPage(idFilm));
         }
@@ -154,7 +66,7 @@ namespace Cinema.View
         {
             TextBlock activeElement = sender as TextBlock;
           
-            FilmsPhotos activeFilmsPhotos = activeElement.DataContext as FilmsPhotos;
+            Films activeFilmsPhotos = activeElement.DataContext as Films;
             
             int idFilm = activeFilmsPhotos.IdFilm;
             if (DeleteModeTextBlock.Visibility == Visibility.Visible)
@@ -200,17 +112,21 @@ namespace Cinema.View
 
         private void ReturnButtonClick(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine(annVlad.IdFilm);
             DeleteModeTextBlock.Visibility = Visibility.Collapsed;
             ReturnButton.Visibility = Visibility.Collapsed;
             DeleteButton.Visibility = Visibility.Visible;
         }
 
-        //private void FilmsListView_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        //{
-            
-        //     annVlad = FilmsListView.SelectedItem as FilmsPhotos;
-        //    Console.WriteLine(annVlad.IdFilm);
-        //}
+    
+
+        private void SessionsButtonClick(object sender, RoutedEventArgs e)
+        {
+            Button activeElement = sender as Button;
+
+            Films activeFilmsPhotos = activeElement.DataContext as Films;
+
+            int idFilm = activeFilmsPhotos.IdFilm;
+            this.NavigationService.Navigate(new FilmPage(idFilm));
+        }
     }
 }

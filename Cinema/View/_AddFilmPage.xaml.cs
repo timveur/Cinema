@@ -30,6 +30,8 @@ namespace Cinema.View
         List<Genres> arrayGenres;
         List<Countries> arrayCountries;
         string activeImage = "";
+        int selectedTwoCountry = 0;
+        int selectedTwoGenre = 0;
         public _AddFilmPage()
         {
             InitializeComponent();
@@ -45,29 +47,16 @@ namespace Cinema.View
             AgeLimitComboBox.SelectedValuePath = "IdAgeLimit";
 
             arrayGenres = db.context.Genres.ToList();
-            foreach (var item in arrayGenres)
-            {
-                CheckBox newCheckGenre = new CheckBox
-                {
-                    Content = item.NameGenre,
-                };
-
-                
-                GenresStackPanelComboBox.Children.Add(newCheckGenre);
-
-            }
+            GenresComboBox.ItemsSource = arrayGenres;
+            GenresComboBox.DisplayMemberPath = "NameGenre";
+            GenresComboBox.SelectedValuePath = "IdGenre";
 
             arrayCountries = db.context.Countries.ToList();
-            foreach (var item in arrayCountries)
-            {
-                CheckBox newCheckCountry = new CheckBox
-                {
-                    Content = item.NameCountry
-                };
+            CountriesComboBox.ItemsSource = arrayCountries;
+            CountriesComboBox.DisplayMemberPath = "NameCountry";
+            CountriesComboBox.SelectedValuePath = "IdCountry";
 
-                CountriesStackPanelComboBox.Children.Add(newCheckCountry);
 
-            }
             activeImage = PhotoPathTextBox.Text;
         }
 
@@ -100,39 +89,27 @@ namespace Cinema.View
             try
             {
                 int selectedAgeLimit = Convert.ToInt32(AgeLimitComboBox.SelectedValue);
+                int selectedCountry = Convert.ToInt32(CountriesComboBox.SelectedValue);
+                int selectedGenre = Convert.ToInt32(GenresComboBox.SelectedValue);
+                string nameFilm = NameFilmTextBox.Text;
+                string actors = ActorsTextBox.Text;
+
                 TimeSpan selectedDuration = new TimeSpan();
                 FilmsViewModel newObject = new FilmsViewModel();
-                bool result = newObject.AddFilm(NameFilmTextBox.Text, selectedAgeLimit, ActorsTextBox.Text);
-                bool resultDuration = newObject.AddFilmCheckDuration(DurationHoursFilmTextBox.Text, DurationMinutesFilmTextBox.Text);
-                if (resultDuration)
-                {
-                    selectedDuration = new TimeSpan(Convert.ToInt32(DurationHoursFilmTextBox.Text), Convert.ToInt32(DurationMinutesFilmTextBox.Text), 0);
-                }
+                bool result = newObject.CheckAddFilm(nameFilm, selectedAgeLimit, actors, DurationHoursFilmTextBox.Text, DurationMinutesFilmTextBox.Text, selectedCountry, selectedTwoCountry, selectedGenre, selectedTwoGenre);
+                
 
-                if (result && resultDuration)
+                if (result)
                 {
-                    Films newFilm = new Films()
-                    {
-                        NameFilm = NameFilmTextBox.Text,
-                        DescriptionFilm = DescriptionFilmTextBox.Text,
-                        IdAgeLimit = selectedAgeLimit,
-                        Duration = selectedDuration,
-                        Actors = ActorsTextBox.Text,
-                        FilmsCompany = FilmsCompanyTextBox.Text,
-                        FilmsDirectors = FilmsDirectorsTextBox.Text
-                    };
-                    db.context.Films.Add(newFilm);
-                    db.context.SaveChanges();
-                    Console.WriteLine(newFilm.IdFilm);
-                    FilmsPhotos newFilmPhotos = new FilmsPhotos()
-                    {
-                        IdFilm = newFilm.IdFilm,
-                        PhotoPath = (activeImage != "") ? activeImage : "_nonephoto.jpg"
-                    };
-                db.context.FilmsPhotos.Add(newFilmPhotos);
-                db.context.SaveChanges();
-                MessageBox.Show("Вы успешно добавили фильм. Возвращение к списку фильмов.");
-                this.NavigationService.Navigate(new MainPage());
+                    string description = DescriptionFilmTextBox.Text;
+                    selectedDuration = new TimeSpan(Convert.ToInt32(DurationHoursFilmTextBox.Text), Convert.ToInt32(DurationMinutesFilmTextBox.Text), 0); ;
+                    
+                    string filmsCompany = FilmsCompanyTextBox.Text;
+                    string filmsDirector = FilmsDirectorsTextBox.Text;
+                    string photoPath = PhotoPathTextBox.Text;
+                    newObject.AddFilm(nameFilm, description, selectedAgeLimit, selectedDuration, actors, filmsCompany, filmsDirector, photoPath, selectedCountry, selectedGenre);
+                    MessageBox.Show("Вы успешно добавили фильм. Возвращение к списку фильмов.");
+                    this.NavigationService.Navigate(new MainPage());
             
                 }
             }

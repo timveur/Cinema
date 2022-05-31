@@ -82,9 +82,6 @@
     <Compile Include="Model\FilmsGenres.cs">
       <DependentUpon>ModelCinema.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\FilmsPhotos.cs">
-      <DependentUpon>ModelCinema.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\Formats.cs">
       <DependentUpon>ModelCinema.tt</DependentUpon>
     </Compile>
@@ -107,10 +104,7 @@
       <DependentUpon>ModelCinema.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\Node.cs" />
-    <Compile Include="Model\PartialClasses\FilmsCountries.cs" />
-    <Compile Include="Model\PartialClasses\FilmsGenres.cs" />
-    <Compile Include="Model\PartialClasses\FilmsPhotos.cs" />
-    <Compile Include="Model\PartialClasses\Genres.cs" />
+    <Compile Include="Model\PartialClasses\Films.cs" />
     <Compile Include="Model\PartialClasses\Seats.cs" />
     <Compile Include="Model\RoleUsers.cs">
       <DependentUpon>ModelCinema.tt</DependentUpon>
@@ -162,6 +156,9 @@
     <Compile Include="View\_AddSessionPage.xaml.cs">
       <DependentUpon>_AddSessionPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\_EditFilmPage.xaml.cs">
+      <DependentUpon>_EditFilmPage.xaml</DependentUpon>
+    </Compile>
     <Page Include="Assets\Dictionaries\Dictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -203,6 +200,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\_AddSessionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\_EditFilmPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

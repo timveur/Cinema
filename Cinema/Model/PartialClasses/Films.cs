@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Cinema.Model
 {
-    public partial class FilmsCountries
+    public partial class Films
     {
-
-       
+        public string FullPhotoPath => "/Assets/Images/Films/" + PhotoPath;
     }
 }

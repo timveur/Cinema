@@ -19,7 +19,6 @@ namespace Cinema.Model
         {
             this.FilmsCountries = new HashSet<FilmsCountries>();
             this.FilmsGenres = new HashSet<FilmsGenres>();
-            this.FilmsPhotos = new HashSet<FilmsPhotos>();
             this.Sessions = new HashSet<Sessions>();
         }
     
@@ -31,14 +30,13 @@ namespace Cinema.Model
         public string Actors { get; set; }
         public string FilmsCompany { get; set; }
         public string FilmsDirectors { get; set; }
+        public string PhotoPath { get; set; }
     
         public virtual AgeLimits AgeLimits { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FilmsCountries> FilmsCountries { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FilmsGenres> FilmsGenres { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FilmsPhotos> FilmsPhotos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sessions> Sessions { get; set; }
     }
