@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d1bee8c528c44db185c82df92cb4d4e8" Name="Diagram1" ZoomLevel="62">
+        <EntityTypeShape EntityType="CinemaModelTests.AgeLimits" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModelTests.Countries" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModelTests.Films" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModelTests.FilmsCountries" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModelTests.FilmsGenres" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModelTests.Formats" Width="1.5" PointX="6" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModelTests.Genres" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModelTests.RoleUsers" Width="1.5" PointX="8.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModelTests.Seats" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModelTests.Sessions" Width="1.5" PointX="8.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModelTests.sysdiagrams" Width="1.5" PointX="10.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModelTests.Tickets" Width="1.5" PointX="10.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaModelTests.Users" Width="1.5" PointX="11" PointY="8.25" IsExpanded="true" />
+        <AssociationConnector Association="CinemaModelTests.FK_Films_AgeLimits" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModelTests.FK_FilmsCountries_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModelTests.FK_FilmsCountries_Films" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModelTests.FK_FilmsGenres_Films" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModelTests.FK_Sessions_Films" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModelTests.FK_FilmsGenres_Genres" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModelTests.FK_Sessions_Formats" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModelTests.FK_Users_RoleUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModelTests.FK_Tickets_HallsSeats" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModelTests.FK_Tickets_Sessions" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

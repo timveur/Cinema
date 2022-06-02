@@ -23,6 +23,6 @@
             </StackPanel>
             
         </Grid>
-        <Frame Grid.Row="1" x:Name="MainFrame" NavigationUIVisibility="Hidden" ContentRendered="MainFrameContentRendered" Navigated="MainFrameNavigated"/>
+        <Frame Grid.Row="1" x:Name="MainFrame" NavigationUIVisibility="Hidden" ContentRendered="MainFrameContentRendered"/>
     </Grid>
 </Window>

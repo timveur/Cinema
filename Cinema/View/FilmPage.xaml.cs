@@ -35,7 +35,6 @@ namespace Cinema.View
         DateTime dayThreeDate = new DateTime();
         DateTime dayFourDate = new DateTime();
         BrushConverter bc = new BrushConverter();
-        DateTime selectedDate = new DateTime();
         public FilmPage(int idFilm)
         {
             InitializeComponent();

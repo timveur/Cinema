@@ -41,7 +41,7 @@ namespace Cinema.View
         {
             try
             {
-                CheckClass newObject = new CheckClass();
+                UsersViewModel newObject = new UsersViewModel();
                 bool result = newObject.CheckAuth(LoginTextBox.Text, AuthPasswordBox.Password);
                 if (result)
                 {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cinema.ViewModel
 {
-    class FilmsViewModel
+    public class FilmsViewModel
     {
         private static Core db = new Core();
         public bool CheckAddFilm(string nameFilm, int ageLimit, string actors, string hoursDuration, string minuteDuration, int idCountry, int idTwoCountry, int idGenre, int IdTwoGenre)
@@ -102,6 +102,7 @@ namespace Cinema.ViewModel
                 newFilm.FilmsDirectors = filmsDirector;
             }
             db.context.Films.Add(newFilm);
+            db.context.SaveChanges();
             int idFilm = newFilm.IdFilm;
             FilmsCountries newFilmsCountries = new FilmsCountries()
             {
@@ -109,6 +110,7 @@ namespace Cinema.ViewModel
                 IdFilm = idFilm
             };
             db.context.FilmsCountries.Add(newFilmsCountries);
+            db.context.SaveChanges();
             if (idTwoCountry != 0)
             {
                 FilmsCountries newTwoFilmsCountries = new FilmsCountries()
@@ -117,6 +119,7 @@ namespace Cinema.ViewModel
                     IdFilm = idFilm
                 };
                 db.context.FilmsCountries.Add(newTwoFilmsCountries);
+                db.context.SaveChanges();
             }
             FilmsGenres newFilmsGenres = new FilmsGenres()
             {
@@ -124,6 +127,7 @@ namespace Cinema.ViewModel
                 IdFilm = idFilm
             };
             db.context.FilmsGenres.Add(newFilmsGenres);
+            db.context.SaveChanges();
             if (idTwoGenre != 0)
             {
                 FilmsGenres newTwoFilmsGenres = new FilmsGenres()
@@ -132,6 +136,7 @@ namespace Cinema.ViewModel
                     IdFilm = idFilm
                 };
                 db.context.FilmsGenres.Add(newTwoFilmsGenres);
+                db.context.SaveChanges();
             }
             db.context.SaveChanges();
         }
@@ -269,7 +274,6 @@ namespace Cinema.ViewModel
                     uGenres.IdFilm = idFilm;
                     uGenresTwo.IdGenre = idTwoGenre;
                     uGenresTwo.IdFilm = idFilm;
-
                 }
                 if (idTwoGenre == uGenresTwo.IdGenre && idGenre!= uGenres.IdGenre) 
                 {
@@ -301,5 +305,213 @@ namespace Cinema.ViewModel
             }
             db.context.SaveChanges();
         }
+
+        /// <summary>
+        /// Удаление фильма
+        /// </summary>
+        /// <param name="objFilms">Объект фильма</param>
+        public void DeleteFilm(Films objFilms)
+        {
+            db.context.Films.Remove(objFilms);
+            db.context.SaveChanges();
+
+        }
+
+
+        //////////////////////////////// For tests ////////////////////////////////
+
+        /// <summary>
+        /// Добавление фильма (тестирование)
+        /// </summary>
+        /// <param name="nameFilm">Название фильма</param>
+        /// <param name="description">Описание</param>
+        /// <param name="idAgeLimit">Идентификатор возрастного ограничения</param>
+        /// <param name="selectedDuration">Длительность фильма</param>
+        /// <param name="actors">Актеры</param>
+        /// <param name="filmsCompany">Кинокомпания</param>
+        /// <param name="filmsDirector">Продюссер(-ы)</param>
+        /// <param name="photoPath">Название файла с фото</param>
+        /// <param name="idCountry">Идентификатор первой страны</param>
+        /// <param name="idTwoCountry">Идентификатор второй страны</param>
+        /// <param name="idGenre">Идентификатор первого жанра</param>
+        /// <param name="idTwoGenre">Идентификатор второго жанра</param>
+        public bool AddFilmTest(string nameFilm, string description, int idAgeLimit, TimeSpan selectedDuration, string actors, string filmsCompany, string filmsDirector, string photoPath, int idCountry, int idGenre)
+        {
+            Films newFilm = new Films()
+            {
+                NameFilm = nameFilm,
+                IdAgeLimit = idAgeLimit,
+                Duration = selectedDuration,
+                Actors = actors,
+                PhotoPath = (photoPath != "") ? photoPath : "_nonephoto.jpg"
+            };
+            if (!String.IsNullOrEmpty(description))
+            {
+                newFilm.DescriptionFilm = description;
+            }
+            if (!String.IsNullOrEmpty(filmsCompany))
+            {
+                newFilm.FilmsCompany = filmsCompany;
+            }
+            if (!String.IsNullOrEmpty(filmsDirector))
+            {
+                newFilm.FilmsDirectors = filmsDirector;
+            }
+            db.context.Films.Add(newFilm);
+            db.context.SaveChanges();
+            int idFilm = newFilm.IdFilm;
+            FilmsCountries newFilmsCountries = new FilmsCountries()
+            {
+                IdCountry = idCountry,
+                IdFilm = idFilm
+            };
+            db.context.FilmsCountries.Add(newFilmsCountries);
+            db.context.SaveChanges();
+            FilmsGenres newFilmsGenres = new FilmsGenres()
+            {
+                IdGenre = idGenre,
+                IdFilm = idFilm
+            };
+            db.context.FilmsGenres.Add(newFilmsGenres);
+            db.context.SaveChanges();
+            int countRecordsFilms = db.context.Films.Where(x => x.IdFilm==idFilm && x.NameFilm == nameFilm).Count();
+            int countRecordsGenres = db.context.FilmsGenres.Where(x => x.IdGenre == idGenre && x.IdFilm == idFilm).Count();
+            int countRecordsCountries = db.context.FilmsCountries.Where(x => x.IdCountry == idCountry && x.IdFilm == idFilm).Count();
+            if (countRecordsFilms == 1 && countRecordsGenres == 1 && countRecordsCountries == 1)
+            {
+                db.context.Films.Remove(newFilm);
+                db.context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+
+        /// <summary>
+        /// Редактирование фильма
+        /// </summary>
+        /// <param name="idFilm">Идентификатор фильма</param>
+        /// <param name="nameFilm">Название фильма</param>
+        /// <param name="description">Описание</param>
+        /// <param name="idAgeLimit">Идентификатор возрастного ограничения</param>
+        /// <param name="selectedDuration">Длительность фильма</param>
+        /// <param name="actors">Актеры</param>
+        /// <param name="filmsCompany">Кинокомпания</param>
+        /// <param name="filmsDirector">Продюссер(-ы)</param>
+        /// <param name="photoPath">Название файла с фото</param>
+        /// <param name="idCountry">Идентификатор первой страны</param>
+        /// <param name="idTwoCountry">Идентификатор второй страны</param>
+        /// <param name="idGenre">Идентификатор первого жанра</param>
+        /// <param name="idTwoGenre">Идентификатор второго жанра</param>
+        public bool EditFilmTest(int idFilm, string nameFilm, string description, int idAgeLimit, TimeSpan selectedDuration, string actors, string filmsCompany, string filmsDirector, string photoPath, int idCountry, int idGenre)
+        {
+            var uFilms = db.context.Films.Where(x => x.IdFilm == idFilm).FirstOrDefault();
+            uFilms.NameFilm = nameFilm;
+            uFilms.IdAgeLimit = idAgeLimit;
+            uFilms.Duration = selectedDuration;
+            uFilms.Actors = actors;
+            uFilms.PhotoPath = (photoPath != "") ? photoPath : "_nonephoto.jpg";
+            var uCountries = uFilms.FilmsCountries.FirstOrDefault();
+            var uGenres = uFilms.FilmsGenres.FirstOrDefault();
+            List<FilmsGenres> arrayFilmsGenres = db.context.FilmsGenres.Where(x => x.IdFilm == idFilm).ToList();
+            List<FilmsCountries> arrayFilmsCountries = db.context.FilmsCountries.Where(x => x.IdFilm == idFilm).ToList();
+            List<int> idFilmCountries = new List<int>();
+            if (arrayFilmsCountries != null)
+            {
+                foreach (var item in arrayFilmsCountries)
+                {
+                    idFilmCountries.Add(item.IdFilmCountry);
+                }
+
+            }
+            int idCountrySelect;
+            if (idFilmCountries.Count == 0)
+            {
+                FilmsCountries newFilmsCountries = new FilmsCountries()
+                {
+                    IdCountry = idCountry,
+                    IdFilm = idFilm
+                };
+                db.context.FilmsCountries.Add(newFilmsCountries);
+            }
+
+            if (idFilmCountries.Count == 1)
+            {
+                uCountries.IdCountry = idCountry;
+                uCountries.IdFilm = idFilm;
+            }
+            
+            List<int> idFilmGenres = new List<int>();
+            if (arrayFilmsGenres != null)
+            {
+                foreach (var item in arrayFilmsGenres)
+                {
+                    idFilmGenres.Add(item.IdFilmGenre);
+                }
+            }
+            int idGenreSelect;
+            Console.WriteLine(idFilmGenres.Count);
+            if (idFilmGenres.Count == 0)
+            {
+                FilmsGenres newFilmsGenres = new FilmsGenres()
+                {
+                    IdGenre = idGenre,
+                    IdFilm = idFilm
+                };
+                db.context.FilmsGenres.Add(newFilmsGenres);
+
+            }
+            if (idFilmGenres.Count == 1)
+            {
+                uGenres.IdGenre = idGenre;
+                uGenres.IdFilm = idFilm;
+            }
+            
+            if (!String.IsNullOrEmpty(description))
+            {
+                uFilms.DescriptionFilm = description;
+                db.context.SaveChanges();
+            }
+            if (!String.IsNullOrEmpty(filmsCompany))
+            {
+                uFilms.FilmsCompany = filmsCompany;
+                db.context.SaveChanges();
+            }
+            if (!String.IsNullOrEmpty(filmsDirector))
+            {
+                uFilms.FilmsDirectors = filmsDirector;
+                db.context.SaveChanges();
+            }
+            db.context.SaveChanges();
+
+            int countRecordsFilms = db.context.Films.Where(x => x.IdFilm == idFilm && x.NameFilm == nameFilm && x.IdAgeLimit == idAgeLimit && x.Duration==selectedDuration && x.Actors == actors).Count();
+            int countRecordsGenres = db.context.FilmsGenres.Where(x => x.IdGenre == idGenre && x.IdFilm == idFilm).Count();
+            int countRecordsCountries = db.context.FilmsCountries.Where(x => x.IdCountry == idCountry && x.IdFilm == idFilm).Count();
+            if (countRecordsFilms == 1 && countRecordsGenres == 1 && countRecordsCountries == 1)
+            {
+                return true;
+            }
+            throw new Exception($"{countRecordsFilms}, {countRecordsGenres}, {countRecordsCountries}");
+        }
+
+
+        /// <summary>
+        /// Удаление фильма(тестирование)
+        /// </summary>
+        /// <param name="objFilms">Объект фильма</param>
+        public bool DeleteFilmTest(int idFilm)
+        {
+            var objFilms = db.context.Films.Where(x => x.IdFilm == idFilm).First() as Films;
+            db.context.Films.Remove(objFilms);
+            db.context.SaveChanges();
+            int countRecord = db.context.Films.Where(x => x.IdFilm == idFilm).Count();
+            if (countRecord == 1)
+            {
+                return false;
+            }
+            return true;
+
+        }
+
     }
 }

@@ -53,12 +53,6 @@ namespace Cinema
             Properties.Settings.Default.Save();
         }
 
-        private void MainFrameNavigated(object sender, NavigationEventArgs e)
-        {
-            var page = e.Content;
-        }
-
-
         private void MainFrameContentRendered(object sender, EventArgs e)
         {
             

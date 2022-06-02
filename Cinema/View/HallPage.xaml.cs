@@ -27,7 +27,6 @@ namespace Cinema.View
         List<Seats> arraySeats;
         List<Seats> arrayRowSeats;
         List<Tickets> arrayTickets;
-        List<Tickets> arraySelectedTickets;
         List<int> rows = new List<int>();
         List<int> arrayIdSeatsSelected = new List<int>();
         List<string> arrayInfoSeatsSelected = new List<string>();

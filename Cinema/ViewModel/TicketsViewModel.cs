@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cinema.ViewModel
 {
-    class TicketsViewModel
+    public class TicketsViewModel
     {
         private static Core db = new Core();
 
@@ -23,6 +23,37 @@ namespace Cinema.ViewModel
                 db.context.Tickets.Add(newTicket);
             }
             db.context.SaveChanges();
+        }
+
+
+        /////////////////////////////////// For Tests /////////////////////////////////////
+
+        public bool AddTicketTest(int idSession, List<int> arrayIdSeats)
+        {
+            List<Tickets> countRecords = new List<Tickets>();
+            foreach (var item in arrayIdSeats)
+            {
+                Tickets newTicket = new Tickets()
+                {
+                    IdSession = idSession,
+                    IdSeat = item
+                };
+                db.context.Tickets.Add(newTicket);
+                db.context.SaveChanges();
+                countRecords.Add(newTicket);
+                
+            }
+            db.context.SaveChanges();
+            if (countRecords.Count() == arrayIdSeats.Count())
+            {
+                foreach (var item in countRecords)
+                {
+                    db.context.Tickets.Remove(item);
+                    db.context.SaveChanges();
+                }
+                return true;
+            }
+            return false;
         }
     }
 }

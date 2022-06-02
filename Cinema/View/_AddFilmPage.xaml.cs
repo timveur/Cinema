@@ -36,13 +36,8 @@ namespace Cinema.View
         {
             InitializeComponent();
 
-            
-
             arrayAgeLimits = db.context.AgeLimits.ToList();
-            
-
             AgeLimitComboBox.ItemsSource = arrayAgeLimits;
-
             AgeLimitComboBox.DisplayMemberPath = "Limit";
             AgeLimitComboBox.SelectedValuePath = "IdAgeLimit";
 
@@ -50,7 +45,6 @@ namespace Cinema.View
             GenresComboBox.ItemsSource = arrayGenres;
             GenresComboBox.DisplayMemberPath = "NameGenre";
             GenresComboBox.SelectedValuePath = "IdGenre";
-
             GenresTwoComboBox.ItemsSource = arrayGenres;
             GenresTwoComboBox.DisplayMemberPath = "NameGenre";
             GenresTwoComboBox.SelectedValuePath = "IdGenre";
@@ -59,7 +53,6 @@ namespace Cinema.View
             CountriesComboBox.ItemsSource = arrayCountries;
             CountriesComboBox.DisplayMemberPath = "NameCountry";
             CountriesComboBox.SelectedValuePath = "IdCountry";
-
             CountriesTwoComboBox.ItemsSource = arrayCountries;
             CountriesTwoComboBox.DisplayMemberPath = "NameCountry";
             CountriesTwoComboBox.SelectedValuePath = "IdCountry";

@@ -1,4 +1,5 @@
 ﻿using Cinema.Model;
+using Cinema.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,8 +24,6 @@ namespace Cinema.View
     {
         Core db = new Core();
         List<Films> arrayFilms;
-        List<Genres> arrayGenres;
-        List<FilmsGenres> arrayFilmsGenres;
         List<string> arrayAllGenres = new List<string>();
 
         public MainPage()
@@ -69,8 +68,8 @@ namespace Cinema.View
                 MessageBoxResult rez = MessageBox.Show($"Удалить \"{activeElement.Text}\"?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (rez == MessageBoxResult.Yes)
                 {
-                    db.context.Films.Remove(objFilms);
-                    db.context.SaveChanges();
+                    FilmsViewModel newObj = new FilmsViewModel();
+                    newObj.DeleteFilm(objFilms);
                     MessageBox.Show("Данные успешно удалены.\nВозвращение на главную страницу", "Удаление", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.NavigationService.Navigate(new MainPage());
                 }

@@ -39,8 +39,8 @@ namespace Cinema.View
                 string password = PassPasswordBox.Password;
                 string repeatPassword = RepeatPasswordBox.Password;
                 string phone = PhoneTextBox.Text;                
-                RegViewModel newObject = new RegViewModel();
-                bool result = newObject.CheckRegUser(lastName, firstName, patronymic, login, email, password, repeatPassword);
+                UsersViewModel newObject = new UsersViewModel();
+                bool result = newObject.CheckRegUser(lastName, firstName, login, email, password, repeatPassword);
                 if (result)
                 {
                     newObject.AddUser(lastName, firstName, patronymic, login, email, password, phone);

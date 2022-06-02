@@ -129,9 +129,8 @@
     <Compile Include="Model\Users.cs">
       <DependentUpon>ModelCinema.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\CheckClass.cs" />
     <Compile Include="ViewModel\FilmsViewModel.cs" />
-    <Compile Include="ViewModel\RegViewModel.cs" />
+    <Compile Include="ViewModel\UsersViewModel.cs" />
     <Compile Include="ViewModel\SessionsViewModel.cs" />
     <Compile Include="ViewModel\TicketsViewModel.cs" />
     <Compile Include="View\AuthPage.xaml.cs">
