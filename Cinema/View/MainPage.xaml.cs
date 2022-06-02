@@ -32,23 +32,17 @@ namespace Cinema.View
             InitializeComponent();
             arrayFilms = db.context.Films.ToList();
             FilmsListView.ItemsSource = arrayFilms;
-          
-            int idFilm = 0;
+            if (Properties.Settings.Default.idRoleClient == 1)
+            {
+                AddButton.Visibility = Visibility.Visible;
+                DeleteButton.Visibility = Visibility.Visible;
+            }
+                int idFilm = 0;
             foreach (var item in arrayFilms)
             {
                 idFilm = item.IdFilm;
             }
-
-            arrayGenres = db.context.Genres.ToList();
-            arrayFilmsGenres = db.context.FilmsGenres.Where(x => x.IdFilm == idFilm).ToList();
-            foreach (var item in arrayFilmsGenres)
-            {
-                arrayAllGenres.Add(item.Genres.NameGenre);
-            }
-            string allGenres = String.Join(", ", arrayAllGenres);
-
-
-
+            
         }
 
 
@@ -72,16 +66,10 @@ namespace Cinema.View
             if (DeleteModeTextBlock.Visibility == Visibility.Visible)
             {
                 Films objFilms = activeElement.DataContext as Films;
-               
-               // FilmsPhotos objFilmsPhotos = activeElement.DataContext as FilmsPhotos;
-                //Films activeFilm = db.context.Films.Where(x => x.IdFilm == idFilm) as Films;
                 MessageBoxResult rez = MessageBox.Show($"Удалить \"{activeElement.Text}\"?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (rez == MessageBoxResult.Yes)
                 {
-                   
-                   // db.context.Films.Remove(activeFilm);
                     db.context.Films.Remove(objFilms);
-                   
                     db.context.SaveChanges();
                     MessageBox.Show("Данные успешно удалены.\nВозвращение на главную страницу", "Удаление", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.NavigationService.Navigate(new MainPage());
@@ -106,8 +94,6 @@ namespace Cinema.View
             DeleteButton.Visibility = Visibility.Collapsed;
             DeleteModeTextBlock.Visibility = Visibility.Visible;
             ReturnButton.Visibility = Visibility.Visible;
-
-
         }
 
         private void ReturnButtonClick(object sender, RoutedEventArgs e)
@@ -122,9 +108,7 @@ namespace Cinema.View
         private void SessionsButtonClick(object sender, RoutedEventArgs e)
         {
             Button activeElement = sender as Button;
-
             Films activeFilmsPhotos = activeElement.DataContext as Films;
-
             int idFilm = activeFilmsPhotos.IdFilm;
             this.NavigationService.Navigate(new FilmPage(idFilm));
         }

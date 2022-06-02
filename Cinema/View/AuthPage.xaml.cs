@@ -1,4 +1,5 @@
-﻿using Cinema.ViewModel;
+﻿using Cinema.Model;
+using Cinema.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +22,12 @@ namespace Cinema.View
     /// </summary>
     public partial class AuthPage : Page
     {
+        Core db = new Core();
+        List<Users> arrayUsers;
         public AuthPage()
         {
             InitializeComponent();
+
         }
 
 
@@ -42,6 +46,12 @@ namespace Cinema.View
                 if (result)
                 {
                     Properties.Settings.Default.loginClient = LoginTextBox.Text;
+                    arrayUsers = db.context.Users.Where(x=>x.Login==LoginTextBox.Text).ToList();
+                    foreach (var item in arrayUsers)
+                    {
+                        Properties.Settings.Default.idRoleClient = item.IdRole;
+                    }
+                    
                     Properties.Settings.Default.Save();
 
                     this.NavigationService.Navigate(new MainPage());

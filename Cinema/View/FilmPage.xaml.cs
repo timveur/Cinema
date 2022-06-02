@@ -39,6 +39,11 @@ namespace Cinema.View
         public FilmPage(int idFilm)
         {
             InitializeComponent();
+            if (Properties.Settings.Default.idRoleClient == 1)
+            {
+                AddSessionButton.Visibility = Visibility.Visible;
+                EditButton.Visibility = Visibility.Visible;
+            }
             selectedIdFilm = idFilm;
             arrayFilms = db.context.Films.Where(x => x.IdFilm == idFilm).ToList();
             this.DataContext = arrayFilms;
@@ -90,13 +95,7 @@ namespace Cinema.View
             this.NavigationService.Navigate(new _AddSessionPage(selectedIdFilm));
         }
 
-      
-        private void DeleteSessionButtonClick(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Функция в разработке");
-        }
-
-       
+            
 
         private void SessionButtonClick(object sender, RoutedEventArgs e)
         {

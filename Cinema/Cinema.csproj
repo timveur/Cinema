@@ -103,7 +103,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelCinema.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\Node.cs" />
     <Compile Include="Model\PartialClasses\Films.cs" />
     <Compile Include="Model\PartialClasses\Seats.cs" />
     <Compile Include="Model\RoleUsers.cs">
@@ -134,6 +133,7 @@
     <Compile Include="ViewModel\FilmsViewModel.cs" />
     <Compile Include="ViewModel\RegViewModel.cs" />
     <Compile Include="ViewModel\SessionsViewModel.cs" />
+    <Compile Include="ViewModel\TicketsViewModel.cs" />
     <Compile Include="View\AuthPage.xaml.cs">
       <DependentUpon>AuthPage.xaml</DependentUpon>
     </Compile>

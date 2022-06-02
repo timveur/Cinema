@@ -19,8 +19,9 @@
             <StackPanel x:Name="ButtonsStackPanel" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Style="{StaticResource ActionButton}" x:Name="BackButton" HorizontalAlignment="Right" Width="80" Click="BackButtonClick" Margin="0 0 10 0">Назад</Button>
                 <Button Style="{StaticResource ActionButton}" x:Name="AuthButton" HorizontalAlignment="Right" Width="80" Click="AuthButtonClick">Войти</Button>
+                <Button Style="{StaticResource ActionButton}" x:Name="ExitButton" HorizontalAlignment="Right" Width="80" Click="ExitButtonClick" Visibility="Collapsed">Выйти</Button>
             </StackPanel>
-            <Button Style="{StaticResource ActionButton}" x:Name="ExitButton" HorizontalAlignment="Right" Width="80" Click="ExitButtonClick">Выйти</Button>
+            
         </Grid>
         <Frame Grid.Row="1" x:Name="MainFrame" NavigationUIVisibility="Hidden" ContentRendered="MainFrameContentRendered" Navigated="MainFrameNavigated"/>
     </Grid>

@@ -49,6 +49,7 @@ namespace Cinema
         private void WindowClosed(object sender, EventArgs e)
         {
             Properties.Settings.Default.loginClient = String.Empty;
+            Properties.Settings.Default.idRoleClient = 0;
             Properties.Settings.Default.Save();
         }
 
@@ -98,8 +99,10 @@ namespace Cinema
                 if (messageExit == MessageBoxResult.Yes)
                 {
                     Properties.Settings.Default.loginClient = String.Empty;
+                    Properties.Settings.Default.idRoleClient = 0;
                     Properties.Settings.Default.Save();
                     MainFrame.Refresh();
+                    MainFrame.Navigate(new MainPage());
                 }
             }
             catch

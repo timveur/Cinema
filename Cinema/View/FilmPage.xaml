@@ -28,7 +28,7 @@
                                 <TextBlock x:Name="AgeTextBlock" Style="{StaticResource CaptionImportantTextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding AgeLimits.Limit}"/>
                             </Border>
                         </StackPanel>
-                        <Button Grid.Column="1" x:Name="EditButton" FontSize="16" Width="120" HorizontalAlignment="Right" Click="EditButtonClick">Изменить</Button>
+                        <Button Grid.Column="1" x:Name="EditButton" FontSize="16" Width="120" HorizontalAlignment="Right" Click="EditButtonClick" Visibility="Collapsed">Изменить</Button>
                     </Grid>
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
@@ -88,12 +88,7 @@
                             <Button x:Name="PrintButton" FontSize="16" Width="120" Margin="0 0 10 0" Click="PrintButtonClick">
                                 <TextBlock TextAlignment="Center">Распечатать<LineBreak/>сеансы</TextBlock>
                             </Button>
-                            <Button x:Name="DeleteSessionButton" Margin="0 0 10 0" Width="120" Click="DeleteSessionButtonClick">
-                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" FontSize="16">
-                                    Удаление<LineBreak/>сеансов
-                                </TextBlock>
-                            </Button>
-                            <Button x:Name="AddSessionButton" Click="AddSessionButtonClick"  Width="120">
+                            <Button x:Name="AddSessionButton" Click="AddSessionButtonClick"  Width="120" Visibility="Collapsed">
                                 <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" FontSize="16">
                                     Добавить<LineBreak/>сеанс
                                 </TextBlock>

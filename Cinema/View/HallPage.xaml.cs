@@ -27,6 +27,7 @@ namespace Cinema.View
         List<Seats> arraySeats;
         List<Seats> arrayRowSeats;
         List<Tickets> arrayTickets;
+        List<Tickets> arraySelectedTickets;
         List<int> rows = new List<int>();
         List<int> arrayIdSeatsSelected = new List<int>();
         List<string> arrayInfoSeatsSelected = new List<string>();
@@ -463,7 +464,44 @@ namespace Cinema.View
 
         private void BuyTicketsButtonClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Функция в разработке");
+            try
+            {
+                TicketsViewModel obj = new TicketsViewModel();
+                obj.AddTicket(idSelectedSession, arrayIdSeatsSelected);
+
+                List<Tickets> arrayTicketsSelect;
+                List<int> arrayIdTickets = new List<int>();
+                foreach (var item in arrayIdSeatsSelected)
+                {
+                    arrayTicketsSelect = db.context.Tickets.Where(x => x.IdSeat == item).ToList();
+                    foreach (var itemTicket in arrayTicketsSelect)
+                {
+                        arrayIdTickets.Add(itemTicket.IdTicket);
+                    }
+                }
+                if (arrayIdSeatsSelected.Count == 0)
+                {
+                    MessageBox.Show("Покупка невозможна. Вы не выбрали места.");
+                }
+                if (arrayIdSeatsSelected.Count == 1)
+                {
+                    MessageBox.Show("Билеты куплены. Ваш номер билета: "+ arrayIdTickets[0] + "\nВозвращение на главную страницу.");
+                    this.NavigationService.Navigate(new MainPage());
+                }
+                if (arrayIdSeatsSelected.Count>1)
+                {
+                    string tickets = String.Join(", ", arrayIdTickets);
+                    MessageBox.Show("Билеты куплены. Ваши номера билетов: " + tickets + "\nВозвращение на главную страницу.");
+                    this.NavigationService.Navigate(new MainPage());
+                }
+                
+               
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
     }
 }
