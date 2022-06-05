@@ -69,7 +69,7 @@ namespace Cinema.View
                 if (rez == MessageBoxResult.Yes)
                 {
                     FilmsViewModel newObj = new FilmsViewModel();
-                    newObj.DeleteFilm(objFilms);
+                    newObj.DeleteFilm(objFilms.IdFilm);
                     MessageBox.Show("Данные успешно удалены.\nВозвращение на главную страницу", "Удаление", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.NavigationService.Navigate(new MainPage());
                 }

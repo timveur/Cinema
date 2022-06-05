@@ -35,11 +35,11 @@ namespace Cinema.Model
         public virtual DbSet<Formats> Formats { get; set; }
         public virtual DbSet<Genres> Genres { get; set; }
         public virtual DbSet<RoleUsers> RoleUsers { get; set; }
+        public virtual DbSet<Seats> Seats { get; set; }
         public virtual DbSet<Sessions> Sessions { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tickets> Tickets { get; set; }
         public virtual DbSet<Users> Users { get; set; }
-        public virtual DbSet<Seats> Seats { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

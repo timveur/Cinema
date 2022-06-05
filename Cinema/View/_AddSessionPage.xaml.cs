@@ -56,7 +56,7 @@ namespace Cinema.View
                 bool result = newObject.CheckAddSession(selectedFormat, DateSessionDatePicker.Text, StartTimeTextBox.Text, CostTextBox.Text);
                 if (result)
                 {
-                    newObject.AddSession(selectedIdFilm, selectedIdFilm, dateSession, startTime, endTime, costTicket);
+                    newObject.AddSession(selectedIdFilm, selectedFormat, dateSession, startTime, endTime, costTicket);
                     MessageBox.Show("Вы успешно добавили сеанс. Возвращение к странице фильма.");
                     this.NavigationService.Navigate(new FilmPage(selectedIdFilm));
                 }                

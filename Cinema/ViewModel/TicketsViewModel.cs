@@ -18,7 +18,8 @@ namespace Cinema.ViewModel
                 Tickets newTicket = new Tickets()
                 {
                     IdSession = idSession,
-                    IdSeat = item
+                    IdSeat = item,
+                    IdUser = Properties.Settings.Default.idClient
                 };
                 db.context.Tickets.Add(newTicket);
             }
@@ -36,7 +37,8 @@ namespace Cinema.ViewModel
                 Tickets newTicket = new Tickets()
                 {
                     IdSession = idSession,
-                    IdSeat = item
+                    IdSeat = item,
+                    IdUser = 1
                 };
                 db.context.Tickets.Add(newTicket);
                 db.context.SaveChanges();

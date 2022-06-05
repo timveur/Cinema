@@ -50,6 +50,7 @@ namespace Cinema.View
                     foreach (var item in arrayUsers)
                     {
                         Properties.Settings.Default.idRoleClient = item.IdRole;
+                        Properties.Settings.Default.idClient = item.IdUser;
                     }
                     
                     Properties.Settings.Default.Save();

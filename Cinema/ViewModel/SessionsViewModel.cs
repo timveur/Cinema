@@ -96,7 +96,7 @@ namespace Cinema.ViewModel
             };
             db.context.Sessions.Add(newSession);
             db.context.SaveChanges();
-            int countRecords = db.context.Sessions.Where(x => x.IdFilm == idFilm && x.IdFormat == IdFormat && x.CostTicket == costTicket).Count();
+            int countRecords = db.context.Sessions.Where(x => x.IdFilm == idFilm && x.IdFormat == IdFormat && x.DateSession == dateSession && x.StartTime == startTime && x.CostTicket == costTicket).Count();
             if (countRecords == 1)
             {
                 db.context.Sessions.Remove(newSession);

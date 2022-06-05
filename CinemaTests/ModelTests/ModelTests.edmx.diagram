@@ -28,6 +28,7 @@
         <AssociationConnector Association="CinemaModelTests.FK_Users_RoleUsers" ManuallyRouted="false" />
         <AssociationConnector Association="CinemaModelTests.FK_Tickets_HallsSeats" ManuallyRouted="false" />
         <AssociationConnector Association="CinemaModelTests.FK_Tickets_Sessions" ManuallyRouted="false" />
+        <AssociationConnector Association="CinemaModelTests.FK_Tickets_Users" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

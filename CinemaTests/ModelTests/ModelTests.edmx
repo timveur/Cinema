@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище CinemaModelTests" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище CinemaModelTests" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AgeLimits">
           <Key>
             <PropertyRef Name="IdAgeLimit" />
@@ -76,7 +76,7 @@
             <PropertyRef Name="IdSeat" />
           </Key>
           <Property Name="IdSeat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ParentId" Type="int" />
+          <Property Name="ParentId" Type="int" Nullable="false" />
           <Property Name="Number" Type="int" Nullable="false" />
           <Property Name="Decription" Type="nvarchar" MaxLength="5" Nullable="false" />
         </EntityType>
@@ -109,6 +109,7 @@
           <Property Name="IdTicket" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdSession" Type="int" Nullable="false" />
           <Property Name="IdSeat" Type="int" Nullable="false" />
+          <Property Name="IdUser" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -125,7 +126,9 @@
           <Property Name="IdRole" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Films_AgeLimits">
-          <End Role="AgeLimits" Type="Self.AgeLimits" Multiplicity="1" />
+          <End Role="AgeLimits" Type="Self.AgeLimits" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Films" Type="Self.Films" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AgeLimits">
@@ -137,7 +140,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_FilmsCountries_Countries">
-          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="FilmsCountries" Type="Self.FilmsCountries" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Countries">
@@ -177,7 +182,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_FilmsGenres_Genres">
-          <End Role="Genres" Type="Self.Genres" Multiplicity="1" />
+          <End Role="Genres" Type="Self.Genres" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="FilmsGenres" Type="Self.FilmsGenres" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Genres">
@@ -203,7 +210,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Sessions_Formats">
-          <End Role="Formats" Type="Self.Formats" Multiplicity="1" />
+          <End Role="Formats" Type="Self.Formats" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Sessions" Type="Self.Sessions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Formats">
@@ -214,8 +223,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tickets_HallsSeats">
-          <End Role="Seats" Type="Self.Seats" Multiplicity="1" />
+        <Association Name="FK_Tickets_Seats">
+          <End Role="Seats" Type="Self.Seats" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Seats">
@@ -227,7 +238,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Tickets_Sessions">
-          <End Role="Sessions" Type="Self.Sessions" Multiplicity="1" />
+          <End Role="Sessions" Type="Self.Sessions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sessions">
@@ -238,8 +251,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tickets_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Users_RoleUsers">
-          <End Role="RoleUsers" Type="Self.RoleUsers" Multiplicity="1" />
+          <End Role="RoleUsers" Type="Self.RoleUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RoleUsers">
@@ -323,7 +352,7 @@
             <End Role="Formats" EntitySet="Formats" />
             <End Role="Sessions" EntitySet="Sessions" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tickets_HallsSeats" Association="Self.FK_Tickets_HallsSeats">
+          <AssociationSet Name="FK_Tickets_Seats" Association="Self.FK_Tickets_Seats">
             <End Role="Seats" EntitySet="Seats" />
             <End Role="Tickets" EntitySet="Tickets" />
           </AssociationSet>
@@ -331,13 +360,16 @@
             <End Role="Sessions" EntitySet="Sessions" />
             <End Role="Tickets" EntitySet="Tickets" />
           </AssociationSet>
+          <AssociationSet Name="FK_Tickets_Users" Association="Self.FK_Tickets_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
           <AssociationSet Name="FK_Users_RoleUsers" Association="Self.FK_Users_RoleUsers">
             <End Role="RoleUsers" EntitySet="RoleUsers" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CinemaModelTests" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -425,7 +457,7 @@
             <PropertyRef Name="IdSeat" />
           </Key>
           <Property Name="IdSeat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ParentId" Type="Int32" />
+          <Property Name="ParentId" Type="Int32" Nullable="false" />
           <Property Name="Number" Type="Int32" Nullable="false" />
           <Property Name="Decription" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Tickets" Relationship="Self.FK_Tickets_HallsSeats" FromRole="Seats" ToRole="Tickets" />
@@ -464,6 +496,8 @@
           <Property Name="IdSeat" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Seats" Relationship="Self.FK_Tickets_HallsSeats" FromRole="Tickets" ToRole="Seats" />
           <NavigationProperty Name="Sessions" Relationship="Self.FK_Tickets_Sessions" FromRole="Tickets" ToRole="Sessions" />
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="CinemaModelTests.FK_Tickets_Users" FromRole="Tickets" ToRole="Users" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -479,6 +513,7 @@
           <Property Name="Phone" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
           <Property Name="IdRole" Type="Int32" Nullable="false" />
           <NavigationProperty Name="RoleUsers" Relationship="Self.FK_Users_RoleUsers" FromRole="Users" ToRole="RoleUsers" />
+          <NavigationProperty Name="Tickets" Relationship="CinemaModelTests.FK_Tickets_Users" FromRole="Users" ToRole="Tickets" />
         </EntityType>
         <Association Name="FK_Films_AgeLimits">
           <End Role="AgeLimits" Type="Self.AgeLimits" Multiplicity="1" />
@@ -690,6 +725,10 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <AssociationSet Name="FK_Tickets_Users" Association="CinemaModelTests.FK_Tickets_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -702,6 +741,20 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <Association Name="FK_Tickets_Users">
+          <End Type="CinemaModelTests.Users" Role="Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CinemaModelTests.Tickets" Role="Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -819,6 +872,7 @@
           <EntitySetMapping Name="Tickets">
             <EntityTypeMapping TypeName="CinemaModelTests.Tickets">
               <MappingFragment StoreEntitySet="Tickets">
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
                 <ScalarProperty Name="IdTicket" ColumnName="IdTicket" />
                 <ScalarProperty Name="IdSession" ColumnName="IdSession" />
                 <ScalarProperty Name="IdSeat" ColumnName="IdSeat" />

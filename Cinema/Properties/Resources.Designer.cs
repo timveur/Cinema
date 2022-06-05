@@ -61,12 +61,12 @@ namespace Cinema.Properties {
         }
         
         /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        ///   Поиск локализованного ресурса типа System.Drawing.Icon, аналогичного (Значок).
         /// </summary>
-        internal static System.Drawing.Bitmap cinema1 {
+        internal static System.Drawing.Icon cinema {
             get {
-                object obj = ResourceManager.GetObject("cinema1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                object obj = ResourceManager.GetObject("cinema", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
     }

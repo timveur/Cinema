@@ -17,8 +17,10 @@ namespace Cinema.Model
         public int IdTicket { get; set; }
         public int IdSession { get; set; }
         public int IdSeat { get; set; }
+        public int IdUser { get; set; }
     
-        public virtual Sessions Sessions { get; set; }
         public virtual Seats Seats { get; set; }
+        public virtual Sessions Sessions { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

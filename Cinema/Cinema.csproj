@@ -34,6 +34,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\cinema.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -67,67 +71,67 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\AgeLimits.cs">
-      <DependentUpon>ModelCinema.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Core.cs" />
     <Compile Include="Model\Countries.cs">
-      <DependentUpon>ModelCinema.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Films.cs">
-      <DependentUpon>ModelCinema.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\FilmsCountries.cs">
-      <DependentUpon>ModelCinema.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\FilmsGenres.cs">
-      <DependentUpon>ModelCinema.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Formats.cs">
-      <DependentUpon>ModelCinema.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Genres.cs">
-      <DependentUpon>ModelCinema.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\ModelCinema.Context.cs">
+    <Compile Include="Model\Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelCinema.Context.tt</DependentUpon>
+      <DependentUpon>Model.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\ModelCinema.cs">
+    <Compile Include="Model\Model.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelCinema.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\ModelCinema.Designer.cs">
+    <Compile Include="Model\Model.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelCinema.edmx</DependentUpon>
+      <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\PartialClasses\Films.cs" />
     <Compile Include="Model\PartialClasses\Seats.cs" />
     <Compile Include="Model\RoleUsers.cs">
-      <DependentUpon>ModelCinema.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Seats.cs">
-      <DependentUpon>ModelCinema.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Sessions.cs">
-      <DependentUpon>ModelCinema.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>ModelCinema.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\sp_helpdiagrams_Result.cs">
-      <DependentUpon>ModelCinema.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\sysdiagrams.cs">
-      <DependentUpon>ModelCinema.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Tickets.cs">
-      <DependentUpon>ModelCinema.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Users.cs">
-      <DependentUpon>ModelCinema.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\FilmsViewModel.cs" />
     <Compile Include="ViewModel\UsersViewModel.cs" />
@@ -226,12 +230,12 @@
     </EmbeddedResource>
     <Resource Include="Assets\Fonts\Inter-Regular.ttf" />
     <Resource Include="Assets\Fonts\Inter-SemiBold.ttf" />
-    <EntityDeploy Include="Model\ModelCinema.edmx">
+    <EntityDeploy Include="Model\Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelCinema.Designer.cs</LastGenOutput>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model\ModelCinema.edmx.diagram">
-      <DependentUpon>ModelCinema.edmx</DependentUpon>
+    <None Include="Model\Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -241,9 +245,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\cinema.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\cinema.png" />
@@ -259,21 +260,56 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\cinema.ico" />
     <Resource Include="Assets\Images\Films\leloupetlelion.jpg" />
     <Resource Include="Assets\Images\Films\naemnik2022.jpg" />
     <Resource Include="Assets\Images\Films\finnik.jpg" />
     <Resource Include="Assets\Images\Films\thesurvivor.jpg" />
     <Resource Include="Assets\Images\Films\_nonephoto.jpg" />
     <Resource Include="Assets\Images\Films\anypics58435.jpg" />
-    <Content Include="Model\ModelCinema.Context.tt">
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Word">
+      <Guid>{00020905-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>8</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\Other\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelCinema.edmx</DependentUpon>
-      <LastGenOutput>ModelCinema.Context.cs</LastGenOutput>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model\ModelCinema.tt">
+    <Content Include="Model\Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelCinema.edmx</DependentUpon>
-      <LastGenOutput>ModelCinema.cs</LastGenOutput>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

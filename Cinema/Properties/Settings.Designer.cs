@@ -46,5 +46,17 @@ namespace Cinema.Properties {
                 this["idRoleClient"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int idClient {
+            get {
+                return ((int)(this["idClient"]));
+            }
+            set {
+                this["idClient"] = value;
+            }
+        }
     }
 }

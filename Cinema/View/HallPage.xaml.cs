@@ -1,7 +1,9 @@
 ﻿using Cinema.Model;
 using Cinema.ViewModel;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Word = Microsoft.Office.Interop.Word;
 
 namespace Cinema.View
 {
@@ -31,6 +34,7 @@ namespace Cinema.View
         List<int> arrayIdSeatsSelected = new List<int>();
         List<string> arrayInfoSeatsSelected = new List<string>();
         List<int> arrayIdSeats = new List<int>();
+        List<Tickets> arrayTicketsSelect;
         int idSelectedSeat = 0;
         string selectedSeatRow = "";
         Decimal costOneTicket = 0;
@@ -364,7 +368,10 @@ namespace Cinema.View
             foreach (var itemSeat in arraySeats)
             {
                 numberSeat = itemSeat.NumberDescription;
-                idSeatRow = itemSeat.ParentId ?? 0;
+                if (itemSeat.ParentId != 0)
+                {
+                    idSeatRow = itemSeat.ParentId;
+                }
                 arrayRowSeats = db.context.Seats.Where(x => x.IdSeat == idSeatRow).ToList();
                 foreach (var itemRow in arrayRowSeats)
                 {
@@ -410,7 +417,11 @@ namespace Cinema.View
             {
                 arrayIdSeats.Add(itemSeat.IdSeat);
                 numberSeat = itemSeat.NumberDescription;
-                idSeatRow = itemSeat.ParentId ?? 0;
+                
+                if (itemSeat.ParentId!=0)
+                {
+                    idSeatRow = itemSeat.ParentId;
+                }
                 arrayRowSeats = db.context.Seats.Where(x => x.IdSeat == idSeatRow).ToList();
                 foreach (var itemRow in arrayRowSeats)
                 {                   
@@ -463,42 +474,127 @@ namespace Cinema.View
 
         private void BuyTicketsButtonClick(object sender, RoutedEventArgs e)
         {
-            try
+            if (Properties.Settings.Default.idRoleClient == 0)
             {
-                TicketsViewModel obj = new TicketsViewModel();
-                obj.AddTicket(idSelectedSession, arrayIdSeatsSelected);
-
-                List<Tickets> arrayTicketsSelect;
-                List<int> arrayIdTickets = new List<int>();
-                foreach (var item in arrayIdSeatsSelected)
+                MessageBoxResult rez = MessageBox.Show($"Для покупки билетов необходимо авторизоваться.\nПерейти на страницу овторизации?", "Ошибка", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (rez == MessageBoxResult.Yes)
                 {
-                    arrayTicketsSelect = db.context.Tickets.Where(x => x.IdSeat == item).ToList();
-                    foreach (var itemTicket in arrayTicketsSelect)
-                {
-                        arrayIdTickets.Add(itemTicket.IdTicket);
-                    }
+                    this.NavigationService.Navigate(new AuthPage());
                 }
-                if (arrayIdSeatsSelected.Count == 0)
-                {
-                    MessageBox.Show("Покупка невозможна. Вы не выбрали места.");
-                }
-                if (arrayIdSeatsSelected.Count == 1)
-                {
-                    MessageBox.Show("Билеты куплены. Ваш номер билета: "+ arrayIdTickets[0] + "\nВозвращение на главную страницу.");
-                    this.NavigationService.Navigate(new MainPage());
-                }
-                if (arrayIdSeatsSelected.Count>1)
-                {
-                    string tickets = String.Join(", ", arrayIdTickets);
-                    MessageBox.Show("Билеты куплены. Ваши номера билетов: " + tickets + "\nВозвращение на главную страницу.");
-                    this.NavigationService.Navigate(new MainPage());
-                }
-                
-               
             }
-            catch (Exception ex)
+            if (Properties.Settings.Default.idRoleClient != 0)
             {
-                MessageBox.Show(ex.Message);
+                try
+                {
+                    TicketsViewModel obj = new TicketsViewModel();
+                    obj.AddTicket(idSelectedSession, arrayIdSeatsSelected);
+
+                    
+                    List<int> arrayIdTickets = new List<int>();
+                    foreach (var item in arrayIdSeatsSelected)
+                    {
+                        arrayTicketsSelect = db.context.Tickets.Where(x => x.IdSeat == item).ToList();
+                        foreach (var itemTicket in arrayTicketsSelect)
+                        {
+                            arrayIdTickets.Add(itemTicket.IdTicket);
+                        }
+                    }
+                    if (arrayIdSeatsSelected.Count == 0)
+                    {
+                        MessageBox.Show("Покупка невозможна. Вы не выбрали места.");
+                    }
+
+                    if (arrayIdSeatsSelected.Count > 0)
+                    {
+                        var application = new Word.Application();
+                        Word.Document document = application.Documents.Add();
+                        document.PageSetup.PageWidth = 900;
+                        document.PageSetup.PageHeight = 300;
+                        Word.Paragraph tableParagraph = document.Paragraphs.Add();
+                        Word.Range tableRange = tableParagraph.Range;
+                        Word.Table infoTable = document.Tables.Add(tableRange, 5, 2);
+                        infoTable.Range.Cells.VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                        infoTable.TopPadding = 5;
+                        infoTable.LeftPadding = 5;
+                        Word.Range cellRange;
+                        
+                        cellRange = infoTable.Cell(1, 1).Range;
+                        cellRange.Text = "Фильм: ";
+                        cellRange.Font.Color = Word.WdColor.wdColorGray625;
+                        cellRange = infoTable.Cell(1, 2).Range;
+                        cellRange.Text = $"«{NameFilmTextBlock.Text}» ({AgeTextBlock.Text})";
+                        cellRange = infoTable.Cell(2, 1).Range;
+                        cellRange.Text = "Сеанс: ";
+                        cellRange.Font.Color = Word.WdColor.wdColorGray625;
+                        cellRange = infoTable.Cell(2, 2).Range;
+                        cellRange.Text = DateTimeTextBlock.Text;
+                        cellRange = infoTable.Cell(3, 1).Range;
+                        cellRange.Text = "Места: ";
+                        cellRange.Font.Color = Word.WdColor.wdColorGray625;
+                        cellRange = infoTable.Cell(3, 2).Range;
+                        if (arrayIdSeatsSelected.Count == 1)
+                        {
+                            cellRange.Text = String.Join(", ", arrayInfoSeatsSelected) + $" ({arrayIdSeatsSelected.Count} билет)";
+                        }
+                        if (arrayIdSeatsSelected.Count > 1 && arrayIdSeatsSelected.Count < 5)
+                        {
+                            cellRange.Text = String.Join(", ", arrayInfoSeatsSelected) + $" ({arrayIdSeatsSelected.Count} билета)";
+                        }
+                        if (arrayIdSeatsSelected.Count >= 5)
+                        {
+                            cellRange.Text = String.Join(", ", arrayInfoSeatsSelected) + $" ({arrayIdSeatsSelected.Count} билетов)";
+                        }
+                        cellRange = infoTable.Cell(4, 1).Range;
+                        cellRange.Text = "Стоимость: ";
+                        cellRange.Font.Color = Word.WdColor.wdColorGray625;
+                        cellRange = infoTable.Cell(4, 2).Range;
+                        cellRange.Text = CostTextBlock.Text;
+                        cellRange = infoTable.Cell(5, 1).Range;
+                        if (arrayIdSeatsSelected.Count == 1)
+                        {
+                            cellRange.Text = "Номер билета: ";
+                            cellRange.Font.Color = Word.WdColor.wdColorGray625;
+                        }
+                        if (arrayIdSeatsSelected.Count > 1)
+                        {
+                            cellRange.Text = "Номера билетов: ";
+                            cellRange.Font.Color = Word.WdColor.wdColorGray625;
+                        }
+                        string tickets = String.Join(", ", arrayIdTickets);
+                        cellRange = infoTable.Cell(5, 2).Range;
+                        cellRange.Text = tickets;
+                        infoTable.Columns[1].Width = 65;
+                        infoTable.Shading.BackgroundPatternColor = Word.WdColor.wdColorGray20;
+                        string newfilename = "\\Assets\\Other\\";
+                        //путь к проекту
+                        string appFolderPath = System.Environment.CurrentDirectory;
+
+                        document.SaveAs2($"{appFolderPath}{newfilename}Ticket.pdf", Word.WdExportFormat.wdExportFormatPDF);
+                        application.Visible = true;
+                        MessageBoxResult rez = MessageBox.Show("Хотите распечатать билет?", "Печать билета", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        if (rez == MessageBoxResult.Yes)
+                        {
+                            PrintDialog printObj = new PrintDialog();
+                            if (printObj.ShowDialog() == true)
+                            {
+                                document.PrintOut();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Пользователь прервал печать", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                        }
+                        MessageBox.Show("Билеты куплены.\nВозвращение на главную страницу.");
+                        this.NavigationService.Navigate(new MainPage());
+
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
             
         }

@@ -310,10 +310,12 @@ namespace Cinema.ViewModel
         /// Удаление фильма
         /// </summary>
         /// <param name="objFilms">Объект фильма</param>
-        public void DeleteFilm(Films objFilms)
+        public void DeleteFilm(int idFilm)
         {
+            var objFilms = db.context.Films.Where(x => x.IdFilm == idFilm).First() as Films;
             db.context.Films.Remove(objFilms);
             db.context.SaveChanges();
+
 
         }
 

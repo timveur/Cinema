@@ -188,10 +188,10 @@ namespace CinemaTests
         /// Тест на редактирование фильма
         /// </summary>
         [TestMethod]
-        public void EditFilmTest_14_NameFilmTest_null_2_2150_Actoractor_null_Director1_null_99_4_TrueReturned()
+        public void EditFilmTest_7_NameFilmTest_null_2_2150_Actoractor_null_Director1_null_99_4_TrueReturned()
         {
             //Arrange
-            int idFilm = 14;
+            int idFilm = 7;
             string nameFilm = "NameFilmTest";
             string description = "";
             int idAgeLimit = 2;
@@ -214,10 +214,10 @@ namespace CinemaTests
         /// Тест на удаление фильма
         /// </summary>
         [TestMethod]
-        public void DeleteFilmTest_28_TrueReturned()
+        public void DeleteFilmTest_1009_TrueReturned()
         {
             //Arrange
-            int idFilm = 28;
+            int idFilm = 1009;
             bool expected = true;
             //Act
             FilmsViewModel newObject = new FilmsViewModel();
@@ -271,10 +271,10 @@ namespace CinemaTests
         /// Тест на добавление сеанса
         /// </summary>
         [TestMethod]
-        public void AddSessionTest_2_2_1062022_14200_1360_200_TrueReturned()
+        public void AddSessionTest_5_2_1062022_14200_1360_200_TrueReturned()
         {
             //Arrange
-            int idFilm = 2;
+            int idFilm = 5;
             int idFormat = 2;
             DateTime dateSession = new DateTime(2022, 6, 10);
             TimeSpan startTime = new TimeSpan(14, 20, 0);

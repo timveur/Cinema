@@ -134,25 +134,36 @@ namespace Cinema.View
 
         private void SelectPhotoClick(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog photoDialog = new OpenFileDialog();
-            photoDialog.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg";
-
-            if (photoDialog.ShowDialog() == true)
+            try
             {
-                string newfilename = "\\Assets\\Images\\Films\\";
-                //путь к проекту
-                string appFolderPath = Directory.GetCurrentDirectory();
-                appFolderPath = appFolderPath.Replace("\\bin\\Debug", "");//обрезанный путь
+                OpenFileDialog photoDialog = new OpenFileDialog();
+                photoDialog.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg";
 
-                string imageName = System.IO.Path.GetFileName(photoDialog.FileName);//имя картинки с расширением
+                if (photoDialog.ShowDialog() == true)
+                {
+                    string appFolderPath = System.Environment.CurrentDirectory;
+                    
+                    string newfilename = "\\Assets\\Images\\Films\\";
+                    ////путь к проекту
+                    //string appFolderPath = Directory.GetCurrentDirectory();
+                    //appFolderPath = appFolderPath.Replace("\\bin\\Debug", "");//обрезанный путь
 
-                newfilename = appFolderPath + newfilename + imageName;
 
-                File.Copy(photoDialog.FileName, newfilename);
 
-                Console.WriteLine(newfilename);
-                PhotoPathTextBox.Text = imageName;
-                activeImage = imageName;
+                    string imageName = System.IO.Path.GetFileName(photoDialog.FileName);//имя картинки с расширением
+
+                    newfilename = appFolderPath + newfilename + imageName;
+
+                    File.Copy(photoDialog.FileName, newfilename);
+
+                    Console.WriteLine(newfilename);
+                    PhotoPathTextBox.Text = imageName;
+                    activeImage = imageName;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

@@ -21,7 +21,7 @@ namespace CinemaTests.ModelTests
         }
     
         public int IdSeat { get; set; }
-        public Nullable<int> ParentId { get; set; }
+        public int ParentId { get; set; }
         public int Number { get; set; }
         public string Decription { get; set; }
     

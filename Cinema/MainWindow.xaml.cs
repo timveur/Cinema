@@ -50,6 +50,7 @@ namespace Cinema
         {
             Properties.Settings.Default.loginClient = String.Empty;
             Properties.Settings.Default.idRoleClient = 0;
+            Properties.Settings.Default.idClient = 0;
             Properties.Settings.Default.Save();
         }
 
@@ -95,8 +96,10 @@ namespace Cinema
                     Properties.Settings.Default.loginClient = String.Empty;
                     Properties.Settings.Default.idRoleClient = 0;
                     Properties.Settings.Default.Save();
+                    BackButton.Visibility = Visibility.Collapsed;
                     MainFrame.Refresh();
                     MainFrame.Navigate(new MainPage());
+                    MainFrame.RemoveBackEntry();
                 }
             }
             catch

@@ -76,7 +76,6 @@ namespace Cinema.View
             arrayFilmsCountries = db.context.FilmsCountries.Where(x => x.IdFilm == idFilm).ToList();
             foreach (var item in arrayFilmsCountries)
             {
-                Console.WriteLine(item.Countries.NameCountry);
                 arrayAllCountries.Add(item.Countries.NameCountry);                
             }
             string allCountries = String.Join(", ", arrayAllCountries);
